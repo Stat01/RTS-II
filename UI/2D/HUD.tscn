@@ -1,0 +1,528 @@
+[gd_scene load_steps=29 format=3 uid="uid://wg88u2thbmde"]
+
+[ext_resource type="Script" path="res://UI/2D/HUD.gd" id="1_26415"]
+[ext_resource type="Texture2D" uid="uid://d1b0efekn8p3n" path="res://UI/2D/Buttons/IconButton.png" id="1_ufwlp"]
+[ext_resource type="Shader" path="res://Shaders/Liquidsphere.gdshader" id="3_d8kcb"]
+[ext_resource type="Texture2D" uid="uid://23lt1lhw0i58" path="res://Controllabes/Structures/Power plant/Smoke.png" id="4_4so8e"]
+[ext_resource type="PackedScene" uid="uid://cwdcttkbt25k4" path="res://UI/2D/Buttons/BuildButton.tscn" id="5_1176v"]
+[ext_resource type="PackedScene" uid="uid://b1ngn4awissq0" path="res://Controllabes/Units/AT-12 Gladiator/AT-12 Gladiator.tscn" id="6_2e3gl"]
+[ext_resource type="PackedScene" uid="uid://dpb2bg1ijrq4v" path="res://Controllabes/Units/LT-13 Striker/LT-13 Striker.tscn" id="7_88ie0"]
+[ext_resource type="PackedScene" uid="uid://bjxsxuvqhfmo3" path="res://Controllabes/Structures/Power plant/Power Plant.tscn" id="7_l4ata"]
+[ext_resource type="PackedScene" uid="uid://dxxwrhd6copwk" path="res://Controllabes/Units/M-6 Whiplash/M6-Whiplash.tscn" id="7_lv185"]
+[ext_resource type="PackedScene" uid="uid://c5qqjfm3rtsjf" path="res://Controllabes/Structures/Factory/Factory.tscn" id="8_6f26v"]
+[ext_resource type="PackedScene" uid="uid://ophlcxwrhk8f" path="res://Controllabes/Structures/Omnite Mining Rig/OmniteMiningRig.tscn" id="8_krhp6"]
+[ext_resource type="PackedScene" uid="uid://bl4dotelyy8a0" path="res://Controllabes/Units/LRC Skyfall/LRC Skyfall.tscn" id="9_kmkd6"]
+[ext_resource type="PackedScene" uid="uid://doyx8itgb4f66" path="res://Controllabes/Structures/Omnite Silo/OmniteSilo.tscn" id="9_w1j07"]
+[ext_resource type="PackedScene" uid="uid://bmgr1ddlol6v1" path="res://Controllabes/Structures/Vehicle Depot/Vehicle Depot.tscn" id="10_dxsls"]
+[ext_resource type="Script" path="res://UI/2D/Cursor.gd" id="13_1d2tj"]
+[ext_resource type="PackedScene" uid="uid://bi0m2x2tiwt8v" path="res://Controllabes/Structures/Intelligence Center/IntelligenceCenter.tscn" id="13_hejst"]
+[ext_resource type="Texture2D" uid="uid://dtp1p7to22jnw" path="res://UI/2D/Cursors/Default.png" id="14_oy0lh"]
+[ext_resource type="PackedScene" uid="uid://lq2y3pmflgku" path="res://Controllabes/Structures/Turret MK1/TurretMk1.tscn" id="15_of13l"]
+[ext_resource type="Script" path="res://UI/2D/Minimap.gd" id="16_cfpff"]
+[ext_resource type="Texture2D" uid="uid://jym77djows2h" path="res://UI/2D/Minimap_picture.png" id="17_dffmb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7nexf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jun0m"]
+bg_color = Color(1, 1, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l3y8r"]
+shader = ExtResource("3_d8kcb")
+shader_parameter/fV = 0.48
+shader_parameter/colour = Color(1, 0.176471, 0.176471, 1)
+
+[sub_resource type="Environment" id="Environment_uh77h"]
+background_mode = 1
+adjustment_enabled = true
+adjustment_brightness = 2.0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_gm5q8"]
+
+[sub_resource type="Gradient" id="Gradient_flwjj"]
+offsets = PackedFloat32Array(0.552716, 0.578275)
+colors = PackedColorArray(0, 0, 0, 1, 0.347817, 0.347817, 0.347817, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0cs3n"]
+noise_type = 0
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vbvfx"]
+color_ramp = SubResource("Gradient_flwjj")
+noise = SubResource("FastNoiseLite_0cs3n")
+
+[node name="Hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_26415")
+
+[node name="General UI" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Container" type="Container" parent="General UI"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 10.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="General UI"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureButton" type="TextureButton" parent="General UI/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("1_ufwlp")
+stretch_mode = 4
+
+[node name="TextureButton2" type="TextureButton" parent="General UI/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("1_ufwlp")
+stretch_mode = 4
+
+[node name="TextureButton3" type="TextureButton" parent="General UI/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("1_ufwlp")
+stretch_mode = 4
+
+[node name="TextureButton4" type="TextureButton" parent="General UI/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("1_ufwlp")
+stretch_mode = 4
+
+[node name="TextureButton5" type="TextureButton" parent="General UI/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("1_ufwlp")
+stretch_mode = 4
+
+[node name="TextureButton6" type="TextureButton" parent="General UI/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("1_ufwlp")
+stretch_mode = 4
+
+[node name="TextureButton7" type="TextureButton" parent="General UI/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("1_ufwlp")
+stretch_mode = 4
+
+[node name="TextureButton8" type="TextureButton" parent="General UI/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("1_ufwlp")
+stretch_mode = 4
+
+[node name="TextureButton9" type="TextureButton" parent="General UI/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("1_ufwlp")
+stretch_mode = 4
+
+[node name="Container2" type="Container" parent="General UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 10.0
+
+[node name="SelectionUI" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="SelectionUI"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="SelectionUI/HBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_ufwlp")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SelectionUI/HBoxContainer2/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container3" type="Container" parent="SelectionUI/HBoxContainer2/NinePatchRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SelectionUI/HBoxContainer2/NinePatchRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.25
+
+[node name="Container" type="Container" parent="SelectionUI/HBoxContainer2/NinePatchRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Unit Name" type="Label" parent="SelectionUI/HBoxContainer2/NinePatchRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 20
+text = "Unit Name"
+
+[node name="Container3" type="Container" parent="SelectionUI/HBoxContainer2/NinePatchRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Unit Stats" type="RichTextLabel" parent="SelectionUI/HBoxContainer2/NinePatchRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+text = "750 / 750			Kills  0
+Armour  0			Attack  0
+Structure			Biological"
+fit_content = true
+
+[node name="Container2" type="Container" parent="SelectionUI/HBoxContainer2/NinePatchRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Container3" type="Container" parent="SelectionUI/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 6.0
+mouse_filter = 2
+
+[node name="Container4" type="Container" parent="SelectionUI"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 6.0
+mouse_filter = 2
+
+[node name="Building UI" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Container" type="Container" parent="Building UI"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Building UI"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+mouse_filter = 2
+
+[node name="Container4" type="Container" parent="Building UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.01
+mouse_filter = 2
+
+[node name="PowerBar" type="ProgressBar" parent="Building UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.02
+theme_override_styles/background = SubResource("StyleBoxFlat_7nexf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jun0m")
+value = 42.6
+allow_greater = true
+fill_mode = 3
+show_percentage = false
+
+[node name="Container5" type="Container" parent="Building UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.01
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Building UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+mouse_filter = 2
+
+[node name="Container3" type="Container" parent="Building UI/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.2
+mouse_filter = 2
+
+[node name="Omnite Counter" type="Label" parent="Building UI/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Omnite Counter2" type="Label" parent="Building UI/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "FPS"
+
+[node name="Omnite indicator" type="TextureRect" parent="Building UI/HBoxContainer/VBoxContainer"]
+material = SubResource("ShaderMaterial_l3y8r")
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("4_4so8e")
+stretch_mode = 4
+
+[node name="Container2" type="Container" parent="Building UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Building UI"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Building UI/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+vertical_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Building UI/HBoxContainer2/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Building UI/HBoxContainer2/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+
+[node name="TextureButton2" parent="Building UI/HBoxContainer2/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("5_1176v")]
+layout_mode = 2
+unit = ExtResource("7_88ie0")
+
+[node name="TextureButton" parent="Building UI/HBoxContainer2/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("5_1176v")]
+layout_mode = 2
+unit = ExtResource("6_2e3gl")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Building UI/HBoxContainer2/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+
+[node name="TextureButton3" parent="Building UI/HBoxContainer2/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("5_1176v")]
+layout_mode = 2
+unit = ExtResource("7_lv185")
+
+[node name="TextureButton4" parent="Building UI/HBoxContainer2/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("5_1176v")]
+layout_mode = 2
+unit = ExtResource("9_kmkd6")
+
+[node name="Spacer" type="Container" parent="Building UI/HBoxContainer2"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="Building UI/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+vertical_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Building UI/HBoxContainer2/ScrollContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Building UI/HBoxContainer2/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+
+[node name="TextureButton2" parent="Building UI/HBoxContainer2/ScrollContainer2/VBoxContainer/HBoxContainer" instance=ExtResource("5_1176v")]
+layout_mode = 2
+unit = ExtResource("7_l4ata")
+is_structure_button = true
+
+[node name="TextureButton3" parent="Building UI/HBoxContainer2/ScrollContainer2/VBoxContainer/HBoxContainer" instance=ExtResource("5_1176v")]
+layout_mode = 2
+unit = ExtResource("8_krhp6")
+is_structure_button = true
+
+[node name="TextureButton4" parent="Building UI/HBoxContainer2/ScrollContainer2/VBoxContainer/HBoxContainer" instance=ExtResource("5_1176v")]
+layout_mode = 2
+unit = ExtResource("9_w1j07")
+is_structure_button = true
+
+[node name="TextureButton5" parent="Building UI/HBoxContainer2/ScrollContainer2/VBoxContainer/HBoxContainer" instance=ExtResource("5_1176v")]
+layout_mode = 2
+unit = ExtResource("13_hejst")
+is_structure_button = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Building UI/HBoxContainer2/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+
+[node name="TextureButton3" parent="Building UI/HBoxContainer2/ScrollContainer2/VBoxContainer/HBoxContainer2" instance=ExtResource("5_1176v")]
+layout_mode = 2
+unit = ExtResource("10_dxsls")
+is_structure_button = true
+
+[node name="TextureButton4" parent="Building UI/HBoxContainer2/ScrollContainer2/VBoxContainer/HBoxContainer2" instance=ExtResource("5_1176v")]
+layout_mode = 2
+unit = ExtResource("8_6f26v")
+is_structure_button = true
+
+[node name="TextureButton5" parent="Building UI/HBoxContainer2/ScrollContainer2/VBoxContainer/HBoxContainer2" instance=ExtResource("5_1176v")]
+layout_mode = 2
+unit = ExtResource("15_of13l")
+is_structure_button = true
+
+[node name="Spacer2" type="Container" parent="Building UI/HBoxContainer2"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.45
+
+[node name="Minimap UI" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Container" type="Container" parent="Minimap UI"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Minimap UI"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Container" type="Container" parent="Minimap UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.45
+mouse_filter = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Minimap UI/HBoxContainer"]
+layout_mode = 2
+stretch_mode = 0
+
+[node name="Minimap" type="Control" parent="Minimap UI/HBoxContainer/AspectRatioContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Minimap UI/HBoxContainer/AspectRatioContainer/Minimap"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+stretch = true
+stretch_shrink = 4
+script = ExtResource("16_cfpff")
+refresh_rate = 1.0
+
+[node name="Refresh timer" type="Timer" parent="Minimap UI/HBoxContainer/AspectRatioContainer/Minimap/SubViewportContainer"]
+
+[node name="SubViewport" type="SubViewport" parent="Minimap UI/HBoxContainer/AspectRatioContainer/Minimap/SubViewportContainer"]
+handle_input_locally = false
+debug_draw = 1
+size = Vector2i(50, 50)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Minimap UI/HBoxContainer/AspectRatioContainer/Minimap/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3, 0)
+environment = SubResource("Environment_uh77h")
+attributes = SubResource("CameraAttributesPractical_gm5q8")
+projection = 1
+size = 9.0
+
+[node name="minimap noise" type="Sprite3D" parent="Minimap UI/HBoxContainer/AspectRatioContainer/Minimap/SubViewportContainer/SubViewport/Camera3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 8.74228e-08, -2)
+texture = SubResource("NoiseTexture2D_vbvfx")
+
+[node name="minimap picture" type="Sprite3D" parent="Minimap UI/HBoxContainer/AspectRatioContainer/Minimap/SubViewportContainer/SubViewport/Camera3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.31134e-07, -3)
+texture_filter = 0
+texture = ExtResource("17_dffmb")
+
+[node name="Cursor" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("13_1d2tj")
+
+[node name="TextureRect" type="TextureRect" parent="Cursor"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8
+anchor_top = 0.8
+anchor_right = 0.8
+anchor_bottom = 0.8
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+texture = ExtResource("14_oy0lh")
+
+[connection signal="timeout" from="Minimap UI/HBoxContainer/AspectRatioContainer/Minimap/SubViewportContainer/Refresh timer" to="Minimap UI/HBoxContainer/AspectRatioContainer/Minimap/SubViewportContainer" method="refreshMinimap"]
+[connection signal="timeout" from="Minimap UI/HBoxContainer/AspectRatioContainer/Minimap/SubViewportContainer/Refresh timer" to="Minimap UI/HBoxContainer/AspectRatioContainer/Minimap/SubViewportContainer/SubViewport/Camera3D/minimap noise" method="refreshNoise"]

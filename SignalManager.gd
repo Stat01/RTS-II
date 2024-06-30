@@ -1,0 +1,8 @@
+extends Node
+
+signal camera_shake
+signal rebake_nav_mesh
+signal update_pathing
+signal refund_building
+signal building_placed
+signal minimap_camera_position_changed

@@ -1,0 +1,101 @@
+[gd_scene load_steps=14 format=3 uid="uid://cdyimnapkawjs"]
+
+[ext_resource type="Script" path="res://CameraController.gd" id="1_ngfvg"]
+[ext_resource type="Shader" path="res://Shaders/outline.gdshader" id="2_ll35h"]
+[ext_resource type="Texture2D" uid="uid://8ci2qqo1ft0r" path="res://Shaders/grain.png" id="3_6x3ua"]
+[ext_resource type="Shader" path="res://Shaders/Glitcheffect.gdshader" id="3_p3gsu"]
+[ext_resource type="Shader" path="res://Shaders/Lensflare.gdshader" id="4_43cv0"]
+[ext_resource type="Texture2D" uid="uid://dv50d3ssl4r6v" path="res://Shaders/lens_blur.png" id="5_mkyjd"]
+[ext_resource type="Texture2D" uid="uid://cxkgs5cdjukua" path="res://Shaders/lens_blur2.png" id="6_aep8j"]
+[ext_resource type="Shader" path="res://Shaders/Vignette.gdshader" id="7_j6apt"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_k3a1p"]
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4w2jx"]
+render_priority = 0
+shader = ExtResource("2_ll35h")
+shader_parameter/shadow_color = Color(0.0705882, 0.0196078, 0.00784314, 1)
+shader_parameter/shadow_thickness = 1.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7s1jb"]
+shader = ExtResource("3_p3gsu")
+shader_parameter/shake_power = 0.002
+shader_parameter/shake_rate = 0.05
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 15.5
+shader_parameter/shake_color_rate = 0.002
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yxoms"]
+shader = ExtResource("7_j6apt")
+shader_parameter/alpha = 0.54
+shader_parameter/inner_radius = 0.0
+shader_parameter/outer_radius = 0.995
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o5m2g"]
+shader = ExtResource("4_43cv0")
+shader_parameter/Blur = 5.27
+shader_parameter/FlareThreshold = 0.855
+shader_parameter/Flares = 4
+shader_parameter/FlareSpacing = 0.595
+shader_parameter/Intensity = 8.125
+shader_parameter/Saturation_ = 0.48
+shader_parameter/FlareMult = ExtResource("5_mkyjd")
+shader_parameter/FlareMult2 = ExtResource("6_aep8j")
+
+[node name="CameraController" type="Node3D"]
+script = ExtResource("1_ngfvg")
+min_zoom = 31.0
+max_zoom = 2.5
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.463296, 0.886204, 0, -0.886204, 0.463296, 0, 0.939364, 0.502787)
+
+[node name="Outline" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.999123, -0.0418756, 0, 0.0418756, 0.999123, 0, -0.000518307, -0.190459)
+mesh = SubResource("QuadMesh_k3a1p")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4w2jx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0.494118)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -384.0
+offset_top = -216.0
+offset_right = 384.0
+offset_bottom = 216.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_6x3ua")
+
+[node name="Glitch" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_7s1jb")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Vignette" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_yxoms")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Lens flare" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_o5m2g")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

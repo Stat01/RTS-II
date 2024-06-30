@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://en7o7wea74u8"]
+
+[ext_resource type="Script" path="res://Controllabes/Units/Roach/DeathParticles.gd" id="1_6xj8y"]
+
+[sub_resource type="Gradient" id="Gradient_cm05u"]
+offsets = PackedFloat32Array(0, 0.208824, 0.426471, 0.529412, 0.679412, 0.861765, 1)
+colors = PackedColorArray(0.776471, 0.733333, 0, 1, 0.811765, 0.313726, 0.337255, 1, 0.835294, 0.254902, 0.192157, 1, 1, 0.564706, 0.211765, 1, 1, 0.45098, 0.172549, 1, 0.388235, 0.501961, 0.439216, 1, 0.521569, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_13u0s"]
+gradient = SubResource("Gradient_cm05u")
+
+[sub_resource type="Curve" id="Curve_82ewb"]
+_data = [Vector2(0, 0), 0.0, 7.29544, 0, 0, Vector2(0.0625, 0.993158), 0.0, 0.0, 0, 0, Vector2(0.271739, 0.226842), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_2r0x6"]
+curve = SubResource("Curve_82ewb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lbaea"]
+lifetime_randomness = 1.0
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 1.0
+initial_velocity_max = 3.0
+scale_curve = SubResource("CurveTexture_2r0x6")
+color_ramp = SubResource("GradientTexture1D_13u0s")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+collision_use_scale = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qdjpr"]
+vertex_color_use_as_albedo = true
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_30jq0"]
+material = SubResource("StandardMaterial3D_qdjpr")
+size = Vector2(0.1, 0.1)
+
+[node name="Death Particles" type="GPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.175246, 0)
+emitting = false
+amount = 512
+lifetime = 5.0
+one_shot = true
+explosiveness = 0.94
+process_material = SubResource("ParticleProcessMaterial_lbaea")
+draw_pass_1 = SubResource("QuadMesh_30jq0")
+script = ExtResource("1_6xj8y")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

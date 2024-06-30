@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cs7lfv8w7p0nn"
+path="res://.godot/imported/Entry.ogg-9642e66e2650910815ddcb370ca19a52.oggvorbisstr"
+
+[deps]
+
+source_file="res://Controllabes/Units/AG-1000 AirStrike/Entry.ogg"
+dest_files=["res://.godot/imported/Entry.ogg-9642e66e2650910815ddcb370ca19a52.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

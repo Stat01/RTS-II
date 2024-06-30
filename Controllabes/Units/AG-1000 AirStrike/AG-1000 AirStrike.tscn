@@ -1,0 +1,511 @@
+[gd_scene load_steps=18 format=3 uid="uid://ch0jpwc5xpogs"]
+
+[ext_resource type="Script" path="res://Controllabes/Units/AG-1000 AirStrike/AG-1000 AirStrike.gd" id="1_2wuif"]
+[ext_resource type="PackedScene" uid="uid://dp54oynrq0i8k" path="res://Controllabes/Units/AG-1000 AirStrike/Bomb.tscn" id="2_l0e1g"]
+
+[sub_resource type="Animation" id="Animation_f2try"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bomb1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-20.3196, 100, 19.5868)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bomb2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-19.632, 100, 19.9572)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bomb3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-19.7913, 100, 20.296)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Bomb4:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-20.0073, 100, 19.5902)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Bomb5:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-20.2376, 100, 20.4386)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Bomb6:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-19.4891, 100, 20.2362)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Bomb7:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-20, 100, 20)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Bomb8:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-20.5309, 100, 19.9224)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Bomb9:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-20.0512, 100, 19.9771)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Bomb10:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-19.7524, 100, 19.5983)]
+}
+
+[sub_resource type="Animation" id="Animation_l1hub"]
+resource_name = "Start"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bomb1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.7, 2.8),
+"transitions": PackedFloat32Array(1, 4.28709),
+"update": 0,
+"values": [Vector3(-20, 100, 20), Vector3(0.46552, 0, 0.26306)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bomb2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 2.6),
+"transitions": PackedFloat32Array(1, 4.28709),
+"update": 0,
+"values": [Vector3(-19.632, 100, 19.9572), Vector3(0.516261, -0.00597525, -0.120294)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bomb3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.7, 2.8),
+"transitions": PackedFloat32Array(1, 4.28709),
+"update": 0,
+"values": [Vector3(-19.7913, 100, 20.296), Vector3(0.171345, -0.00597525, 0.374967)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Bomb4:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.6, 2.7),
+"transitions": PackedFloat32Array(1, 4.28709),
+"update": 0,
+"values": [Vector3(-20.0073, 100, 19.5902), Vector3(0.0208859, -0.00597525, -0.540792)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Bomb5:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.7, 2.8),
+"transitions": PackedFloat32Array(1, 4.28709),
+"update": 0,
+"values": [Vector3(-20.2376, 100, 20.4386), Vector3(-0.209402, -0.00597525, 0.307597)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Bomb6:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.8, 2.9),
+"transitions": PackedFloat32Array(1, 4.28709),
+"update": 0,
+"values": [Vector3(-19.4891, 100, 20.2362), Vector3(-0.261442, -0.00597525, -0.447269)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Bomb7:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.4, 2.5),
+"transitions": PackedFloat32Array(1, 4.28709),
+"update": 0,
+"values": [Vector3(-20, 100, 20), Vector3(0.127269, -0.00597525, 0.022197)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Bomb8:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.6, 2.7),
+"transitions": PackedFloat32Array(1, 4.28709),
+"update": 0,
+"values": [Vector3(-20.5309, 100, 19.9224), Vector3(-0.502674, -0.00597525, -0.20853)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Bomb9:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.3, 2.4),
+"transitions": PackedFloat32Array(1, 4.28709),
+"update": 0,
+"values": [Vector3(-20.0512, 100, 19.9771), Vector3(-0.0230041, -0.00597525, -0.153888)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Bomb10:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.5, 2.6),
+"transitions": PackedFloat32Array(1, 4.28709),
+"update": 0,
+"values": [Vector3(-19.7524, 100, 19.5983), Vector3(0.275805, -0.00597525, -0.532706)]
+}
+
+[sub_resource type="Animation" id="Animation_h7xgr"]
+resource_name = "Start_pos"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bomb1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-20.2919, 100, 19.6626)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bomb2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-19.632, 100, 19.9572)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bomb3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-19.7913, 100, 20.296)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Bomb4:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-20.0073, 100, 19.5902)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Bomb5:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-20.2376, 100, 20.4386)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Bomb6:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-19.4891, 100, 20.2362)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Bomb7:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-20, 100, 20)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Bomb8:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-20.5309, 100, 19.9224)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Bomb9:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-20.0512, 100, 19.9771)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Bomb10:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-19.7524, 100, 19.5983)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gst86"]
+_data = {
+"RESET": SubResource("Animation_f2try"),
+"Start": SubResource("Animation_l1hub"),
+"Start_pos": SubResource("Animation_h7xgr")
+}
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jn5hv"]
+radius = 2.4492
+
+[sub_resource type="Gradient" id="Gradient_eu0lx"]
+offsets = PackedFloat32Array(0, 0.202941, 0.335294, 0.526471)
+colors = PackedColorArray(0.619608, 0.380392, 1, 1, 1, 0.278431, 0.0509804, 1, 1, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6ubj6"]
+gradient = SubResource("Gradient_eu0lx")
+
+[sub_resource type="Curve" id="Curve_aulb3"]
+max_value = 12.77
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.157609, 1), 6.42063, 6.42063, 0, 0, Vector2(0.581522, 12.77), 0.0, 0.0, 0, 0, Vector2(0.858696, 12.77), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.71158, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_7md8n"]
+curve = SubResource("Curve_aulb3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_40x4p"]
+lifetime_randomness = 0.62
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 1, 0)
+spread = 30.0
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, -10, 0)
+scale_curve = SubResource("CurveTexture_7md8n")
+color_ramp = SubResource("GradientTexture1D_6ubj6")
+turbulence_noise_strength = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gj3xq"]
+vertex_color_use_as_albedo = true
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_vhj44"]
+material = SubResource("StandardMaterial3D_gj3xq")
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_my2rb"]
+emission_shape_offset = Vector3(0, 20, 0)
+direction = Vector3(0, -1, 0)
+spread = 0.01
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+scale_min = 0.1
+scale_max = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4adt2"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 50.0
+billboard_mode = 2
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_q2wfa"]
+material = SubResource("StandardMaterial3D_4adt2")
+size = Vector2(0.1, 10)
+
+[node name="Airstrike" type="Node3D"]
+script = ExtResource("1_2wuif")
+
+[node name="Bomb1" parent="." instance=ExtResource("2_l0e1g")]
+transform = Transform3D(0.739948, -0.21942, -0.635871, -1.49012e-08, 0.945302, -0.326195, 0.672664, 0.241367, 0.699475, -20.3196, 100, 19.5868)
+
+[node name="Bomb2" parent="." instance=ExtResource("2_l0e1g")]
+transform = Transform3D(0.739948, -0.21942, -0.635871, -1.49012e-08, 0.945302, -0.326195, 0.672664, 0.241367, 0.699475, -19.632, 100, 19.9572)
+
+[node name="Bomb3" parent="." instance=ExtResource("2_l0e1g")]
+transform = Transform3D(0.739948, -0.21942, -0.635871, -1.49012e-08, 0.945302, -0.326195, 0.672664, 0.241367, 0.699475, -19.7913, 100, 20.296)
+
+[node name="Bomb4" parent="." instance=ExtResource("2_l0e1g")]
+transform = Transform3D(0.739948, -0.21942, -0.635871, -1.49012e-08, 0.945302, -0.326195, 0.672664, 0.241367, 0.699475, -20.0073, 100, 19.5902)
+
+[node name="Bomb5" parent="." instance=ExtResource("2_l0e1g")]
+transform = Transform3D(0.739948, -0.21942, -0.635871, -1.49012e-08, 0.945302, -0.326195, 0.672664, 0.241367, 0.699475, -20.2376, 100, 20.4386)
+
+[node name="Bomb6" parent="." instance=ExtResource("2_l0e1g")]
+transform = Transform3D(0.739948, -0.21942, -0.635871, -1.49012e-08, 0.945302, -0.326195, 0.672664, 0.241367, 0.699475, -19.4891, 100, 20.2362)
+
+[node name="Bomb7" parent="." instance=ExtResource("2_l0e1g")]
+
+[node name="Bomb8" parent="." instance=ExtResource("2_l0e1g")]
+transform = Transform3D(0.739948, -0.21942, -0.635871, -1.49012e-08, 0.945302, -0.326195, 0.672664, 0.241367, 0.699475, -20.5309, 100, 19.9224)
+
+[node name="Bomb9" parent="." instance=ExtResource("2_l0e1g")]
+transform = Transform3D(0.739948, -0.21942, -0.635871, -1.49012e-08, 0.945302, -0.326195, 0.672664, 0.241367, 0.699475, -20.0512, 100, 19.9771)
+
+[node name="Bomb10" parent="." instance=ExtResource("2_l0e1g")]
+transform = Transform3D(0.739948, -0.21942, -0.635871, -1.49012e-08, 0.945302, -0.326195, 0.672664, 0.241367, 0.699475, -19.7524, 100, 19.5983)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gst86")
+}
+
+[node name="damage Area" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 12
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="damage Area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0651212, 0, 0.15484)
+shape = SubResource("CylinderShape3D_jn5hv")
+
+[node name="Explosion" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.29161, 0)
+emitting = false
+amount = 2048
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_40x4p")
+draw_pass_1 = SubResource("QuadMesh_vhj44")
+
+[node name="Laser" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 97.1318, 0)
+amount = 512
+lifetime = 0.6
+visibility_aabb = AABB(-4, -102.151, -4, 8, 204.301, 8)
+process_material = SubResource("ParticleProcessMaterial_my2rb")
+draw_pass_1 = SubResource("QuadMesh_q2wfa")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="damage Area" to="." method="_on_damage_area_body_entered"]
+[connection signal="finished" from="Explosion" to="." method="_on_explosion_finished"]

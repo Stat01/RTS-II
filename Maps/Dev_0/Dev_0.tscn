@@ -1,0 +1,133 @@
+[gd_scene load_steps=26 format=3 uid="uid://bsrpn5c6sv2ef"]
+
+[ext_resource type="Script" path="res://Maps/Dev_0/Map.gd" id="1_1f5m2"]
+[ext_resource type="Terrain3DStorage" uid="uid://43o5cqt1shu1" path="res://Maps/Dev_0/new_terrain_3d_storage.res" id="1_aj3a4"]
+[ext_resource type="Texture2D" path="res://Maps/Dev_0/Textures/Grass/Grass004_alb_ht.dds" id="2_svdwx"]
+[ext_resource type="Texture2D" path="res://Maps/Dev_0/Textures/Grass/Grass004_nrm_rgh.dds" id="3_ydnr7"]
+[ext_resource type="Texture2D" path="res://Maps/Dev_0/Textures/Rock/Rock030_alb_ht.dds" id="4_pdvjr"]
+[ext_resource type="Texture2D" path="res://Maps/Dev_0/Textures/Rock/Rock030_nrm_rgh.dds" id="5_msbcw"]
+[ext_resource type="Texture2D" path="res://Maps/Dev_0/Textures/Dirt/Dirt067_alb_ht.dds" id="6_35x61"]
+[ext_resource type="Texture2D" path="res://Maps/Dev_0/Textures/Dirt/Dirt067_nrm_rgh.dds" id="7_xwyq1"]
+[ext_resource type="Texture2D" path="res://Maps/Dev_0/Textures/Sand/Sand054_alb_ht.dds" id="8_m1dux"]
+[ext_resource type="Texture2D" path="res://Maps/Dev_0/Textures/Sand/Sand054_nrm_rgh.dds" id="9_ovkd6"]
+
+[sub_resource type="Gradient" id="Gradient_tro2n"]
+offsets = PackedFloat32Array(0.2, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_65a7o"]
+noise_type = 2
+frequency = 0.03
+cellular_jitter = 3.0
+cellular_return_type = 0
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_amplitude = 50.0
+domain_warp_fractal_type = 2
+domain_warp_fractal_lacunarity = 1.5
+domain_warp_fractal_gain = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_moiqu"]
+seamless = true
+color_ramp = SubResource("Gradient_tro2n")
+noise = SubResource("FastNoiseLite_65a7o")
+
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_s8c1p"]
+_shader_parameters = {
+"_mouse_layer": 2147483648,
+"blend_sharpness": null,
+"height_blending": null,
+"macro_variation1": Color(0.894118, 0.909804, 0.972549, 1),
+"macro_variation2": Color(0.913725, 0.909804, 0.815686, 1),
+"noise1_angle": 0.0,
+"noise1_offset": null,
+"noise1_scale": 0.173,
+"noise2_scale": 0.009,
+"noise3_scale": null,
+"noise_texture": SubResource("NoiseTexture2D_moiqu")
+}
+world_background = 0
+
+[sub_resource type="Terrain3DTexture" id="Terrain3DTexture_1x841"]
+name = "Grass"
+albedo_texture = ExtResource("2_svdwx")
+normal_texture = ExtResource("3_ydnr7")
+uv_scale = 1.0
+
+[sub_resource type="Terrain3DTexture" id="Terrain3DTexture_w0dix"]
+name = "Rock"
+texture_id = 1
+albedo_texture = ExtResource("4_pdvjr")
+normal_texture = ExtResource("5_msbcw")
+uv_scale = 1.0
+
+[sub_resource type="Terrain3DTexture" id="Terrain3DTexture_hlnkc"]
+name = "Dirt"
+texture_id = 2
+albedo_texture = ExtResource("6_35x61")
+normal_texture = ExtResource("7_xwyq1")
+uv_scale = 1.0
+
+[sub_resource type="Terrain3DTexture" id="Terrain3DTexture_gcs5m"]
+name = "Sand"
+texture_id = 3
+albedo_texture = ExtResource("8_m1dux")
+normal_texture = ExtResource("9_ovkd6")
+uv_scale = 1.0
+
+[sub_resource type="Terrain3DTextureList" id="Terrain3DTextureList_rvrgw"]
+textures = Array[Terrain3DTexture]([SubResource("Terrain3DTexture_1x841"), SubResource("Terrain3DTexture_w0dix"), SubResource("Terrain3DTexture_hlnkc"), SubResource("Terrain3DTexture_gcs5m")])
+
+[sub_resource type="Curve" id="Curve_3jylu"]
+_data = [Vector2(0.00673401, 0), 0.0, 4.37239, 0, 0, Vector2(0.53872, 0.991181), 0.0, 0.0, 0, 0, Vector2(0.996633, 0.0033921), -3.64439, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_buqe7"]
+curve = SubResource("Curve_3jylu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vylgh"]
+emission_shape = 3
+emission_box_extents = Vector3(110, 0.1, 130)
+gravity = Vector3(0, 0.01, 0)
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_buqe7")
+color = Color(0, 0, 0, 0.784314)
+hue_variation_min = -0.01
+hue_variation_max = 0.01
+turbulence_influence_min = 1.0
+turbulence_influence_max = 1.0
+collision_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tm5nm"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.0784314)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_on0po"]
+material = SubResource("StandardMaterial3D_tm5nm")
+
+[sub_resource type="BoxMesh" id="BoxMesh_h4i1i"]
+size = Vector3(256, 1, 1)
+
+[node name="Dev0" type="Node3D"]
+script = ExtResource("1_1f5m2")
+size_m = 128
+
+[node name="Terrain3D" type="Terrain3D" parent="."]
+storage = ExtResource("1_aj3a4")
+material = SubResource("Terrain3DMaterial_s8c1p")
+texture_list = SubResource("Terrain3DTextureList_rvrgw")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -112.973, 0, 129.736)
+layers = 2
+amount = 1000000
+lifetime = 5.0
+visibility_aabb = AABB(-117, -4, -130, 234, 8, 260)
+process_material = SubResource("ParticleProcessMaterial_vylgh")
+draw_pass_1 = SubResource("PlaneMesh_on0po")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128, 0, -0.5)
+mesh = SubResource("BoxMesh_h4i1i")

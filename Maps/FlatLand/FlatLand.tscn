@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://dnp12gvyulqnb"]
+
+[ext_resource type="Texture2D" uid="uid://c5a0dksbqxs77" path="res://ImageExports/out/ground.png" id="1_5http"]
+[ext_resource type="Texture2D" uid="uid://cftrvxxhbepyd" path="res://Maps/Dev Horseshoe/ground_height.png" id="2_1r7io"]
+[ext_resource type="Texture2D" uid="uid://bmhuedxyf7pkk" path="res://Maps/Dev Horseshoe/ground_nor.png" id="3_chx2l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rwxbv"]
+albedo_texture = ExtResource("1_5http")
+normal_enabled = true
+normal_scale = 0.7
+normal_texture = ExtResource("3_chx2l")
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("2_1r7io")
+uv1_scale = Vector3(2, 2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rvphp"]
+material = SubResource("StandardMaterial3D_rwxbv")
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_81i23"]
+size = Vector3(100, 1, 100)
+
+[node name="Map" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_rvphp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_81i23")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+size = Vector3(100, 2, 100)

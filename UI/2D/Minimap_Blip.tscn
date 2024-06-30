@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnck6472nq5i5"]
+
+[ext_resource type="Texture2D" uid="uid://doc5ynklhymnu" path="res://UI/2D/Minimap_blip.png" id="1_ff4vv"]
+
+[node name="Blip" type="Sprite3D"]
+transform = Transform3D(16, 0, 0, 0, -6.99382e-07, 16, 0, -16, -6.99382e-07, 0, 0, 0)
+texture = ExtResource("1_ff4vv")

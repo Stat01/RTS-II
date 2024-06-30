@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://n83tupt1qtp4"]
+
+[ext_resource type="Script" path="res://UI/3D/Building Squares/Blockcheck.gd" id="1_41iim"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_tl8vf"]
+size = Vector3(3, 2, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_veij6"]
+size = Vector3(3, 1, 5)
+
+[node name="3x3 Factory" type="Node3D"]
+
+[node name="3x3 Factory" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0.7, 0, 0.7)
+mesh = SubResource("BoxMesh_tl8vf")
+skeleton = NodePath("")
+
+[node name="Area3D" type="Area3D" parent="3x3 Factory"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+collision_layer = 0
+collision_mask = 13
+script = ExtResource("1_41iim")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3x3 Factory/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_veij6")
+
+[connection signal="body_entered" from="3x3 Factory/Area3D" to="3x3 Factory/Area3D" method="_on_body_entered"]
+[connection signal="body_exited" from="3x3 Factory/Area3D" to="3x3 Factory/Area3D" method="_on_body_exited"]

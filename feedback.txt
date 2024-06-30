@@ -1,0 +1,15 @@
+v0.01
+done - mines can be put anywhere
+done - enemy units visible in FOW when hovering over them
+done - units can spawn in fucked places
+done - can place buildings in terrain
+done - power not implemented
+done - minimap
+
+v0.02
+can still place buildings in terrain
+units spawn inside each other from production facilities
+waypoints for production facilities
+Mining rigs and omnite patches display amount mining and amount remaining respectively
+increase minimap size
+attack move icon

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dynmqvcimknc3"]
+
+[ext_resource type="Script" path="res://AI/AIMaster.gd" id="1_6g0yy"]
+
+[node name="AI Master" type="Node"]
+script = ExtResource("1_6g0yy")
+
+[node name="SpawnEnemyTimer" type="Timer" parent="."]
+
+[node name="LaunchAttackTimer" type="Timer" parent="."]
+wait_time = 12.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="SpawnEnemyTimer" to="." method="spawnEnemy"]
+[connection signal="timeout" from="LaunchAttackTimer" to="." method="launchAttack"]

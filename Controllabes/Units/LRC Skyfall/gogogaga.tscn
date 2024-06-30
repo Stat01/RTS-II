@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbdk47ks0ghju"]
+
+[ext_resource type="PackedScene" uid="uid://yicxnay2salw" path="res://Imports/LRC Artillery.glb" id="1_afmwg"]
+
+[node name="LRC Artillery" instance=ExtResource("1_afmwg")]

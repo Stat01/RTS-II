@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck2ij3h4tglip"]
+
+[ext_resource type="Script" path="res://BuildingHandler.gd" id="1_qns1q"]
+
+[node name="Building Handler" type="Node"]
+script = ExtResource("1_qns1q")

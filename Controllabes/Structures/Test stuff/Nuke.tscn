@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbakwb4k7e6of"]
+
+[ext_resource type="Script" path="res://Controllabes/Structures/Test stuff/Nuke.gd" id="1_5bfqe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uatl2"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="Curve" id="Curve_ym3p5"]
+_data = [Vector2(0, 0.351648), 0.0, 0.0, 0, 0, Vector2(1, 0), -7.77197, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3tskh"]
+curve = SubResource("Curve_ym3p5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o0t15"]
+angle_min = -360.0
+angle_max = 360.0
+direction = Vector3(0, 1, 0)
+spread = 21.687
+initial_velocity_max = 12.89
+scale_curve = SubResource("CurveTexture_3tskh")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dd4v3"]
+
+[node name="Nuke" type="Node3D"]
+script = ExtResource("1_5bfqe")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_uatl2")
+emitting = false
+amount = 10000
+lifetime = 4.74
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_o0t15")
+draw_pass_1 = SubResource("PlaneMesh_dd4v3")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true

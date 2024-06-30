@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvhd3unlck7x4"]
+
+[ext_resource type="Script" path="res://ImageExports/ImageExport.gd" id="1_sku1d"]
+
+[node name="ImageExport" type="Node2D"]
+script = ExtResource("1_sku1d")
