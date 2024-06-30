@@ -1,12 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwdcttkbt25k4"]
+[gd_scene load_steps=4 format=3 uid="uid://cwdcttkbt25k4"]
 
+[ext_resource type="Script" path="res://UI/2D/Buttons/BuildButton.gd" id="1_3hut6"]
 [ext_resource type="Texture2D" uid="uid://baxrgdbckk2wq" path="res://UI/2D/Buttons/ExamplePortrait.png" id="1_mgeqn"]
 [ext_resource type="Script" path="res://UI/2D/BuyButton.gd" id="2_2ells"]
 
-[node name="TextureButton" type="TextureButton"]
+[node name="BuildButton" type="Control"]
 custom_minimum_size = Vector2(64, 64)
-offset_right = 64.0
-offset_bottom = 64.0
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_3hut6")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 button_mask = 3
@@ -15,7 +30,7 @@ ignore_texture_size = true
 stretch_mode = 4
 script = ExtResource("2_2ells")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="RichTextLabel" type="RichTextLabel" parent="TextureButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,10 +44,10 @@ $$$
 [queue]"
 scroll_active = false
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="TextureButton"]
 one_shot = true
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="ProgressBar" type="ProgressBar" parent="TextureButton"]
 layout_mode = 1
 offset_top = 60.0
 offset_right = 64.0
@@ -40,7 +55,7 @@ offset_bottom = 64.0
 value = 50.0
 show_percentage = false
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="TextureButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,5 +64,5 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="gui_input" from="TextureButton" to="TextureButton" method="_on_gui_input"]
+[connection signal="timeout" from="TextureButton/Timer" to="TextureButton" method="_on_timer_timeout"]

@@ -4,23 +4,15 @@ extends Control
 
 const DEFAULT_CURSOR = preload("res://UI/2D/Cursors/Default.png")
 
-const SELECT_0 = preload("res://UI/2D/Cursors/Select0.png")
-const SELECT_1 = preload("res://UI/2D/Cursors/Select1.png")
-const SELECT_2 = preload("res://UI/2D/Cursors/Select2.png")
-const SELECT_3 = preload("res://UI/2D/Cursors/Select3.png")
-const SELECT_4 = preload("res://UI/2D/Cursors/Select4.png")
-const SELECT_5 = preload("res://UI/2D/Cursors/Select5.png")
-const SELECT_6 = preload("res://UI/2D/Cursors/Select6.png")
-const SELECT_7 = preload("res://UI/2D/Cursors/Select7.png")
 const SELECT_ARR: Array = [
-	SELECT_0,
-	SELECT_1,
-	SELECT_2,
-	SELECT_3,
-	SELECT_4,
-	SELECT_5,
-	SELECT_6,
-	SELECT_7
+	preload("res://UI/2D/Cursors/Select0.png"),
+	preload("res://UI/2D/Cursors/Select1.png"),
+	preload("res://UI/2D/Cursors/Select2.png"),
+	preload("res://UI/2D/Cursors/Select3.png"),
+	preload("res://UI/2D/Cursors/Select4.png"),
+	preload("res://UI/2D/Cursors/Select5.png"),
+	preload("res://UI/2D/Cursors/Select6.png"),
+	preload("res://UI/2D/Cursors/Select7.png")
 ]
 
 const TARGET_CURSOR = preload("res://UI/2D/Cursors/Target.png")

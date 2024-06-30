@@ -1,6 +1,5 @@
 [gd_scene load_steps=16 format=3 uid="uid://dgeiuigxw0r0a"]
 
-[ext_resource type="PackedScene" uid="uid://wg88u2thbmde" path="res://UI/2D/HUD.tscn" id="1_2ep4q"]
 [ext_resource type="PackedScene" uid="uid://cdyimnapkawjs" path="res://CameraController.tscn" id="1_347s1"]
 [ext_resource type="Script" path="res://Main.gd" id="1_x2gny"]
 [ext_resource type="Script" path="res://nav_mesh.gd" id="2_1f3u2"]
@@ -13,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bmgr1ddlol6v1" path="res://Controllabes/Structures/Vehicle Depot/Vehicle Depot.tscn" id="10_h17d8"]
 [ext_resource type="PackedScene" uid="uid://b4hnsaqm2co3j" path="res://Controllabes/Units/Zel'va/Zel'va.tscn" id="12_77b7h"]
 [ext_resource type="PackedScene" uid="uid://dynmqvcimknc3" path="res://AI/AIMaster.tscn" id="12_86qhq"]
+[ext_resource type="PackedScene" uid="uid://ctkamyp28he0a" path="res://UI/2D/HUDv2.tscn" id="13_28r8x"]
 [ext_resource type="PackedScene" uid="uid://ck2ij3h4tglip" path="res://BuildingHandler.tscn" id="14_kltx4"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_tl0ht"]
@@ -163,7 +163,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, 60)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Hud" parent="CanvasLayer" instance=ExtResource("1_2ep4q")]
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("13_28r8x")]
 
 [node name="PathingTimer" type="Timer" parent="."]
 wait_time = 0.1

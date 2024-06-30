@@ -5,10 +5,10 @@ extends TextureButton
 @onready var progress_bar: ProgressBar = $ProgressBar
 @onready var block_rect: ColorRect = $ColorRect
 
-@export var unit: PackedScene
-@export var is_structure_button: bool
+var unit: PackedScene
+var is_structure_button: bool
 
-@export var print_locked: bool
+var print_locked: bool
 
 var unit_name: String
 var price: int
@@ -26,6 +26,7 @@ var ins: Node3D
 const EXAMPLE_PORTRAIT = preload("res://UI/2D/Buttons/ExamplePortrait.png")
 
 func _ready() -> void:
+	await get_tree().create_timer(0.05).timeout
 	ins = unit.instantiate()
 	unit_name = ins.getName()
 	price = ins.getPrice()
@@ -36,13 +37,15 @@ func _ready() -> void:
 	if texture_normal == null:
 		texture_normal = EXAMPLE_PORTRAIT
 	
+	tooltip_text = unit_name + "\n" + str(price) + "c"
+	
 	SignalManager.refund_building.connect(refundBuilding)
 	SignalManager.building_placed.connect(buildingPlaced)
 
 func _process(_delta: float) -> void:
-	label.text = unit_name + "\n" + str(price)
-	if amount_in_queue > 0:
-		label.text += "c\n[" + str(amount_in_queue) + "]"
+	label.text = unit_name
+	if amount_in_queue > 0 and !is_structure_button:
+		label.text += "\n" + str(amount_in_queue)
 	
 	if currently_building or building_complete:
 		progress_bar.max_value = timer.wait_time

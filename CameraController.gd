@@ -53,6 +53,9 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	
+	#update mouse pos
+	mouse_pos = get_viewport().get_mouse_position()
+	
 #region Camera panning
 	pan_direction = mouse_pos - mouse_middle_pan_pos
 	pan_direction = pan_direction / 64
@@ -78,6 +81,7 @@ func _physics_process(delta: float) -> void:
 #endregion
 	
 #region Cursors
+	GeneralVars.current_cursor_type = 0
 	var info: Dictionary = getWorldClickPosition()
 	if "position" in info:
 		var collider = info["collider"]
@@ -99,6 +103,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		#Mouse out of bounds idk safety or something
 		GeneralVars.current_cursor_type = 0
+	print(GeneralVars.current_cursor_type)
 #endregion
 
 #region Camera shake
@@ -132,12 +137,8 @@ func minimapMoveCamera(pos: Vector2) -> void:
 	global_position = Vector3(real_mouse_pos.x - GeneralVars.getMapSize() * 2, global_position.y, real_mouse_pos.y)
 
 func _unhandled_input(event: InputEvent) -> void:
-	#update mouse pos
-	if event is InputEventMouseMotion:
-		mouse_pos = event.position
-	
 #region Camera zoom and panning
-	elif event is InputEventMouseButton:
+	if event is InputEventMouseButton:
 		match event.button_index:
 			#zoom in
 			MOUSE_BUTTON_WHEEL_UP: if event.pressed: target_zoom -= 2.5
