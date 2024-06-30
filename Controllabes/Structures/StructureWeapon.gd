@@ -20,6 +20,8 @@ func _ready() -> void:
 	detection_area.get_child(0).shape.height = 10
 	detection_area.body_entered.connect(detectionAreaEntered)
 	detection_area.body_exited.connect(detectionAreaExited)
+	
+	connect("tree_exiting", tree_exiting)
 
 func _process(delta: float) -> void:
 	super._process(delta)
@@ -60,3 +62,8 @@ func setDetectedTargets(i: Array[CharacterBody3D]) -> void:
 	detected_targets.append_array(i)
 func getDetectedTargets() -> Array[CharacterBody3D]: return detected_targets
 func clearDetectedTargets() -> void: detected_targets.clear()
+
+func tree_exiting() -> void:
+	print(self)
+	if PlayerVars.getBuildings().has(getName()):
+		PlayerVars.getBuildings().erase(getName())

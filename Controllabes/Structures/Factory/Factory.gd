@@ -2,6 +2,7 @@ extends "res://Controllabes/Structures/StructureNoWeapon.gd"
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+
 func _ready() -> void:
 	super._ready()
 	PlayerVars.setFactoryBuilding(self)

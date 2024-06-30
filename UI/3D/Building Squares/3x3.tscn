@@ -25,5 +25,13 @@ script = ExtResource("1_bykcr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_veij6")
 
+[node name="Terraincheck" type="Area3D" parent="3x3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3x3/Terraincheck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_veij6")
+
 [connection signal="body_entered" from="3x3/Area3D" to="3x3/Area3D" method="_on_body_entered"]
 [connection signal="body_exited" from="3x3/Area3D" to="3x3/Area3D" method="_on_body_exited"]

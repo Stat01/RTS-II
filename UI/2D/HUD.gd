@@ -58,7 +58,7 @@ func hideAllUI() -> void:
 	
 
 
-func updateSelectionUI(unit: CharacterBody3D) -> void:
+func updateSelectionUI(unit: Controllable) -> void:
 	unit_name.text = unit.getName()
 	
 	unit_stats.text = ""
@@ -78,6 +78,8 @@ func updateSelectionUI(unit: CharacterBody3D) -> void:
 		
 		if (unit.getIsBuilding() and unit.getDamage() > 0) or !unit.getIsBuilding():
 			unit_stats.text += "			Kills  " + str(unit.getKills())
+		elif unit.getName() == "Mining Rig":
+			unit_stats.text += "			Yield " + str(unit.omnite_yield)
 		
 		unit_stats.text += "\nArmour  " + str(unit.getArmour())
 
@@ -88,3 +90,6 @@ func updateSelectionUI(unit: CharacterBody3D) -> void:
 
 		if (unit.getIsBuilding() and unit.getDamage() > 0) or !unit.getIsBuilding():
 			unit_stats.text += "			" + damage_type
+	
+	elif unit.getName() == "Omnite Cluster":
+		unit_stats.text = str(unit.amount)

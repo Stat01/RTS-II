@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://dtp1p7to22jnw" path="res://UI/2D/Cursors/Default.png" id="14_oy0lh"]
 [ext_resource type="PackedScene" uid="uid://lq2y3pmflgku" path="res://Controllabes/Structures/Turret MK1/TurretMk1.tscn" id="15_of13l"]
 [ext_resource type="Script" path="res://UI/2D/Minimap.gd" id="16_cfpff"]
-[ext_resource type="Texture2D" uid="uid://jym77djows2h" path="res://UI/2D/Minimap_picture.png" id="17_dffmb"]
+[ext_resource type="Texture2D" uid="uid://bej73x6e7lrer" path="res://UI/2D/SplashScreen.jpg" id="18_my13r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7nexf"]
 
@@ -39,14 +39,17 @@ adjustment_brightness = 2.0
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_gm5q8"]
 
 [sub_resource type="Gradient" id="Gradient_flwjj"]
-offsets = PackedFloat32Array(0.552716, 0.578275)
-colors = PackedColorArray(0, 0, 0, 1, 0.347817, 0.347817, 0.347817, 1)
+offsets = PackedFloat32Array(0.571885, 0.587859)
+colors = PackedColorArray(0, 0, 0, 1, 0.716296, 0.716296, 0.716296, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0cs3n"]
 noise_type = 0
 frequency = 1.0
+domain_warp_frequency = 5.33
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vbvfx"]
+width = 2048
+height = 2048
 color_ramp = SubResource("Gradient_flwjj")
 noise = SubResource("FastNoiseLite_0cs3n")
 
@@ -247,6 +250,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="Version Label" type="Label" parent="Building UI"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Steel Horizon v0.02"
+horizontal_alignment = 2
 
 [node name="Container" type="Container" parent="Building UI"]
 layout_mode = 2
@@ -449,12 +459,14 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 1.45
+size_flags_stretch_ratio = 7.0
 mouse_filter = 2
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="Minimap UI/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 stretch_mode = 0
+alignment_vertical = 2
 
 [node name="Minimap" type="Control" parent="Minimap UI/HBoxContainer/AspectRatioContainer"]
 custom_minimum_size = Vector2(200, 200)
@@ -473,7 +485,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
 stretch = true
-stretch_shrink = 4
 script = ExtResource("16_cfpff")
 refresh_rate = 1.0
 
@@ -482,7 +493,7 @@ refresh_rate = 1.0
 [node name="SubViewport" type="SubViewport" parent="Minimap UI/HBoxContainer/AspectRatioContainer/Minimap/SubViewportContainer"]
 handle_input_locally = false
 debug_draw = 1
-size = Vector2i(50, 50)
+size = Vector2i(200, 200)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="Minimap UI/HBoxContainer/AspectRatioContainer/Minimap/SubViewportContainer/SubViewport"]
@@ -493,13 +504,13 @@ projection = 1
 size = 9.0
 
 [node name="minimap noise" type="Sprite3D" parent="Minimap UI/HBoxContainer/AspectRatioContainer/Minimap/SubViewportContainer/SubViewport/Camera3D"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 8.74228e-08, -2)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 8.74228e-08, -2)
 texture = SubResource("NoiseTexture2D_vbvfx")
 
 [node name="minimap picture" type="Sprite3D" parent="Minimap UI/HBoxContainer/AspectRatioContainer/Minimap/SubViewportContainer/SubViewport/Camera3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.31134e-07, -3)
 texture_filter = 0
-texture = ExtResource("17_dffmb")
+texture = ExtResource("18_my13r")
 
 [node name="Cursor" type="Control" parent="."]
 anchors_preset = 0

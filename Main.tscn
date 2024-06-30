@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dgeiuigxw0r0a"]
+[gd_scene load_steps=16 format=3 uid="uid://dgeiuigxw0r0a"]
 
 [ext_resource type="PackedScene" uid="uid://wg88u2thbmde" path="res://UI/2D/HUD.tscn" id="1_2ep4q"]
 [ext_resource type="PackedScene" uid="uid://cdyimnapkawjs" path="res://CameraController.tscn" id="1_347s1"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://bsrpn5c6sv2ef" path="res://Maps/Dev_0/Dev_0.tscn" id="7_8iif0"]
 [ext_resource type="PackedScene" uid="uid://rxe3e51pm3mu" path="res://Controllabes/Structures/Omnite/Omnite.tscn" id="7_a07hw"]
 [ext_resource type="PackedScene" uid="uid://cy7gmooct6gol" path="res://Controllabes/Structures/MCU/MCU.tscn" id="8_gm1f2"]
+[ext_resource type="PackedScene" uid="uid://bmgr1ddlol6v1" path="res://Controllabes/Structures/Vehicle Depot/Vehicle Depot.tscn" id="10_h17d8"]
+[ext_resource type="PackedScene" uid="uid://b4hnsaqm2co3j" path="res://Controllabes/Units/Zel'va/Zel'va.tscn" id="12_77b7h"]
 [ext_resource type="PackedScene" uid="uid://dynmqvcimknc3" path="res://AI/AIMaster.tscn" id="12_86qhq"]
 [ext_resource type="PackedScene" uid="uid://ck2ij3h4tglip" path="res://BuildingHandler.tscn" id="14_kltx4"]
 
@@ -49,8 +51,23 @@ script = ExtResource("2_1f3u2")
 [node name="MCU" parent="Structures" instance=ExtResource("8_gm1f2")]
 transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -28, 0, 20)
 
+[node name="Vehicle Depot" parent="Structures" instance=ExtResource("10_h17d8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, 23)
+
 [node name="Units" type="Node" parent="."]
 script = ExtResource("4_1qj16")
+
+[node name="Zel\'va" parent="Units" instance=ExtResource("12_77b7h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, 25)
+
+[node name="Zel\'va2" parent="Units" instance=ExtResource("12_77b7h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.3626, 0, 26.1545)
+
+[node name="Zel\'va3" parent="Units" instance=ExtResource("12_77b7h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.3626, 0, 26.1545)
+
+[node name="Zel\'va4" parent="Units" instance=ExtResource("12_77b7h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.5549, 1.90735e-06, 21.9308)
 
 [node name="Doodads" type="Node" parent="."]
 

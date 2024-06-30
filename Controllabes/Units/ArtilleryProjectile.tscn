@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://clff6f8s7ucf"]
 
-[ext_resource type="Script" path="res://Controllabes/Units/ArtilleryProjectile.gd" id="1_ti8pw"]
+[ext_resource type="Script" path="res://Controllabes/Units/ArtilleryProjectile.gd" id="1_p41ih"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gjvrc"]
 resource_name = "Base"
@@ -149,7 +149,7 @@ is_hemisphere = true
 transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0)
 collision_layer = 0
 collision_mask = 0
-script = ExtResource("1_ti8pw")
+script = ExtResource("1_p41ih")
 
 [node name="Model" type="MeshInstance3D" parent="."]
 transform = Transform3D(4.77671e-16, -1.09278e-08, 0.25, -0.25, -1.09278e-08, 0, 1.09278e-08, -0.25, -1.09278e-08, 0, 0, 0)

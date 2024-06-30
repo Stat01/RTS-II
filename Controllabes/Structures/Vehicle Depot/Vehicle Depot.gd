@@ -8,5 +8,5 @@ func _ready() -> void:
 	animation_player.play("Rise")
 
 func die() -> void:
-	super.die()
 	PlayerVars.setVehicleDepotBuilding(null)
+	super.die()

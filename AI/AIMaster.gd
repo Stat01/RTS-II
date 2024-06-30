@@ -26,7 +26,7 @@ func _ready() -> void:
 func launchAttack() -> void:
 	if !GeneralVars.getStructureList().get_children().is_empty():
 		var ins = AI_SLAVE.instantiate()
-		var unit_group: Array[CharacterBody3D]
+		var unit_group: Array[CharacterBody3D] = []
 		
 		for unit in units:
 			unit_group.append(unit)

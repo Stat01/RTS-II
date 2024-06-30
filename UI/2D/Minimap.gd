@@ -13,8 +13,8 @@ var dragging: bool
 func _ready() -> void:
 	var map_size := GeneralVars.getMapSize()
 	camera.size = map_size * 2
-	minimap_noise.scale = Vector3(map_size * 2,map_size * 2,map_size * 2)
-	minimap_picture.scale = Vector3(map_size * 3.1,map_size * 3.1,map_size * 3.1)
+	minimap_noise.scale = Vector3(map_size * 1,map_size * 1,map_size * 1)
+	minimap_picture.scale = Vector3(map_size * 0.4,map_size * 0.4,map_size * 0.4)
 	camera.global_position = Vector3(-map_size, 512, map_size)
 	refresh_timer.start(refresh_rate)
 	refreshMinimap()
@@ -26,14 +26,17 @@ func refreshMinimap() -> void:
 		if PlayerVars.getEnergyRemaining() <= 100:
 			minimap_noise.visible = true
 			minimap_noise.get("texture").get("noise").set("seed", randi_range(0,1024))
+			camera.environment.adjustment_enabled = false
 		else:
 			minimap_noise.visible = false
 			minimap_picture.visible = false
+			camera.environment.adjustment_enabled = true
 	else:
 		minimap_picture.visible = true
 		minimap_noise.visible = false
+		camera.environment.adjustment_enabled = false
 
 func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == 1:
+	if PlayerVars.hasRadar() and PlayerVars.getEnergyRemaining() > 100 and event is InputEventMouseButton and event.button_index == 1:
 		var mouse_pos := Vector2(event.position.x / size.x, event.position.y / size.y)
 		SignalManager.minimap_camera_position_changed.emit(mouse_pos)

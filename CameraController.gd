@@ -58,17 +58,17 @@ func _physics_process(delta: float) -> void:
 	pan_direction = pan_direction / 64
 	pan_direction = pan_direction * Settings.camera_pan_speed
 	##left
-	#if mouse_pos.x < get_viewport().get_visible_rect().size.x - (get_viewport().get_visible_rect().size.x - 30) or Input.is_action_pressed("camera_left"):
-	#	pan_direction.x -= 1
+	if mouse_pos.x < get_viewport().get_visible_rect().size.x - (get_viewport().get_visible_rect().size.x - 30) or Input.is_action_pressed("camera_left"):
+		pan_direction.x -= 1
 	##right
-	#if mouse_pos.x > get_viewport().get_visible_rect().size.x - 30 or Input.is_action_pressed("camera_right"):
-	#	pan_direction.x += 1
+	if mouse_pos.x > get_viewport().get_visible_rect().size.x - 30 or Input.is_action_pressed("camera_right"):
+		pan_direction.x += 1
 	##forward
-	#if mouse_pos.y < get_viewport().get_visible_rect().size.y - (get_viewport().get_visible_rect().size.y - 30) or Input.is_action_pressed("camera_forward"):
-	#	pan_direction.y -= 1
+	if mouse_pos.y < get_viewport().get_visible_rect().size.y - (get_viewport().get_visible_rect().size.y - 30) or Input.is_action_pressed("camera_forward"):
+		pan_direction.y -= 1
 	##backward
-	#if mouse_pos.y > get_viewport().get_visible_rect().size.y - 30 or Input.is_action_pressed("camera_backward"):
-	#	pan_direction.y += 1
+	if mouse_pos.y > get_viewport().get_visible_rect().size.y - 30 or Input.is_action_pressed("camera_backward"):
+		pan_direction.y += 1
 	if panning:
 		global_position += Vector3(pan_direction.x, 0, pan_direction.y)
 #endregion
@@ -113,7 +113,7 @@ func _physics_process(delta: float) -> void:
 		glitch_effect.material.set("shader_parameter/shake_color", shake_strength * 0.01)
 #endregion
 	
-
+	
 	
 	
 	#AI debug
@@ -200,6 +200,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		dragging_box = false
 		line.clear_points()
 #endregion
+	
+	#Delete Controllable, maybe debug?
+	if event.is_action_pressed("delete"):
+		for unit in PlayerVars.getSelectedUnits():
+			unit.die()
 
 func shakeCamera(strength: float) -> void:
 	applyShake(strength)
@@ -285,41 +290,67 @@ func issueCommand() -> void:
 		var collision_pos = result["position"]
 		
 		for unit in PlayerVars.getSelectedUnits():
+#region Command Unit
 			if !unit.getIsBuilding():
 				#attack move check
 				if attack_move:
 					#unit
 					if collider != null and collider is CharacterBody3D:
-							unit.setCurrentTarget(collider)
-							unit.setSavedTargetPosition(collision_pos)
-							unit.getMovementPointer().movePointer(collision_pos)
-							unit.setState(2)
+						#visible
+						if !collider.getVisibleBy().is_empty():
+							commandAttackUnit(unit, collider, collision_pos)
+						#not visible
+						else:
+							commandAttackMove(unit, collision_pos)
 					#no unit
 					else:
-							unit.setTargetPosition(collision_pos)
-							unit.setSavedTargetPosition(collision_pos)
-							unit.getMovementPointer().movePointer(collision_pos)
-							unit.setAttackMoving(true)
-							unit.setState(2)
+						commandAttackMove(unit, collision_pos)
 				#no attack move
 				else:
 					#unit
 					if collider != null and collider is CharacterBody3D:
 						#enemy unit
 						if collider.getTeam() == 2:
-								unit.setCurrentTarget(collider)
-								unit.setSavedTargetPosition(collision_pos)
-								unit.getMovementPointer().movePointer(collision_pos)
-								unit.setState(2)
+							#visible
+							if !collider.getVisibleBy().is_empty():
+								commandAttackUnit(unit, collider, collision_pos)
+							#not visible
+							else:
+								commandMoveUnit(unit, collision_pos)
 						else:
-								unit.setTargetPosition(collider.global_position)
-								unit.setSavedTargetPosition(collision_pos)
-								unit.getMovementPointer().movePointer(collision_pos)
-								unit.setState(1)
+							commandMoveToUnit(unit, collider, collision_pos)
 					#no unit
 					else:	
-							unit.setTargetPosition(collision_pos)
-							unit.setSavedTargetPosition(collision_pos)
-							unit.getMovementPointer().movePointer(collision_pos)
-							unit.forceSetCurrentTarget(null)
-							unit.setState(1)
+						commandMoveUnit(unit, collision_pos)
+#endregion
+#region Command Structure
+			elif unit.has_method("getWayPoint") and unit.isProductionBuilding() and !attack_move:
+				unit.setWayPoint(collision_pos)
+				unit.getMovementPointer().movePointer(collision_pos)
+#endregion
+
+func commandAttackUnit(unit: Controllable, collider: Controllable, collision_pos: Vector3) -> void:
+	unit.setCurrentTarget(collider)
+	unit.setSavedTargetPosition(collision_pos)
+	unit.getMovementPointer().movePointer(collision_pos)
+	unit.setState(2)
+
+func commandAttackMove(unit: Controllable, collision_pos: Vector3) -> void:
+	unit.setTargetPosition(collision_pos)
+	unit.setSavedTargetPosition(collision_pos)
+	unit.getMovementPointer().movePointer(collision_pos)
+	unit.setAttackMoving(true)
+	unit.setState(2)
+
+func commandMoveUnit(unit: Controllable, collision_pos: Vector3) -> void:
+	unit.setTargetPosition(collision_pos)
+	unit.setSavedTargetPosition(collision_pos)
+	unit.getMovementPointer().movePointer(collision_pos)
+	unit.forceSetCurrentTarget(null)
+	unit.setState(1)
+
+func commandMoveToUnit(unit: Controllable, collider: Controllable, collision_pos: Vector3) -> void:
+	unit.setTargetPosition(collider.global_position)
+	unit.setSavedTargetPosition(collision_pos)
+	unit.getMovementPointer().movePointer(collision_pos)
+	unit.setState(1)

@@ -8,6 +8,8 @@ extends TextureButton
 @export var unit: PackedScene
 @export var is_structure_button: bool
 
+@export var print_locked: bool
+
 var unit_name: String
 var price: int
 var build_time: int
@@ -50,9 +52,13 @@ func _process(_delta: float) -> void:
 	
 	for i in unit_requirements:
 		if !PlayerVars.getBuildings().has(i):
+			if print_locked:
+				print("should lock")
 			is_locked = true
 			break
 		else:
+			if print_locked:
+				print("should unlock")
 			is_locked = false
 	
 	block_rect.set_visible(is_locked)
@@ -100,16 +106,30 @@ func _on_timer_timeout() -> void:
 			1:	#Vehicle Depot
 				if PlayerVars.hasVehicleDepotBuilding():
 					GeneralVars.getUnitsList().add_child(ins1)
-					ins1.global_position = PlayerVars.getVehicleDepotBuilding().getSpawnNode().global_position
-			
+					var pos : Vector3 = PlayerVars.getVehicleDepotBuilding().getSpawnNode().global_position
+					ins1.global_position = Vector3(pos.x + randf_range(-1, 1), pos.y, pos.z + randf_range(-1, 1))
+					await get_tree().create_timer(0.05).timeout
+					commandMoveUnit(ins1, PlayerVars.getVehicleDepotBuilding().getWayPoint())
 			2:	#Factory
 				if PlayerVars.hasFactoryBuilding():
 					GeneralVars.getUnitsList().add_child(ins1)
-					ins1.global_position = PlayerVars.getFactoryBuilding().getSpawnNode().global_position
+					var pos : Vector3 = PlayerVars.getFactoryBuilding().getSpawnNode().global_position
+					ins1.global_position = Vector3(pos.x + randf_range(-1.5, 1.5), pos.y, pos.z + randf_range(-1.5, 1.5))
+					await get_tree().create_timer(0.05).timeout
+					commandMoveUnit(ins1, PlayerVars.getFactoryBuilding().getWayPoint())
 		
 		amount_in_queue -= 1
 		if amount_in_queue > 0:
 			timer.start(build_time)
+		else:
+			currently_building = false
+
+func commandMoveUnit(unit_: Controllable, collision_pos: Vector3) -> void:
+	unit_.setTargetPosition(collision_pos)
+	unit_.setSavedTargetPosition(collision_pos)
+	unit_.getMovementPointer().movePointer(collision_pos)
+	unit_.forceSetCurrentTarget(null)
+	unit_.setState(1)
 
 func refundBuilding(unit_name_: String) -> void:
 	if is_structure_button and unit_name_ == unit_name:

@@ -23,6 +23,9 @@ func _on_timer_timeout() -> void:
 	
 	PlayerVars.changeOmnite(omnite_yield)
 	
+	for i in omnite_area.get_overlapping_bodies():
+		i.amount -= 1
+	
 	if omnite_yield <= 0:
 		animation_player_crane.stop()
 		animation_player_drill.stop()
