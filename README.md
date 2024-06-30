@@ -1,1 +1,1 @@
-RTS II is a game about rts:ing
+Steel Horizon is an rts game inspired by games like command and conquer and supreme commander.
