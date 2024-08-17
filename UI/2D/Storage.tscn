@@ -1,0 +1,404 @@
+[gd_scene load_steps=28 format=3 uid="uid://bcfvr0ifg1sg"]
+
+[ext_resource type="Script" path="res://UI/2D/Cursor.gd" id="1_0s6p3"]
+[ext_resource type="Texture2D" uid="uid://dtp1p7to22jnw" path="res://UI/2D/Cursors/Default.png" id="2_4gesp"]
+[ext_resource type="Theme" uid="uid://dxvdeeo5047vg" path="res://Themes/UIPanel.tres" id="3_f8vnu"]
+[ext_resource type="Script" path="res://UI/2D/Minimap.gd" id="4_41clh"]
+[ext_resource type="PackedScene" uid="uid://cwdcttkbt25k4" path="res://UI/2D/Buttons/BuildButton.tscn" id="5_nj7ch"]
+[ext_resource type="PackedScene" uid="uid://bjxsxuvqhfmo3" path="res://Controllabes/Structures/Power plant/Power Plant.tscn" id="6_wbx7v"]
+[ext_resource type="PackedScene" uid="uid://ophlcxwrhk8f" path="res://Controllabes/Structures/Omnite Mining Rig/OmniteMiningRig.tscn" id="7_7lnjv"]
+[ext_resource type="PackedScene" uid="uid://doyx8itgb4f66" path="res://Controllabes/Structures/Omnite Silo/OmniteSilo.tscn" id="8_oy72t"]
+[ext_resource type="PackedScene" uid="uid://bi0m2x2tiwt8v" path="res://Controllabes/Structures/Intelligence Center/IntelligenceCenter.tscn" id="9_wxusc"]
+[ext_resource type="PackedScene" uid="uid://bmgr1ddlol6v1" path="res://Controllabes/Structures/Vehicle Depot/Vehicle Depot.tscn" id="10_ekdwf"]
+[ext_resource type="PackedScene" uid="uid://c5qqjfm3rtsjf" path="res://Controllabes/Structures/Factory/Factory.tscn" id="11_g15nw"]
+[ext_resource type="PackedScene" uid="uid://lq2y3pmflgku" path="res://Controllabes/Structures/Turret MK1/TurretMk1.tscn" id="12_m72ig"]
+[ext_resource type="PackedScene" uid="uid://dpb2bg1ijrq4v" path="res://Controllabes/Units/LT-13 Striker/LT-13 Striker.tscn" id="13_0ipsj"]
+[ext_resource type="PackedScene" uid="uid://dxxwrhd6copwk" path="res://Controllabes/Units/M-6 Whiplash/M6-Whiplash.tscn" id="14_fur56"]
+[ext_resource type="PackedScene" uid="uid://b1ngn4awissq0" path="res://Controllabes/Units/AT-12 Gladiator/AT-12 Gladiator.tscn" id="15_hxxko"]
+[ext_resource type="PackedScene" uid="uid://bl4dotelyy8a0" path="res://Controllabes/Units/LRC Skyfall/LRC Skyfall.tscn" id="16_thhim"]
+[ext_resource type="Shader" path="res://Shaders/Liquidsphere.gdshader" id="17_ab2aj"]
+[ext_resource type="Texture2D" uid="uid://23lt1lhw0i58" path="res://Controllabes/Structures/Power plant/Smoke.png" id="18_4nppg"]
+
+[sub_resource type="Environment" id="Environment_uh77h"]
+background_mode = 1
+adjustment_enabled = true
+adjustment_brightness = 2.0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_gm5q8"]
+
+[sub_resource type="Gradient" id="Gradient_4vvjm"]
+offsets = PackedFloat32Array(0.571885, 0.587859)
+colors = PackedColorArray(0, 0, 0, 1, 0.716296, 0.716296, 0.716296, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_c3d86"]
+noise_type = 0
+frequency = 1.0
+domain_warp_frequency = 5.33
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vbvfx"]
+width = 2048
+height = 2048
+color_ramp = SubResource("Gradient_4vvjm")
+noise = SubResource("FastNoiseLite_c3d86")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ikfwm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7nexf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jun0m"]
+bg_color = Color(1, 1, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l3y8r"]
+shader = ExtResource("17_ab2aj")
+shader_parameter/fV = 0.48
+shader_parameter/colour = Color(1, 0.176471, 0.176471, 1)
+
+[node name="Storage" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 25.0
+offset_top = 18.0
+offset_right = 65.0
+offset_bottom = 58.0
+
+[node name="Cursor" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("1_0s6p3")
+
+[node name="TextureRect" type="TextureRect" parent="Cursor"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8
+anchor_top = 0.8
+anchor_right = 0.8
+anchor_bottom = 0.8
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+texture = ExtResource("2_4gesp")
+
+[node name="MainDivider" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 569.0
+offset_bottom = 275.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GeneralContainer" type="VBoxContainer" parent="MainDivider"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.9
+
+[node name="PanelContainer" type="PanelContainer" parent="MainDivider/GeneralContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+theme = ExtResource("3_f8vnu")
+
+[node name="MinimapContainer" type="AspectRatioContainer" parent="MainDivider/GeneralContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Minimap" type="Control" parent="MainDivider/GeneralContainer/PanelContainer/MinimapContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MainDivider/GeneralContainer/PanelContainer/MinimapContainer/Minimap"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+stretch = true
+script = ExtResource("4_41clh")
+refresh_rate = 1.0
+
+[node name="Refresh timer" type="Timer" parent="MainDivider/GeneralContainer/PanelContainer/MinimapContainer/Minimap/SubViewportContainer"]
+
+[node name="SubViewport" type="SubViewport" parent="MainDivider/GeneralContainer/PanelContainer/MinimapContainer/Minimap/SubViewportContainer"]
+handle_input_locally = false
+debug_draw = 1
+size = Vector2i(200, 200)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="MainDivider/GeneralContainer/PanelContainer/MinimapContainer/Minimap/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3, 0)
+environment = SubResource("Environment_uh77h")
+attributes = SubResource("CameraAttributesPractical_gm5q8")
+projection = 1
+size = 9.0
+
+[node name="minimap noise" type="Sprite3D" parent="MainDivider/GeneralContainer/PanelContainer/MinimapContainer/Minimap/SubViewportContainer/SubViewport/Camera3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 8.74228e-08, -2)
+texture = SubResource("NoiseTexture2D_vbvfx")
+
+[node name="minimap picture" type="Sprite3D" parent="MainDivider/GeneralContainer/PanelContainer/MinimapContainer/Minimap/SubViewportContainer/SubViewport/Camera3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.31134e-07, -3)
+texture_filter = 0
+texture = SubResource("CompressedTexture2D_ikfwm")
+
+[node name="BuildingSelectionEnergyContainer" type="HBoxContainer" parent="MainDivider/GeneralContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="BuildingSelectionContainer" type="VBoxContainer" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="BuildingContainer" type="HBoxContainer" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="BuildingPanelContainer" type="PanelContainer" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_f8vnu")
+
+[node name="BuildingScrollContainer" type="ScrollContainer" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer/BuildingPanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+horizontal_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer/BuildingPanelContainer/BuildingScrollContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer/BuildingPanelContainer/BuildingScrollContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="TextureButton" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer/BuildingPanelContainer/BuildingScrollContainer/HBoxContainer/VBoxContainer" instance=ExtResource("5_nj7ch")]
+layout_mode = 2
+unit = ExtResource("6_wbx7v")
+is_structure_button = true
+
+[node name="TextureButton2" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer/BuildingPanelContainer/BuildingScrollContainer/HBoxContainer/VBoxContainer" instance=ExtResource("5_nj7ch")]
+layout_mode = 2
+unit = ExtResource("7_7lnjv")
+is_structure_button = true
+
+[node name="TextureButton3" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer/BuildingPanelContainer/BuildingScrollContainer/HBoxContainer/VBoxContainer" instance=ExtResource("5_nj7ch")]
+layout_mode = 2
+unit = ExtResource("8_oy72t")
+is_structure_button = true
+
+[node name="TextureButton4" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer/BuildingPanelContainer/BuildingScrollContainer/HBoxContainer/VBoxContainer" instance=ExtResource("5_nj7ch")]
+layout_mode = 2
+unit = ExtResource("9_wxusc")
+is_structure_button = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer/BuildingPanelContainer/BuildingScrollContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="TextureButton" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer/BuildingPanelContainer/BuildingScrollContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("5_nj7ch")]
+layout_mode = 2
+unit = ExtResource("10_ekdwf")
+is_structure_button = true
+
+[node name="TextureButton2" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer/BuildingPanelContainer/BuildingScrollContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("5_nj7ch")]
+layout_mode = 2
+unit = ExtResource("11_g15nw")
+is_structure_button = true
+
+[node name="TextureButton3" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer/BuildingPanelContainer/BuildingScrollContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("5_nj7ch")]
+layout_mode = 2
+unit = ExtResource("12_m72ig")
+is_structure_button = true
+
+[node name="UnitPanelContainer" type="PanelContainer" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_f8vnu")
+
+[node name="UnitScrollContainer" type="ScrollContainer" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer/UnitPanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+horizontal_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer/UnitPanelContainer/UnitScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VboxContainer" type="VBoxContainer" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer/UnitPanelContainer/UnitScrollContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="TextureButton" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer/UnitPanelContainer/UnitScrollContainer/HBoxContainer/VboxContainer" instance=ExtResource("5_nj7ch")]
+layout_mode = 2
+unit = ExtResource("13_0ipsj")
+
+[node name="VboxContainer2" type="VBoxContainer" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer/UnitPanelContainer/UnitScrollContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="TextureButton" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer/UnitPanelContainer/UnitScrollContainer/HBoxContainer/VboxContainer2" instance=ExtResource("5_nj7ch")]
+layout_mode = 2
+unit = ExtResource("14_fur56")
+
+[node name="TextureButton2" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer/UnitPanelContainer/UnitScrollContainer/HBoxContainer/VboxContainer2" instance=ExtResource("5_nj7ch")]
+layout_mode = 2
+unit = ExtResource("15_hxxko")
+
+[node name="TextureButton3" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/BuildingContainer/UnitPanelContainer/UnitScrollContainer/HBoxContainer/VboxContainer2" instance=ExtResource("5_nj7ch")]
+layout_mode = 2
+unit = ExtResource("16_thhim")
+
+[node name="SelectionPanelContainer" type="PanelContainer" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_f8vnu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/SelectionPanelContainer"]
+layout_mode = 2
+
+[node name="Container3" type="Container" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/SelectionPanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/SelectionPanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.25
+
+[node name="Container" type="Container" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/SelectionPanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Unit Name" type="Label" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/SelectionPanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 20
+text = "Unit Name"
+
+[node name="Container3" type="Container" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/SelectionPanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Unit Stats" type="RichTextLabel" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/SelectionPanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+text = "750 / 750			Kills  0
+Armour  0			Attack  0
+Structure			Biological"
+fit_content = true
+
+[node name="Container2" type="Container" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/BuildingSelectionContainer/SelectionPanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="PanelContainer" type="PanelContainer" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer"]
+layout_mode = 2
+theme = ExtResource("3_f8vnu")
+
+[node name="PowerBar" type="ProgressBar" parent="MainDivider/GeneralContainer/BuildingSelectionEnergyContainer/PanelContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.04
+theme_override_styles/background = SubResource("StyleBoxFlat_7nexf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jun0m")
+value = 42.6
+allow_greater = true
+fill_mode = 3
+show_percentage = false
+
+[node name="OmniteContainer" type="VBoxContainer" parent="MainDivider"]
+layout_mode = 2
+
+[node name="Spacer" type="Container" parent="MainDivider/OmniteContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="PanelContainer" type="PanelContainer" parent="MainDivider/OmniteContainer"]
+layout_mode = 2
+theme = ExtResource("3_f8vnu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainDivider/OmniteContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainDivider/OmniteContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Omnite Counter" type="Label" parent="MainDivider/OmniteContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Spacer" type="Container" parent="MainDivider/OmniteContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.09
+
+[node name="Omnite indicator" type="TextureRect" parent="MainDivider/OmniteContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+material = SubResource("ShaderMaterial_l3y8r")
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("18_4nppg")
+stretch_mode = 4
+
+[node name="Spacer2" type="Container" parent="MainDivider/OmniteContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.09
+
+[node name="Spacer" type="Container" parent="MainDivider"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="VersionAndFpsContainer" type="VBoxContainer" parent="MainDivider"]
+layout_mode = 2
+
+[node name="Version Label" type="Label" parent="MainDivider/VersionAndFpsContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Steel Horizon v0.1 [UI Update]"
+horizontal_alignment = 2
+
+[node name="FPS Counter" type="Label" parent="MainDivider/VersionAndFpsContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "FPS"
+horizontal_alignment = 2
+
+[connection signal="timeout" from="MainDivider/GeneralContainer/PanelContainer/MinimapContainer/Minimap/SubViewportContainer/Refresh timer" to="MainDivider/GeneralContainer/PanelContainer/MinimapContainer/Minimap/SubViewportContainer" method="refreshMinimap"]
+[connection signal="timeout" from="MainDivider/GeneralContainer/PanelContainer/MinimapContainer/Minimap/SubViewportContainer/Refresh timer" to="MainDivider/GeneralContainer/PanelContainer/MinimapContainer/Minimap/SubViewportContainer/SubViewport/Camera3D/minimap noise" method="refreshNoise"]

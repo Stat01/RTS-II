@@ -103,7 +103,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		#Mouse out of bounds idk safety or something
 		GeneralVars.current_cursor_type = 0
-	print(GeneralVars.current_cursor_type)
 #endregion
 
 #region Camera shake

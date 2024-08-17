@@ -3,7 +3,7 @@ extends TextureButton
 @onready var label: RichTextLabel = $RichTextLabel
 @onready var timer: Timer = $Timer
 @onready var progress_bar: ProgressBar = $ProgressBar
-@onready var block_rect: ColorRect = $ColorRect
+@onready var block_rect: TextureRect = $TextureRect
 
 var unit: PackedScene
 var is_structure_button: bool
@@ -25,6 +25,9 @@ var ins: Node3D
 
 const EXAMPLE_PORTRAIT = preload("res://UI/2D/Buttons/ExamplePortrait.png")
 
+const LOCKED_ICON = preload("res://UI/2D/UI/Locked_Icon.png")
+const UNLOCKED_ICON = preload("res://UI/2D/UI/Unlocked_Icon.png")
+
 func _ready() -> void:
 	await get_tree().create_timer(0.05).timeout
 	ins = unit.instantiate()
@@ -36,8 +39,6 @@ func _ready() -> void:
 	texture_normal = ins.getIcon()
 	if texture_normal == null:
 		texture_normal = EXAMPLE_PORTRAIT
-	
-	tooltip_text = unit_name + "\n" + str(price) + "c"
 	
 	SignalManager.refund_building.connect(refundBuilding)
 	SignalManager.building_placed.connect(buildingPlaced)
@@ -64,40 +65,46 @@ func _process(_delta: float) -> void:
 				print("should unlock")
 			is_locked = false
 	
-	block_rect.set_visible(is_locked)
+	if is_locked:
+		block_rect.texture = LOCKED_ICON
+		tooltip_text = ""
+	else:
+		block_rect.texture = UNLOCKED_ICON
+		tooltip_text = unit_name + "\n" + str(price) + "c"
 
 func _on_gui_input(event: InputEvent) -> void:
-	if is_structure_button:
-		if event is InputEventMouseButton and event.is_action_pressed("left_click"):
-			#start building
-			if !currently_building and PlayerVars.getOmnite() >= ins.getPrice() and amount_in_queue == 0:
-				PlayerVars.changeOmnite(-ins.getPrice())
-				currently_building = true
-				amount_in_queue += 1
-				timer.start(build_time)
-			
-			#place building
-			if building_complete:
-				PlayerVars.setBuildingMode(true)
-				PlayerVars.setActiveBuilding(unit)
-		elif event is InputEventMouseButton and event.is_action_pressed("right_click"):
-			refundBuilding(unit_name)
-			timer.stop()
-	else:
-		if event is InputEventMouseButton and event.is_action_pressed("left_click"):
-			if PlayerVars.getOmnite() >= ins.getPrice():
-				currently_building = true
-				PlayerVars.changeOmnite(-ins.getPrice())
-				amount_in_queue += 1
-				if amount_in_queue == 1:
+	if !is_locked:
+		if is_structure_button:
+			if event is InputEventMouseButton and event.is_action_pressed("left_click"):
+				#start building
+				if !currently_building and PlayerVars.getOmnite() >= ins.getPrice() and amount_in_queue == 0:
+					PlayerVars.changeOmnite(-ins.getPrice())
+					currently_building = true
+					amount_in_queue += 1
 					timer.start(build_time)
-		
-		elif event is InputEventMouseButton and event.is_action_pressed("right_click"):
-			if currently_building:
-				PlayerVars.changeOmnite(ins.getPrice())
-				amount_in_queue -= 1
-				if amount_in_queue <= 0:
-					currently_building = false
+				
+				#place building
+				if building_complete:
+					PlayerVars.setBuildingMode(true)
+					PlayerVars.setActiveBuilding(unit)
+			elif event is InputEventMouseButton and event.is_action_pressed("right_click"):
+				refundBuilding(unit_name)
+				timer.stop()
+		else:
+			if event is InputEventMouseButton and event.is_action_pressed("left_click"):
+				if PlayerVars.getOmnite() >= ins.getPrice():
+					currently_building = true
+					PlayerVars.changeOmnite(-ins.getPrice())
+					amount_in_queue += 1
+					if amount_in_queue == 1:
+						timer.start(build_time)
+			
+			elif event is InputEventMouseButton and event.is_action_pressed("right_click"):
+				if currently_building:
+					PlayerVars.changeOmnite(ins.getPrice())
+					amount_in_queue -= 1
+					if amount_in_queue <= 0:
+						currently_building = false
 
 func _on_timer_timeout() -> void:
 	if is_structure_button:

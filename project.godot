@@ -10,9 +10,11 @@ config_version=5
 
 [application]
 
-config/name="RTS Game II"
-run/main_scene="res://Main.tscn"
+config/name="Steel Horizon"
+config/version="v0.1 [ui update]"
+run/main_scene="res://MainMenu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/image="res://UI/2D/splash screen.png"
 config/icon="res://icon.svg"
 
 [autoload]
@@ -21,6 +23,7 @@ Settings="*res://Settings.gd"
 SignalManager="*res://SignalManager.gd"
 PlayerVars="*res://PlayerVars.gd"
 GeneralVars="*res://GeneralVars.gd"
+EffectCreator="*res://EffectCreator.gd"
 
 [display]
 
@@ -99,8 +102,8 @@ delete={
 
 [layer_names]
 
-3d_render/layer_1="Projectile Effects"
-3d_render/layer_2="Fog of war"
+3d_render/layer_1="Default"
+3d_render/layer_2="Terrain"
 3d_physics/layer_1="Terrain"
 3d_physics/layer_2="Mineral"
 3d_physics/layer_3="Building"

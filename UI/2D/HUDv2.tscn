@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://c5qqjfm3rtsjf" path="res://Controllabes/Structures/Factory/Factory.tscn" id="15_oqu8d"]
 [ext_resource type="PackedScene" uid="uid://lq2y3pmflgku" path="res://Controllabes/Structures/Turret MK1/TurretMk1.tscn" id="16_uewbl"]
 [ext_resource type="Script" path="res://UI/2D/Minimap.gd" id="17_yj0v1"]
-[ext_resource type="Texture2D" uid="uid://bej73x6e7lrer" path="res://UI/2D/SplashScreen.jpg" id="18_wa8bt"]
 [ext_resource type="Script" path="res://UI/2D/Cursor.gd" id="19_lv756"]
 [ext_resource type="Texture2D" uid="uid://dtp1p7to22jnw" path="res://UI/2D/Cursors/Default.png" id="20_0ft1m"]
 
@@ -42,6 +41,8 @@ width = 2048
 height = 2048
 color_ramp = SubResource("Gradient_flwjj")
 noise = SubResource("FastNoiseLite_0cs3n")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ikfwm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7nexf"]
 
@@ -112,7 +113,7 @@ refresh_rate = 1.0
 [node name="SubViewport" type="SubViewport" parent="MainDivider/GeneralContainer/PanelContainer/MinimapContainer/Minimap/SubViewportContainer"]
 handle_input_locally = false
 debug_draw = 1
-size = Vector2i(272, 272)
+size = Vector2i(200, 200)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="MainDivider/GeneralContainer/PanelContainer/MinimapContainer/Minimap/SubViewportContainer/SubViewport"]
@@ -129,7 +130,7 @@ texture = SubResource("NoiseTexture2D_vbvfx")
 [node name="minimap picture" type="Sprite3D" parent="MainDivider/GeneralContainer/PanelContainer/MinimapContainer/Minimap/SubViewportContainer/SubViewport/Camera3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.31134e-07, -3)
 texture_filter = 0
-texture = ExtResource("18_wa8bt")
+texture = SubResource("CompressedTexture2D_ikfwm")
 
 [node name="BuildingSelectionEnergyContainer" type="HBoxContainer" parent="MainDivider/GeneralContainer"]
 layout_mode = 2

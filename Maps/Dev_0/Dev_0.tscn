@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bsrpn5c6sv2ef"]
+[gd_scene load_steps=25 format=3 uid="uid://bsrpn5c6sv2ef"]
 
 [ext_resource type="Script" path="res://Maps/Dev_0/Map.gd" id="1_1f5m2"]
 [ext_resource type="Terrain3DStorage" uid="uid://43o5cqt1shu1" path="res://Maps/Dev_0/new_terrain_3d_storage.res" id="1_aj3a4"]
@@ -107,9 +107,6 @@ albedo_color = Color(1, 1, 1, 0.0784314)
 [sub_resource type="PlaneMesh" id="PlaneMesh_on0po"]
 material = SubResource("StandardMaterial3D_tm5nm")
 
-[sub_resource type="BoxMesh" id="BoxMesh_h4i1i"]
-size = Vector3(256, 1, 1)
-
 [node name="Dev0" type="Node3D"]
 script = ExtResource("1_1f5m2")
 size_m = 128
@@ -118,6 +115,7 @@ size_m = 128
 storage = ExtResource("1_aj3a4")
 material = SubResource("Terrain3DMaterial_s8c1p")
 texture_list = SubResource("Terrain3DTextureList_rvrgw")
+render_layers = 2147483650
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -112.973, 0, 129.736)
@@ -127,7 +125,3 @@ lifetime = 5.0
 visibility_aabb = AABB(-117, -4, -130, 234, 8, 260)
 process_material = SubResource("ParticleProcessMaterial_vylgh")
 draw_pass_1 = SubResource("PlaneMesh_on0po")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128, 0, -0.5)
-mesh = SubResource("BoxMesh_h4i1i")

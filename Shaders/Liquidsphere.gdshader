@@ -39,8 +39,7 @@ void fragment() {
 		bF=step(uv.y,(-fA+bW)+fP)*c;
 
     COLOR =
-		vec4((step(sdf,1.)-step(sdf,.9))+
-		(fF+(clamp(bF-fF,0.,1.)*.8))+
+		vec4((fF+(clamp(bF-fF,0.,1.)*.8))+
 		clamp(pow((sdf+.01)*
 		((1.-(fF+bF))*c),5.),0.,1.));
 	
