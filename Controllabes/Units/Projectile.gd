@@ -2,7 +2,6 @@ extends CharacterBody3D
 
 @onready var collision_area: Area3D = $"Collision Area"
 @onready var trail: GPUParticles3D = $Trail
-@onready var impact: GPUParticles3D = $Impact
 @onready var model: MeshInstance3D = $Model
 
 var shooter: CharacterBody3D
@@ -37,7 +36,7 @@ func _on_collision_area_body_entered(body: Node3D) -> void:
 		if body != null and shooter != null:
 			body.reduceHealth(damage, damage_type, shooter)
 		collision_area.set_deferred("monitoring", false)
-		impact.set_emitting(true)
+		EffectCreator.explosionImpactSmall(global_position, global_rotation)
 		model.set_visible(false)
 		
 		#camera shake

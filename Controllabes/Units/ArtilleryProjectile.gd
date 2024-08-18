@@ -5,7 +5,7 @@ extends CharacterBody3D
 @onready var trail: GPUParticles3D = $Trail
 @onready var model: MeshInstance3D = $Model
 
-const PROJECTILE = preload("res://Controllabes/Units/ArtilleryProjectile.tscn")
+const PROJECTILE: NodePath = "res://Controllabes/Units/ArtilleryProjectile.tscn"
 
 var shooter: CharacterBody3D
 var team: int
@@ -84,7 +84,7 @@ func _on_collision_area_ground_body_entered(body: Node3D) -> void:
 		queue_free()
 
 func createDownwardProjectile() -> void:
-	var ins: CharacterBody3D = PROJECTILE.instantiate()
+	var ins: CharacterBody3D = load(PROJECTILE).instantiate()
 	
 	#set projectile stats
 	if shooter == null:

@@ -1,6 +1,6 @@
 extends Node3D
 
-const GROUND_DECAL = preload("res://Controllabes/Units/GroundDecal.tscn")
+const GROUND_DECAL = preload("res://Effects/Decals/Impacts/ImpactMedium.tscn")
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var explosion: GPUParticles3D = $Explosion

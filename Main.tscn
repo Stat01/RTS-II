@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dgeiuigxw0r0a"]
+[gd_scene load_steps=17 format=3 uid="uid://dgeiuigxw0r0a"]
 
 [ext_resource type="PackedScene" uid="uid://cdyimnapkawjs" path="res://CameraController.tscn" id="1_347s1"]
 [ext_resource type="Script" path="res://Main.gd" id="1_x2gny"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bl4dotelyy8a0" path="res://Controllabes/Units/LRC Skyfall/LRC Skyfall.tscn" id="10_o3t68"]
 [ext_resource type="PackedScene" uid="uid://b4hnsaqm2co3j" path="res://Controllabes/Units/Zel'va/Zel'va.tscn" id="11_87l8a"]
 [ext_resource type="PackedScene" uid="uid://dynmqvcimknc3" path="res://AI/AIMaster.tscn" id="12_86qhq"]
+[ext_resource type="PackedScene" uid="uid://dpb2bg1ijrq4v" path="res://Controllabes/Units/LT-13 Striker/LT-13 Striker.tscn" id="12_st7us"]
 [ext_resource type="PackedScene" uid="uid://bive3wv7ome64" path="res://UI/2D/HUDv3.tscn" id="13_cncwy"]
 [ext_resource type="PackedScene" uid="uid://ck2ij3h4tglip" path="res://BuildingHandler.tscn" id="14_kltx4"]
 
@@ -61,6 +62,9 @@ is_invincible = true
 [node name="Zel\'va" parent="Units" instance=ExtResource("11_87l8a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 0, 23)
 is_invincible = true
+
+[node name="LT-13 Striker" parent="Units" instance=ExtResource("12_st7us")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37, 0, 29)
 
 [node name="Doodads" type="Node" parent="."]
 

@@ -1,9 +1,9 @@
-[gd_scene load_steps=34 format=3 uid="uid://dk4sllt7nlgrp"]
+[gd_scene load_steps=34 format=3 uid="uid://betf8216khd6f"]
 
-[ext_resource type="Texture2D" uid="uid://c6ofl75sadut8" path="res://Effects/Resources/SmokeWallSmallColorCurve.tres" id="1_c6eto"]
-[ext_resource type="ArrayMesh" uid="uid://cc52ejb6i333q" path="res://Effects/Resources/SmokeWallSmall.tres" id="2_naay1"]
-[ext_resource type="Texture2D" uid="uid://d2lugoud5amg6" path="res://Effects/Resources/Smoke.png" id="3_4mbji"]
-[ext_resource type="ArrayMesh" uid="uid://bf6eefkxvctjo" path="res://Effects/Resources/SmokeBlobSmall.tres" id="4_hpiox"]
+[ext_resource type="Texture2D" uid="uid://c6ofl75sadut8" path="res://Effects/Resources/SmokeWallSmallColorCurve.tres" id="1_p27ax"]
+[ext_resource type="ArrayMesh" uid="uid://cc52ejb6i333q" path="res://Effects/Resources/SmokeWallSmall.tres" id="2_ljlwp"]
+[ext_resource type="Texture2D" uid="uid://d2lugoud5amg6" path="res://Effects/Resources/Smoke.png" id="3_htyas"]
+[ext_resource type="ArrayMesh" uid="uid://bf6eefkxvctjo" path="res://Effects/Resources/SmokeBlobSmall.tres" id="4_ckmge"]
 
 [sub_resource type="Animation" id="Animation_2wwcm"]
 resource_name = "Explosion"
@@ -27,7 +27,7 @@ tracks/1/path = NodePath("FireBalls:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.15),
+"times": PackedFloat32Array(0.07),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -122,31 +122,31 @@ point_count = 4
 [sub_resource type="CurveTexture" id="CurveTexture_0mgom"]
 curve = SubResource("Curve_217b6")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qw30u"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8rjy5"]
 particle_flag_align_y = true
 emission_shape = 6
 emission_ring_axis = Vector3(0, 0, 0)
 emission_ring_height = 0.0
-emission_ring_radius = 1.0
+emission_ring_radius = 0.5
 emission_ring_inner_radius = 0.0
 direction = Vector3(0, 0, 1)
 spread = 180.0
 flatness = 1.0
-initial_velocity_min = 1.5
-initial_velocity_max = 1.5
-gravity = Vector3(0, -0.1, 0)
-scale_min = 3.0
-scale_max = 3.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
 scale_curve = SubResource("CurveTexture_0mgom")
 color = Color(0.509286, 0.509286, 0.509286, 1)
-color_ramp = ExtResource("1_c6eto")
+color_ramp = ExtResource("1_p27ax")
 emission_curve = SubResource("CurveTexture_x6idi")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eqw3d"]
 transparency = 1
 shading_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("3_4mbji")
+albedo_texture = ExtResource("3_htyas")
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -159,12 +159,12 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ghvsa"]
 gradient = SubResource("Gradient_8rwi7")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i8mro"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_axtu2"]
 direction = Vector3(0, 1, 0)
 initial_velocity_max = 0.2
 gravity = Vector3(0, 0, 0)
-scale_min = 0.4
-scale_max = 0.8
+scale_min = 0.1
+scale_max = 0.2
 color_ramp = SubResource("GradientTexture1D_ghvsa")
 
 [sub_resource type="QuadMesh" id="QuadMesh_04r4o"]
@@ -176,7 +176,7 @@ emission_energy_multiplier = 10.0
 
 [sub_resource type="Gradient" id="Gradient_btevo"]
 offsets = PackedFloat32Array(0, 0.553903)
-colors = PackedColorArray(10, 10, 10, 1, 0, 0, 0, 1)
+colors = PackedColorArray(5, 5, 5, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_7pkkp"]
 gradient = SubResource("Gradient_btevo")
@@ -196,13 +196,13 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_uru65"]
 curve = SubResource("Curve_lymab")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fdpx5"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ax6ix"]
 direction = Vector3(0, 1, 0)
-initial_velocity_min = 6.0
-initial_velocity_max = 8.0
+initial_velocity_min = 4.0
+initial_velocity_max = 5.0
 gravity = Vector3(0, -5, 0)
-scale_min = 0.02
-scale_max = 0.15
+scale_min = 0.01
+scale_max = 0.1
 scale_curve = SubResource("CurveTexture_uru65")
 color_ramp = SubResource("GradientTexture1D_7pkkp")
 emission_curve = SubResource("CurveTexture_5cvdl")
@@ -225,13 +225,14 @@ gradient = SubResource("Gradient_upgm5")
 use_hdr = true
 
 [sub_resource type="Curve" id="Curve_o0leo"]
-_data = [Vector2(0, 0.567843), 0.0, 0.0, 0, 0, Vector2(0.323232, 0.994573), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.567843), 0.0, 0.0, 0, 0, Vector2(0.296296, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_ecmwx"]
 curve = SubResource("Curve_o0leo")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_760xu"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iyhpx"]
+particle_flag_rotate_y = true
 emission_shape = 1
 emission_sphere_radius = 0.2
 angle_min = -408.9
@@ -239,13 +240,14 @@ angle_max = 364.4
 direction = Vector3(0, 1, 0)
 initial_velocity_min = 0.1
 initial_velocity_max = 1.0
+angular_velocity_min = -59.18
+angular_velocity_max = 78.9
 gravity = Vector3(0, 0, 0)
-scale_min = 1.5
-scale_max = 1.5
+scale_min = 0.6
 scale_curve = SubResource("CurveTexture_ecmwx")
 color_ramp = SubResource("GradientTexture1D_2hxbv")
 
-[node name="ExplosionMedium" type="Node3D"]
+[node name="ExplosionSmall" type="Node3D"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -256,37 +258,37 @@ autoplay = "Explosion"
 [node name="SmokeWallSmall" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_j1utr")
 emitting = false
-amount = 26
+amount = 24
 lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_qw30u")
-draw_pass_1 = ExtResource("2_naay1")
+process_material = SubResource("ParticleProcessMaterial_8rjy5")
+draw_pass_1 = ExtResource("2_ljlwp")
 
 [node name="SmokeTrail" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_eqw3d")
 emitting = false
-amount = 2000
+amount = 1000
 one_shot = true
-process_material = SubResource("ParticleProcessMaterial_i8mro")
+process_material = SubResource("ParticleProcessMaterial_axtu2")
 draw_pass_1 = SubResource("QuadMesh_04r4o")
 
 [node name="FireBalls" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_rrck8")
 emitting = false
-amount = 64
+amount = 32
 sub_emitter = NodePath("../SmokeTrail")
 lifetime = 3.0
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_fdpx5")
+process_material = SubResource("ParticleProcessMaterial_ax6ix")
 draw_pass_1 = SubResource("SphereMesh_le5xp")
 
 [node name="SmokeBlob" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_3vb2u")
 emitting = false
-lifetime = 4.0
+lifetime = 3.0
 one_shot = true
 explosiveness = 0.95
-process_material = SubResource("ParticleProcessMaterial_760xu")
-draw_pass_1 = ExtResource("4_hpiox")
+process_material = SubResource("ParticleProcessMaterial_iyhpx")
+draw_pass_1 = ExtResource("4_ckmge")
