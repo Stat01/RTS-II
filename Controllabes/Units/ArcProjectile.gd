@@ -3,7 +3,6 @@ extends RigidBody3D
 @onready var collision_area: Area3D = $"Collision Area"
 @onready var collision_area_ground: Area3D = $"Collision Area Ground"
 @onready var trail: GPUParticles3D = $Trail
-@onready var impact: GPUParticles3D = $Impact
 @onready var model: MeshInstance3D = $Model
 
 var shooter: CharacterBody3D
@@ -49,14 +48,13 @@ func _on_collision_area_ground_body_entered(body: Node3D) -> void:
 		exploded = true
 		if body is Terrain3D:
 			global_position = Vector3(global_position.x, 0.2, global_position.z)
-			impact.global_position = global_position
 			for i in victims:
 				if i != null and i is CharacterBody3D and i.has_method("getTeam") and i.getTeam() != team and i.getTeam() != 0:
 					if i != null and shooter != null:
 						i.reduceHealth(damage, damage_type, shooter)
 			
 			#particles
-			impact.set_emitting(true)
+			EffectCreator.explosionSmall(global_position)
 			model.set_visible(false)
 			trail.set_emitting(false)
 			

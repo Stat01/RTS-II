@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dp70x3vadp8fl"]
+[gd_scene load_steps=10 format=3 uid="uid://dp70x3vadp8fl"]
 
 [ext_resource type="Script" path="res://Controllabes/Units/ArcProjectile.gd" id="1_8l0ml"]
 
@@ -42,44 +42,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_6cpx1")
 
-[sub_resource type="Gradient" id="Gradient_pcv4f"]
-offsets = PackedFloat32Array(0, 0.235294, 0.7)
-colors = PackedColorArray(1, 1, 1, 1, 1, 0.380392, 0, 1, 0.226707, 0.226707, 0.226707, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_pbjbl"]
-gradient = SubResource("Gradient_pcv4f")
-
-[sub_resource type="Curve" id="Curve_kas62"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.33341, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_e08my"]
-curve = SubResource("Curve_kas62")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_epeur"]
-lifetime_randomness = 1.0
-angle_min = -720.0
-angle_max = 720.0
-direction = Vector3(0, 1, 0)
-spread = 90.0
-initial_velocity_min = 4.0
-initial_velocity_max = 5.0
-gravity = Vector3(0, -10, 0)
-scale_min = 0.0
-scale_max = 3.0
-scale_curve = SubResource("CurveTexture_e08my")
-color_ramp = SubResource("GradientTexture1D_pbjbl")
-collision_use_scale = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j75bk"]
-vertex_color_use_as_albedo = true
-billboard_mode = 1
-billboard_keep_scale = true
-
-[sub_resource type="QuadMesh" id="QuadMesh_uu8kk"]
-material = SubResource("StandardMaterial3D_j75bk")
-size = Vector2(0.1, 0.1)
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_5xqu5"]
 height = 1.98381
 radius = 1.5
@@ -111,16 +73,6 @@ script = ExtResource("1_8l0ml")
 transform = Transform3D(1.9107e-15, -4.37114e-08, 1, -1, -4.37114e-08, 1.50348e-20, 4.37114e-08, -1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_mjxpk")
 skeleton = NodePath("")
-
-[node name="Impact" type="GPUParticles3D" parent="."]
-top_level = true
-emitting = false
-amount = 512
-lifetime = 1.5
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_epeur")
-draw_pass_1 = SubResource("QuadMesh_uu8kk")
 
 [node name="Collision Area" type="Area3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
