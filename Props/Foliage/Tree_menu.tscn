@@ -1,7 +1,7 @@
-[gd_scene load_steps=455 format=3 uid="uid://cpktfsar1cyqr"]
+[gd_scene load_steps=455 format=3 uid="uid://boecnmv3i0h66"]
 
-[ext_resource type="Script" path="res://Props/Foliage/Tree.gd" id="1_5t731"]
-[ext_resource type="Texture2D" uid="uid://b2rfo2qvr7v1d" path="res://Imports/Tree_tree_small_02_leaves_diff_1k-tree_small_02_leaves_alpha_1k.png" id="2_unen1"]
+[ext_resource type="Script" path="res://Props/Foliage/Tree_menu.gd" id="1_p602n"]
+[ext_resource type="Texture2D" uid="uid://b2rfo2qvr7v1d" path="res://Imports/Tree_tree_small_02_leaves_diff_1k-tree_small_02_leaves_alpha_1k.png" id="2_xxvyv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_63lhe"]
 resource_name = "Wood"
@@ -49,7 +49,7 @@ transparency = 2
 alpha_scissor_threshold = 0.5
 alpha_antialiasing_mode = 0
 cull_mode = 2
-albedo_texture = ExtResource("2_unen1")
+albedo_texture = ExtResource("2_xxvyv")
 roughness = 0.5
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ioj12"]
@@ -7669,7 +7669,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_sn4rl")
 
 [node name="Tree" type="Node3D"]
-script = ExtResource("1_5t731")
+script = ExtResource("1_p602n")
 
 [node name="Cylinder" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

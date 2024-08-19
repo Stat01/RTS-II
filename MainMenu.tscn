@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://w7dmlgw3uh3a"]
+[gd_scene load_steps=74 format=3 uid="uid://w7dmlgw3uh3a"]
 
 [ext_resource type="Terrain3DStorage" uid="uid://bkib0l8682ygp" path="res://new_terrain_3d_storage.res" id="1_2453c"]
 [ext_resource type="Texture2D" path="res://Maps/Dev_0/Textures/Grass/Grass004_alb_ht.dds" id="2_lde7g"]
@@ -12,6 +12,8 @@
 [ext_resource type="CameraAttributesPractical" uid="uid://bm5jhn0wvv8gc" path="res://CameraSettings.tres" id="10_aer1n"]
 [ext_resource type="Script" path="res://Main Menu.gd" id="10_o5t41"]
 [ext_resource type="Texture2D" uid="uid://bsxl1uj7rgitm" path="res://UI/2D/Main_menu_graphic.png" id="11_0adti"]
+[ext_resource type="PackedScene" uid="uid://cpktfsar1cyqr" path="res://Props/Foliage/Tree.tscn" id="13_vbggm"]
+[ext_resource type="PackedScene" uid="uid://boecnmv3i0h66" path="res://Props/Foliage/Tree_menu.tscn" id="14_n6cge"]
 
 [sub_resource type="Gradient" id="Gradient_hb4h4"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -1011,6 +1013,66 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("11_0adti")
 expand_mode = 1
+
+[node name="Tree" parent="." instance=ExtResource("13_vbggm")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 269.639, 1.975, 216.003)
+
+[node name="Tree2" parent="." instance=ExtResource("13_vbggm")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 242.049, 1.975, 228.033)
+
+[node name="Tree3" parent="." instance=ExtResource("14_n6cge")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 236.516, 3.88455, 214.302)
+
+[node name="Tree4" parent="." instance=ExtResource("14_n6cge")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 243.929, 3.88455, 205.135)
+
+[node name="Tree5" parent="." instance=ExtResource("14_n6cge")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 233.929, 3.88455, 197.135)
+
+[node name="Tree6" parent="." instance=ExtResource("14_n6cge")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 244.929, 3.88455, 188.135)
+
+[node name="Tree7" parent="." instance=ExtResource("14_n6cge")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 257.93, 3.88455, 192.135)
+
+[node name="Tree8" parent="." instance=ExtResource("14_n6cge")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 272.93, 3.88455, 199.135)
+
+[node name="Tree9" parent="." instance=ExtResource("14_n6cge")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 270.93, 3.88455, 187.135)
+
+[node name="Tree10" parent="." instance=ExtResource("14_n6cge")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 260.945, 3.88455, 173.297)
+
+[node name="Tree11" parent="." instance=ExtResource("14_n6cge")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 255.945, 3.88455, 178.297)
+
+[node name="Tree12" parent="." instance=ExtResource("14_n6cge")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 263.945, 3.88455, 181.297)
+
+[node name="Tree13" parent="." instance=ExtResource("14_n6cge")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 250.945, 3.88455, 171.297)
+
+[node name="Tree14" parent="." instance=ExtResource("14_n6cge")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 242.945, 3.88455, 177.297)
+
+[node name="Tree15" parent="." instance=ExtResource("14_n6cge")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 233.945, 3.88455, 171.297)
+
+[node name="Tree16" parent="." instance=ExtResource("14_n6cge")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 228.945, 3.88455, 179.297)
+
+[node name="Tree17" parent="." instance=ExtResource("14_n6cge")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 234.945, 3.88455, 184.297)
+
+[node name="Tree18" parent="." instance=ExtResource("14_n6cge")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 223.945, 3.88455, 191.297)
+
+[node name="Tree19" parent="." instance=ExtResource("14_n6cge")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 218.945, 3.88455, 180.297)
+
+[node name="Tree20" parent="." instance=ExtResource("14_n6cge")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 217.945, 3.88455, 170.297)
 
 [connection signal="pressed" from="CanvasLayer/Main Menu/HBoxContainer/VBoxContainer/Button_start" to="CanvasLayer/Main Menu" method="_on_button_start_pressed"]
 [connection signal="pressed" from="CanvasLayer/Main Menu/HBoxContainer/VBoxContainer/Button_options" to="CanvasLayer/Main Menu" method="_on_button_options_pressed"]

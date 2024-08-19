@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dgeiuigxw0r0a"]
+[gd_scene load_steps=19 format=3 uid="uid://dgeiuigxw0r0a"]
 
 [ext_resource type="PackedScene" uid="uid://cdyimnapkawjs" path="res://CameraController.tscn" id="1_347s1"]
 [ext_resource type="Script" path="res://Main.gd" id="1_x2gny"]
@@ -10,15 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://rxe3e51pm3mu" path="res://Controllabes/Structures/Omnite/Omnite.tscn" id="7_a07hw"]
 [ext_resource type="PackedScene" uid="uid://cy7gmooct6gol" path="res://Controllabes/Structures/MCU/MCU.tscn" id="8_gm1f2"]
 [ext_resource type="PackedScene" uid="uid://bi0m2x2tiwt8v" path="res://Controllabes/Structures/Intelligence Center/IntelligenceCenter.tscn" id="9_powdk"]
-[ext_resource type="PackedScene" uid="uid://bl4dotelyy8a0" path="res://Controllabes/Units/LRC Skyfall/LRC Skyfall.tscn" id="10_o3t68"]
 [ext_resource type="PackedScene" uid="uid://bjxsxuvqhfmo3" path="res://Controllabes/Structures/Power plant/Power Plant.tscn" id="10_ys27q"]
-[ext_resource type="PackedScene" uid="uid://b4hnsaqm2co3j" path="res://Controllabes/Units/Zel'va/Zel'va.tscn" id="11_87l8a"]
 [ext_resource type="PackedScene" uid="uid://c5qqjfm3rtsjf" path="res://Controllabes/Structures/Factory/Factory.tscn" id="11_qmxxu"]
 [ext_resource type="PackedScene" uid="uid://dynmqvcimknc3" path="res://AI/AIMaster.tscn" id="12_86qhq"]
-[ext_resource type="PackedScene" uid="uid://dpb2bg1ijrq4v" path="res://Controllabes/Units/LT-13 Striker/LT-13 Striker.tscn" id="12_st7us"]
+[ext_resource type="PackedScene" uid="uid://b1ngn4awissq0" path="res://Controllabes/Units/AT-12 Gladiator/AT-12 Gladiator.tscn" id="13_ax1gw"]
 [ext_resource type="PackedScene" uid="uid://bive3wv7ome64" path="res://UI/2D/HUDv3.tscn" id="13_cncwy"]
 [ext_resource type="PackedScene" uid="uid://ck2ij3h4tglip" path="res://BuildingHandler.tscn" id="14_kltx4"]
-[ext_resource type="PackedScene" uid="uid://dxxwrhd6copwk" path="res://Controllabes/Units/M-6 Whiplash/M6-Whiplash.tscn" id="16_uiety"]
 [ext_resource type="PackedScene" uid="uid://ophlcxwrhk8f" path="res://Controllabes/Structures/Omnite Mining Rig/OmniteMiningRig.tscn" id="18_j57ik"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_tl0ht"]
@@ -72,20 +69,8 @@ transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 
 [node name="Units" type="Node" parent="."]
 script = ExtResource("4_1qj16")
 
-[node name="LRC Skyfall" parent="Units" instance=ExtResource("10_o3t68")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.006, 9.53674e-07, 32.9247)
-is_invincible = true
-
-[node name="Zel\'va" parent="Units" instance=ExtResource("11_87l8a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 0, 23)
-is_invincible = true
-
-[node name="LT-13 Striker" parent="Units" instance=ExtResource("12_st7us")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37, 0, 29)
-is_invincible = true
-
-[node name="M-6 Whiplash" parent="Units" instance=ExtResource("16_uiety")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 0, 32)
+[node name="AT-12 Tank" parent="Units" instance=ExtResource("13_ax1gw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, 30)
 
 [node name="Doodads" type="Node" parent="."]
 
