@@ -5,6 +5,8 @@ extends Control
 
 @onready var selection_ui: VBoxContainer = $VBoxContainer/HBoxContainer/VBoxContainer3/AspectRatioContainer/TextureRect/VBoxContainer
 
+@onready var pause_menu: HBoxContainer = $PauseMenu
+
 @onready var omnite_indicator: TextureRect = $"VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer/AspectRatioContainer2/Omnite indicator"
 @onready var omnite_counter: Label = $"VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer/AspectRatioContainer2/Omnite indicator/Omnite Counter"
 @onready var fps_counter: Label = $"VBoxContainer/FPS Counter"
@@ -12,14 +14,13 @@ extends Control
 
 @onready var cursor: Control = $Cursor
 
+const MAIN_MENU: NodePath = "res://MainMenu.tscn"
+
 var omnite: float
 
 func _process(_delta: float) -> void:
 	
 	fps_counter.text = str(Engine.get_frames_per_second()) + "fps"
-	
-	#cursor
-	cursor.position = get_global_mouse_position()
 	
 	#selection ui
 	if !PlayerVars.getSelectedUnits().is_empty():
@@ -86,3 +87,26 @@ func updateSelectionUI(unit: Controllable) -> void:
 	
 	elif unit.getName() == "Omnite Cluster":
 		unit_stats.text = str(unit.amount)
+
+func togglePauseMenu() -> void:
+	if pause_menu.visible == false:
+		pause_menu.visible = true
+		GeneralVars.setPaused(true)
+		return
+	pause_menu.visible = false
+	GeneralVars.setPaused(false)
+
+func exitToMainMenu() -> void:
+	var ins = load(MAIN_MENU).instantiate()
+	get_tree().root.add_child(ins)
+	#delete self
+	$"../..".queue_free()
+
+func enterOptionsMenu() -> void:
+	pass
+func resume() -> void:
+	togglePauseMenu()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		togglePauseMenu()

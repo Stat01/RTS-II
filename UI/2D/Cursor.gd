@@ -16,3 +16,6 @@ func _process(_delta: float) -> void:
 			visible = false
 		2:
 			visible = false
+
+func _exit_tree() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

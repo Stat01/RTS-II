@@ -183,6 +183,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		#set attack move
 		if event.is_action_pressed("attack_move") and !attack_move:
 			attack_move = true
+	
+	#Deselect button
+	if event.is_action_pressed("deselect"):
+		for unit: Controllable in PlayerVars.getSelectedUnits():
+			unit.is_selected = false
+		PlayerVars.clearSelectedUnits()
 #endregion
 	
 #region Draw box
@@ -211,7 +217,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	#Delete Controllable, maybe debug?
 	if event.is_action_pressed("delete"):
-		for unit in PlayerVars.getSelectedUnits():
+		for unit: Controllable in PlayerVars.getSelectedUnits():
 			unit.die()
 
 func calculateSelectionBoxPos() -> void:
