@@ -2,18 +2,19 @@ extends Node3D
 
 @onready var camera: Camera3D = $Camera3D
 @onready var glitch_effect: ColorRect = $CanvasLayer/Glitch
-@onready var nav_mesh: NavigationRegion3D = $"../NavigationRegion3D"
+@onready var select_cursor: MeshInstance3D = $Select
+@onready var attack_cursor: MeshInstance3D = $Attack
 
 var mouse_pos: Vector2
 var mouse_middle_pan_pos: Vector2
 var mouse_middle_down: bool = false
 
 var mouse_dragging: bool = false
-var pos_1: Vector2 = Vector2.ZERO
-var pos_2: Vector2 = Vector2.ZERO
-var line: Line2D = Line2D.new()
-var box_pos_1: Vector2
-var box_pos_2: Vector2
+var pos_1: Vector3 = Vector3.ZERO
+var pos_2: Vector3 = Vector3.ZERO
+var box: CSGBox3D = CSGBox3D.new()
+var box_pos_1: Vector3
+var box_pos_2: Vector3
 var dragging_box: bool
 
 var target_zoom: float
@@ -37,7 +38,6 @@ const AI_SLAVE = preload("res://AI/AISlave.tscn")
 const AI_MASTER = preload("res://AI/AIMaster.tscn")
 var ai_master: Node
 
-
 func _ready() -> void:
 	
 	SignalManager.minimap_camera_position_changed.connect(minimapMoveCamera)
@@ -45,8 +45,7 @@ func _ready() -> void:
 	target_zoom = global_position.y
 
 	#selection box
-	line.width = 5
-	line.default_color = Color(1,0,0)
+	box.material = load("res://UI/3D/selectionboxmaterial.tres")
 	
 	#AI debug
 	ai_master = AI_MASTER.instantiate()
@@ -82,8 +81,15 @@ func _physics_process(delta: float) -> void:
 	
 #region Cursors
 	GeneralVars.current_cursor_type = 0
+	select_cursor.visible = false
+	attack_cursor.visible = false
 	var info: Dictionary = getWorldClickPosition()
 	if "position" in info:
+		
+		#3d cursors
+		select_cursor.global_position = info["position"]
+		attack_cursor.global_position = info["position"]
+		
 		var collider = info["collider"]
 		if collider is CharacterBody3D and collider.has_method("getTeam"):
 			match collider.getTeam():
@@ -91,18 +97,15 @@ func _physics_process(delta: float) -> void:
 					GeneralVars.current_cursor_type = 0
 				1:	#Friendly
 					GeneralVars.current_cursor_type = 1
+					select_cursor.visible = true
 				2:	#Enemy
 					if collider.visible:
 						if !PlayerVars.getSelectedUnits().is_empty():
 							GeneralVars.current_cursor_type = 2
+							attack_cursor.visible = true
 						else:
 							GeneralVars.current_cursor_type = 1
-		else:
-			#Not hovering over controllable
-			GeneralVars.current_cursor_type = 0
-	else:
-		#Mouse out of bounds idk safety or something
-		GeneralVars.current_cursor_type = 0
+							select_cursor.visible = true
 #endregion
 
 #region Camera shake
@@ -185,26 +188,40 @@ func _unhandled_input(event: InputEvent) -> void:
 #region Draw box
 	if event.is_action_pressed("left_click") and !dragging_box:
 		dragging_box = true
-		box_pos_1 = get_viewport().get_mouse_position() 
+		var result = getWorldClickPosition()
+		if "position" in result:
+			box_pos_1 = result["position"]
 	
 	if dragging_box:
-		box_pos_2 = get_viewport().get_mouse_position()
-		line.clear_points()
-		if line.get_parent() == null:
-			get_tree().root.add_child(line)
-		var points: Array[Vector2] = [box_pos_1, Vector2(box_pos_1.x, box_pos_2.y), box_pos_2, Vector2(box_pos_2.x, box_pos_1.y), box_pos_1]
-		for point in points:
-			line.add_point(point)
+		var result = getWorldClickPosition()
+		if "position" in result:
+			box_pos_2 = result["position"]
+		
+		if box.get_parent() == null:
+			get_tree().root.add_child(box)
+		
+		box.visible = true
+		calculateSelectionBoxPos()
+		
 		
 	if event.is_action_released("left_click") and dragging_box:
 		dragging_box = false
-		line.clear_points()
+		box.visible = false
 #endregion
 	
 	#Delete Controllable, maybe debug?
 	if event.is_action_pressed("delete"):
 		for unit in PlayerVars.getSelectedUnits():
 			unit.die()
+
+func calculateSelectionBoxPos() -> void:
+	var pos_x: float = (box_pos_1.x + box_pos_2.x) / 2
+	var pos_z: float = (box_pos_1.z + box_pos_2.z) / 2
+	var size_x: float = absf(box_pos_1.x - box_pos_2.x)
+	var size_z: float = absf(box_pos_1.z - box_pos_2.z)
+	
+	box.global_position = Vector3(pos_x, 0, pos_z)
+	box.size = Vector3(size_x, 0.1, size_z)
 
 func shakeCamera(strength: float) -> void:
 	applyShake(strength)
@@ -246,40 +263,40 @@ func getSelection(shift_pressed: bool) -> void:
 func startSelectionBox() -> void:
 	var result = getWorldClickPosition()
 	if "position" in result:
-		pos_1 = Vector2(result["position"].x, result["position"].z)
+		pos_1 = result["position"]
 
 func endSelectionBox() -> void:
 	var result = getWorldClickPosition()
 	if "position" in result:
-		pos_2 = Vector2(result["position"].x, result["position"].z)
+		pos_2 = result["position"]
 		
 		for unit in PlayerVars.getAllUnits():
 			if !unit.is_building:
 				#start top left
-				if pos_1.x < pos_2.x and pos_1.y < pos_2.y:
+				if pos_1.x < pos_2.x and pos_1.z < pos_2.z:
 					if unit.global_position.x > pos_1.x and unit.global_position.x < pos_2.x:
-						if unit.global_position.z > pos_1.y and unit.global_position.z < pos_2.y:
+						if unit.global_position.z > pos_1.z and unit.global_position.z < pos_2.z:
 							PlayerVars.addToSelectedUnits(unit)
 							unit.setIsSelected(true)
 				
 				#start bottom left
-				if pos_1.x < pos_2.x and pos_1.y > pos_2.y:
+				if pos_1.x < pos_2.x and pos_1.z > pos_2.z:
 					if unit.global_position.x > pos_1.x and unit.global_position.x < pos_2.x:
-						if unit.global_position.z < pos_1.y and unit.global_position.z > pos_2.y:
+						if unit.global_position.z < pos_1.z and unit.global_position.z > pos_2.z:
 							PlayerVars.addToSelectedUnits(unit)
 							unit.setIsSelected(true)
 				
 				#start bottom right
-				if pos_1.x > pos_2.x and pos_1.y > pos_2.y:
+				if pos_1.x > pos_2.x and pos_1.z > pos_2.z:
 					if unit.global_position.x < pos_1.x and unit.global_position.x > pos_2.x:
-						if unit.global_position.z < pos_1.y and unit.global_position.z > pos_2.y:
+						if unit.global_position.z < pos_1.z and unit.global_position.z > pos_2.z:
 							PlayerVars.addToSelectedUnits(unit)
 							unit.setIsSelected(true)
 				
 				#start top right
-				if pos_1.x > pos_2.x and pos_1.y < pos_2.y:
+				if pos_1.x > pos_2.x and pos_1.z < pos_2.z:
 					if unit.global_position.x < pos_1.x and unit.global_position.x > pos_2.x:
-						if unit.global_position.z > pos_1.y and unit.global_position.z < pos_2.y:
+						if unit.global_position.z > pos_1.z and unit.global_position.z < pos_2.z:
 							PlayerVars.addToSelectedUnits(unit)
 							unit.setIsSelected(true)
 

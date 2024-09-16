@@ -10,11 +10,16 @@ extends Control
 @onready var fps_counter: Label = $"VBoxContainer/FPS Counter"
 @onready var power_bar: ProgressBar = $VBoxContainer/HBoxContainer/VBoxContainer2/AspectRatioContainer2/HBoxContainer/VBoxContainer/TextureRect/PowerBar
 
+@onready var cursor: Control = $Cursor
+
 var omnite: float
 
 func _process(_delta: float) -> void:
 	
 	fps_counter.text = str(Engine.get_frames_per_second()) + "fps"
+	
+	#cursor
+	cursor.position = get_global_mouse_position()
 	
 	#selection ui
 	if !PlayerVars.getSelectedUnits().is_empty():

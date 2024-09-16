@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bive3wv7ome64"]
+[gd_scene load_steps=34 format=3 uid="uid://bive3wv7ome64"]
 
 [ext_resource type="Script" path="res://UI/2D/HUDv3.gd" id="1_g57i4"]
 [ext_resource type="Texture2D" uid="uid://uqqq6spu1g3q" path="res://UI/2D/UI/Minimap.png" id="1_m87vn"]
@@ -23,6 +23,8 @@
 [ext_resource type="Texture2D" uid="uid://gvjq17hi6rv" path="res://UI/2D/UI/Omnite_ball.png" id="19_2xkk5"]
 [ext_resource type="Shader" path="res://Shaders/Liquidsphere.gdshader" id="20_croe6"]
 [ext_resource type="Texture2D" uid="uid://23lt1lhw0i58" path="res://Controllabes/Structures/Power plant/Smoke.png" id="21_fyy1r"]
+[ext_resource type="Script" path="res://UI/2D/Cursor.gd" id="24_xk3i4"]
+[ext_resource type="Texture2D" uid="uid://dtp1p7to22jnw" path="res://UI/2D/Cursors/Default.png" id="25_i3fph"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_piko6"]
 
@@ -223,7 +225,7 @@ refresh_rate = 1.0
 [node name="SubViewport" type="SubViewport" parent="VBoxContainer/HBoxContainer/VBoxContainer2/AspectRatioContainer/PanelContainer/Minimap/SubViewportContainer"]
 handle_input_locally = false
 debug_draw = 1
-size = Vector2i(2, 2)
+size = Vector2i(119, 117)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="VBoxContainer/HBoxContainer/VBoxContainer2/AspectRatioContainer/PanelContainer/Minimap/SubViewportContainer/SubViewport"]
@@ -513,6 +515,25 @@ size_flags_stretch_ratio = 0.1
 
 [node name="Container" type="Container" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
 layout_mode = 2
+
+[node name="Cursor" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("24_xk3i4")
+
+[node name="TextureRect" type="TextureRect" parent="Cursor"]
+texture_filter = 1
+layout_mode = 1
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+texture = ExtResource("25_i3fph")
 
 [connection signal="timeout" from="VBoxContainer/HBoxContainer/VBoxContainer2/AspectRatioContainer/PanelContainer/Minimap/SubViewportContainer/Refresh timer" to="VBoxContainer/HBoxContainer/VBoxContainer2/AspectRatioContainer/PanelContainer/Minimap/SubViewportContainer" method="refreshMinimap"]
 [connection signal="timeout" from="VBoxContainer/HBoxContainer/VBoxContainer2/AspectRatioContainer/PanelContainer/Minimap/SubViewportContainer/Refresh timer" to="VBoxContainer/HBoxContainer/VBoxContainer2/AspectRatioContainer/PanelContainer/Minimap/SubViewportContainer/SubViewport/Camera3D/minimap noise" method="refreshNoise"]
