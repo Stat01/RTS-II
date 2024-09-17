@@ -1,20 +1,28 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dxvdeeo5047vg"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://dxvdeeo5047vg"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f2k5l"]
-bg_color = Color(0.2, 0.2, 0.2, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.5, 0, 0, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-expand_margin_left = 3.0
-expand_margin_top = 3.0
-expand_margin_right = 3.0
-expand_margin_bottom = 2.0
+[ext_resource type="Texture2D" uid="uid://cyvcu0m2agxtp" path="res://UI/2D/CheckboxOn.png" id="1_fst6h"]
+[ext_resource type="Texture2D" uid="uid://c477vvy0bgxxo" path="res://UI/2D/CheckboxOff.png" id="2_2cvjk"]
+[ext_resource type="Texture2D" uid="uid://d0syd1qmbbkvv" path="res://UI/2D/Slidergrabber.png" id="3_r74ac"]
+[ext_resource type="Texture2D" uid="uid://cbeqhvqpdxcmy" path="res://UI/2D/Slidergrabberactive.png" id="4_3reqf"]
+[ext_resource type="Texture2D" uid="uid://dbniojl05scit" path="res://UI/2D/Slidertick.png" id="5_m0atq"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_5iid7"]
+color = Color(0.0901961, 0.0901961, 0.0941176, 1)
+thickness = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_04ggb"]
+bg_color = Color(0.561588, 0.561589, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [resource]
-PanelContainer/styles/panel = SubResource("StyleBoxFlat_f2k5l")
+CheckButton/icons/checked = ExtResource("1_fst6h")
+CheckButton/icons/unchecked = ExtResource("2_2cvjk")
+HSeparator/constants/separation = 10
+HSeparator/styles/separator = SubResource("StyleBoxLine_5iid7")
+HSlider/icons/grabber = ExtResource("3_r74ac")
+HSlider/icons/grabber_highlight = ExtResource("4_3reqf")
+HSlider/icons/tick = ExtResource("5_m0atq")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_04ggb")

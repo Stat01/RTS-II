@@ -52,17 +52,18 @@ func _ready() -> void:
 	target_position = global_position
 
 func _physics_process(delta: float) -> void:
-	super._process(delta)
-	can_move = false
-	
-	if current_target != null:
-		target_position = current_target.global_position
-	stateMachine()
-	
-	if print_state:
-		print(getState())
-	if print_current_target:
-		print(getCurrentTarget())
+	if !GeneralVars.getPaused():
+		super._process(delta)
+		can_move = false
+		
+		if current_target != null:
+			target_position = current_target.global_position
+		stateMachine()
+		
+		if print_state:
+			print(getState())
+		if print_current_target:
+			print(getCurrentTarget())
 
 func stateMachine() -> void:
 	match state:
@@ -197,7 +198,7 @@ func moveUnit() -> void:
 	nav_agent.set_velocity(new_velocity)
 
 func safeMoveUnit(safe_velocity: Vector3) -> void:
-	if can_move:
+	if can_move and !GeneralVars.getPaused():
 		var global_vel = global_position + safe_velocity
 		smoothTurn(Vector3(global_vel.x, global_position.y, global_vel.z), self, rotation_speed)
 		#velocity = Vector3(safe_velocity.normalized().x, 0, safe_velocity.normalized().z) * move_speed

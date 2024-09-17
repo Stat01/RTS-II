@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bive3wv7ome64"]
+[gd_scene load_steps=36 format=3 uid="uid://bive3wv7ome64"]
 
 [ext_resource type="Script" path="res://UI/2D/HUDv3.gd" id="1_g57i4"]
 [ext_resource type="Texture2D" uid="uid://uqqq6spu1g3q" path="res://UI/2D/UI/Minimap.png" id="1_m87vn"]
@@ -25,6 +25,8 @@
 [ext_resource type="Texture2D" uid="uid://23lt1lhw0i58" path="res://Controllabes/Structures/Power plant/Smoke.png" id="21_fyy1r"]
 [ext_resource type="Script" path="res://UI/2D/Cursor.gd" id="24_xk3i4"]
 [ext_resource type="Texture2D" uid="uid://dtp1p7to22jnw" path="res://UI/2D/Cursors/Default.png" id="25_i3fph"]
+[ext_resource type="Texture2D" uid="uid://bohgvumc4bkuq" path="res://UI/2D/OptionsBackground.png" id="26_558bj"]
+[ext_resource type="Theme" uid="uid://dxvdeeo5047vg" path="res://Themes/UIPanel.tres" id="27_exwat"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_piko6"]
 
@@ -517,6 +519,7 @@ size_flags_stretch_ratio = 0.1
 layout_mode = 2
 
 [node name="Cursor" type="Control" parent="."]
+z_index = 99
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -583,8 +586,139 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="OptionsMenu" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="Container" parent="OptionsMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="Container" type="Container" parent="OptionsMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="OptionsMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+texture = ExtResource("26_558bj")
+region_rect = Rect2(0, 0, 259, 259)
+patch_margin_left = 45
+patch_margin_top = 45
+patch_margin_right = 45
+patch_margin_bottom = 45
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OptionsMenu/VBoxContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 44.0
+offset_top = 44.0
+offset_right = -44.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Section" type="Label" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("27_exwat")
+text = "Mouse Settings"
+horizontal_alignment = 1
+
+[node name="CheckButtonEdgePan" type="CheckButton" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("27_exwat")
+button_pressed = true
+text = "Camera edge pan"
+alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("27_exwat")
+
+[node name="CameraEdgePanSpeedLabel" type="Label" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("27_exwat")
+text = "Camera edge pan speed"
+
+[node name="SliderEdgePanSpeed" type="HSlider" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("27_exwat")
+max_value = 1.0
+step = 0.1
+value = 0.5
+tick_count = 11
+ticks_on_borders = true
+
+[node name="HSeparator2" type="HSeparator" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("27_exwat")
+
+[node name="CameraPanSpeedLabel" type="Label" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("27_exwat")
+text = "Camera pan speed"
+
+[node name="SliderPanSpeed" type="HSlider" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("27_exwat")
+max_value = 1.0
+step = 0.1
+value = 0.5
+tick_count = 11
+ticks_on_borders = true
+
+[node name="Container" type="Container" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CheckButton2" type="CheckButton" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("27_exwat")
+text = "Mystery button"
+alignment = 2
+
+[node name="Container3" type="Container" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Container2" type="Container" parent="OptionsMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Container2" type="Container" parent="OptionsMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [connection signal="timeout" from="VBoxContainer/HBoxContainer/VBoxContainer2/AspectRatioContainer/PanelContainer/Minimap/SubViewportContainer/Refresh timer" to="VBoxContainer/HBoxContainer/VBoxContainer2/AspectRatioContainer/PanelContainer/Minimap/SubViewportContainer" method="refreshMinimap"]
 [connection signal="timeout" from="VBoxContainer/HBoxContainer/VBoxContainer2/AspectRatioContainer/PanelContainer/Minimap/SubViewportContainer/Refresh timer" to="VBoxContainer/HBoxContainer/VBoxContainer2/AspectRatioContainer/PanelContainer/Minimap/SubViewportContainer/SubViewport/Camera3D/minimap noise" method="refreshNoise"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/Resume" to="." method="resume"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/Options" to="." method="enterOptionsMenu"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/Exit" to="." method="exitToMainMenu"]
+[connection signal="toggled" from="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/CheckButtonEdgePan" to="." method="setEdgePan"]
+[connection signal="value_changed" from="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/SliderEdgePanSpeed" to="." method="setEdgePanSpeed"]
+[connection signal="value_changed" from="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/SliderPanSpeed" to="." method="setPanSpeed"]

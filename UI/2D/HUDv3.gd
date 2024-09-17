@@ -14,9 +14,19 @@ extends Control
 
 @onready var cursor: Control = $Cursor
 
+##options menu stuff
+@onready var options_menu: HBoxContainer = $OptionsMenu
+@onready var check_button_edge_pan: CheckButton = $OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/CheckButtonEdgePan
+@onready var slider_edge_pan_speed: HSlider = $OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/SliderEdgePanSpeed
+@onready var slider_pan_speed: HSlider = $OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/SliderPanSpeed
+
+
 const MAIN_MENU: NodePath = "res://MainMenu.tscn"
 
 var omnite: float
+
+func _ready() -> void:
+	initializeOptions()
 
 func _process(_delta: float) -> void:
 	
@@ -103,10 +113,28 @@ func exitToMainMenu() -> void:
 	$"../..".queue_free()
 
 func enterOptionsMenu() -> void:
-	pass
+	toggleOptionsMenu()
+
+func toggleOptionsMenu() -> void:
+	if options_menu.visible == false:
+		options_menu.visible = true
+		return
+	options_menu.visible = false
+
 func resume() -> void:
 	togglePauseMenu()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		togglePauseMenu()
+		options_menu.visible = false
+
+##Options buttons n' shit
+func initializeOptions() -> void:
+	check_button_edge_pan.button_pressed = Settings.edge_pan
+	slider_edge_pan_speed.value = Settings.camera_edge_pan_speed
+	slider_pan_speed.value = Settings.camera_pan_speed
+
+func setEdgePan(i: bool) -> void:	Settings.edge_pan = i
+func setEdgePanSpeed(i: float) -> void:	Settings.camera_edge_pan_speed = i
+func setPanSpeed(i: float) -> void:	Settings.camera_pan_speed = i

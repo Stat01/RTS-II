@@ -143,27 +143,28 @@ func _ready() -> void:
 	PlayerVars.changeCurrentEnergyUsage(energy_usage)
 
 func _process(_delta: float) -> void:
-	if selection_circle != null:
-		if is_selected:
-			selection_circle.set_visible(true)
-		else:
-			selection_circle.set_visible(false)
-	
-	#visibility
-	if getTeam() == 2:
-		if getVisibleBy().is_empty() and turn_visible == true:
-			turn_visible = false
-			await get_tree().create_timer(1.5).timeout
-			visible = false
-		elif !getVisibleBy().is_empty():
-			turn_visible = true
-			visible = true
-	
-	if health <= 0:
-		die()
-	
-	if print_visible_by:
-		print(getVisibleBy())
+	if !GeneralVars.getPaused():
+		if selection_circle != null:
+			if is_selected:
+				selection_circle.set_visible(true)
+			else:
+				selection_circle.set_visible(false)
+		
+		#visibility
+		if getTeam() == 2:
+			if getVisibleBy().is_empty() and turn_visible == true:
+				turn_visible = false
+				await get_tree().create_timer(1.5).timeout
+				visible = false
+			elif !getVisibleBy().is_empty():
+				turn_visible = true
+				visible = true
+		
+		if health <= 0:
+			die()
+		
+		if print_visible_by:
+			print(getVisibleBy())
 
 func smoothTurn(look_pos: Vector3, target_node: Node, rot_speed: float = 0.1) -> void:
 	if look_pos.distance_to(target_node.global_position) > 0.01:

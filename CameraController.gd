@@ -20,6 +20,8 @@ var dragging_box: bool
 var target_zoom: float
 var pan_direction: Vector2
 var panning: bool
+var panning_key_amount: int
+var key_pan_direction: Vector2
 
 @export var min_zoom: float
 @export var max_zoom: float
@@ -54,171 +56,206 @@ func _physics_process(delta: float) -> void:
 	
 	#update mouse pos
 	mouse_pos = get_viewport().get_mouse_position()
-	
+	if !GeneralVars.getPaused():
 #region Camera panning
-	pan_direction = mouse_pos - mouse_middle_pan_pos
-	pan_direction = pan_direction / 64
-	pan_direction = pan_direction * Settings.camera_pan_speed
-	##left
-	if mouse_pos.x < get_viewport().get_visible_rect().size.x - (get_viewport().get_visible_rect().size.x - 30) or Input.is_action_pressed("camera_left"):
-		pan_direction.x -= 1
-	##right
-	if mouse_pos.x > get_viewport().get_visible_rect().size.x - 30 or Input.is_action_pressed("camera_right"):
-		pan_direction.x += 1
-	##forward
-	if mouse_pos.y < get_viewport().get_visible_rect().size.y - (get_viewport().get_visible_rect().size.y - 30) or Input.is_action_pressed("camera_forward"):
-		pan_direction.y -= 1
-	##backward
-	if mouse_pos.y > get_viewport().get_visible_rect().size.y - 30 or Input.is_action_pressed("camera_backward"):
-		pan_direction.y += 1
-	if panning:
-		global_position += Vector3(pan_direction.x, 0, pan_direction.y)
+		if panning:
+			pan_direction = mouse_pos - mouse_middle_pan_pos
+			pan_direction = pan_direction / 64
+			pan_direction *= Settings.camera_pan_speed
+		
+		if panning_key_amount > 0:
+			panning_key_amount *= Settings.camera_pan_speed
+		
+		##left
+		if mouse_pos.x < get_viewport().get_visible_rect().size.x - (get_viewport().get_visible_rect().size.x - 30):
+			global_position.x -= 1
+		##right
+		if mouse_pos.x > get_viewport().get_visible_rect().size.x - 30:
+			global_position.x += 1
+		##forward
+		if mouse_pos.y < get_viewport().get_visible_rect().size.y - (get_viewport().get_visible_rect().size.y - 30):
+			global_position.z -= 1
+		##backward
+		if mouse_pos.y > get_viewport().get_visible_rect().size.y - 30:
+			global_position.z += 1
+		
+		if panning or panning_key_amount > 0:
+			global_position += Vector3(pan_direction.x + key_pan_direction.x, 0, pan_direction.y + key_pan_direction.y)
 #endregion
 	
 #region Update zoom level
-	global_position.y = lerp(global_position.y, target_zoom, 0.5)
+		global_position.y = lerp(global_position.y, target_zoom, 0.5)
 #endregion
 	
 #region Cursors
-	GeneralVars.current_cursor_type = 0
-	select_cursor.visible = false
-	attack_cursor.visible = false
-	var info: Dictionary = getWorldClickPosition()
-	if "position" in info:
-		
-		#3d cursors
-		select_cursor.global_position = info["position"]
-		attack_cursor.global_position = info["position"]
-		
-		var collider = info["collider"]
-		if collider is CharacterBody3D and collider.has_method("getTeam"):
-			match collider.getTeam():
-				0:	#Neutral
-					GeneralVars.current_cursor_type = 0
-				1:	#Friendly
-					GeneralVars.current_cursor_type = 1
-					select_cursor.visible = true
-				2:	#Enemy
-					if collider.visible:
-						if !PlayerVars.getSelectedUnits().is_empty():
-							GeneralVars.current_cursor_type = 2
-							attack_cursor.visible = true
-						else:
-							GeneralVars.current_cursor_type = 1
-							select_cursor.visible = true
+		GeneralVars.current_cursor_type = 0
+		select_cursor.visible = false
+		attack_cursor.visible = false
+		var info: Dictionary = getWorldClickPosition()
+		if "position" in info:
+			
+			#3d cursors
+			select_cursor.global_position = info["position"]
+			attack_cursor.global_position = info["position"]
+			
+			var collider = info["collider"]
+			if collider is CharacterBody3D and collider.has_method("getTeam"):
+				match collider.getTeam():
+					0:	#Neutral
+						GeneralVars.current_cursor_type = 0
+					1:	#Friendly
+						GeneralVars.current_cursor_type = 1
+						select_cursor.visible = true
+					2:	#Enemy
+						if collider.visible:
+							if !PlayerVars.getSelectedUnits().is_empty():
+								GeneralVars.current_cursor_type = 2
+								attack_cursor.visible = true
+							else:
+								GeneralVars.current_cursor_type = 1
+								select_cursor.visible = true
 #endregion
 
 #region Camera shake
-	if shake_strength > 0:
-		shake_strength = lerpf(shake_strength, 0, shake_fade * delta)
-		
-		var offset: Vector2 = randomOffset()
-		camera.h_offset = offset.x
-		camera.v_offset = offset.y
-		glitch_effect.material.set("shader_parameter/shake_power", shake_strength * 0.01)
-		glitch_effect.material.set("shader_parameter/shake_rate", shake_strength * 1.0)
-		glitch_effect.material.set("shader_parameter/shake_color", shake_strength * 0.01)
+		if shake_strength > 0:
+			shake_strength = lerpf(shake_strength, 0, shake_fade * delta)
+			
+			var offset: Vector2 = randomOffset()
+			camera.h_offset = offset.x
+			camera.v_offset = offset.y
+			glitch_effect.material.set("shader_parameter/shake_power", shake_strength * 0.01)
+			glitch_effect.material.set("shader_parameter/shake_rate", shake_strength * 1.0)
+			glitch_effect.material.set("shader_parameter/shake_color", shake_strength * 0.01)
 #endregion
-	
-	
-	
-	
-	#AI debug
-	if Input.is_action_just_pressed("debugbutton"):
-		get_tree().root.get_node("Main").get_node("AI Slave").queue_free()
-		#var ins = AI_SLAVE.instantiate()
-		#var units: Array[CharacterBody3D]
-		#for unit: Controllable in GeneralVars.getUnitsList().get_children():
-		#	if unit.getName() == "Rasmus":
-		#		units.append(unit)
-		#ins.initialize(0, units, false, ai_master, GeneralVars.getStructureList().get_children()[0], )
-		#get_tree().root.add_child(ins)
+		
+		#AI debug
+		if Input.is_action_just_pressed("debugbutton"):
+			get_tree().root.get_node("Main").get_node("AI Slave").queue_free()
+			#var ins = AI_SLAVE.instantiate()
+			#var units: Array[CharacterBody3D]
+			#for unit: Controllable in GeneralVars.getUnitsList().get_children():
+			#	if unit.getName() == "Rasmus":
+			#		units.append(unit)
+			#ins.initialize(0, units, false, ai_master, GeneralVars.getStructureList().get_children()[0], )
+			#get_tree().root.add_child(ins)
 
 func minimapMoveCamera(pos: Vector2) -> void:
 	var real_mouse_pos := pos * GeneralVars.getMapSize() * 2
 	global_position = Vector3(real_mouse_pos.x - GeneralVars.getMapSize() * 2, global_position.y, real_mouse_pos.y)
 
 func _unhandled_input(event: InputEvent) -> void:
+	if !GeneralVars.getPaused():
 #region Camera zoom and panning
-	if event is InputEventMouseButton:
-		match event.button_index:
-			#zoom in
-			MOUSE_BUTTON_WHEEL_UP: if event.pressed: target_zoom -= 2.5
-			#zoom out
-			MOUSE_BUTTON_WHEEL_DOWN: if event.pressed: target_zoom += 2.5
-			#camera middle mouse pan
-			MOUSE_BUTTON_MIDDLE:
-				if event.pressed:
-					panning = true
-					mouse_middle_pan_pos = event.position
-				else:
-					panning = false
-	target_zoom = clamp(target_zoom, max_zoom, min_zoom)
+		if event is InputEventMouseButton:
+			match event.button_index:
+				#zoom in
+				MOUSE_BUTTON_WHEEL_UP: if event.pressed: target_zoom -= 2.5
+				#zoom out
+				MOUSE_BUTTON_WHEEL_DOWN: if event.pressed: target_zoom += 2.5
+				#camera middle mouse pan
+				MOUSE_BUTTON_MIDDLE:
+					if event.pressed:
+						panning = true
+						mouse_middle_pan_pos = event.position
+					else:
+						panning = false
+						pan_direction = Vector2.ZERO
+		target_zoom = clamp(target_zoom, max_zoom, min_zoom)
+		
+		##left
+		if event.is_action_pressed("camera_left"):
+			key_pan_direction.x -= 1
+			panning_key_amount += 1
+		##right
+		if event.is_action_pressed("camera_right"):
+			key_pan_direction.x += 1
+			panning_key_amount += 1
+		##forward
+		if event.is_action_pressed("camera_forward"):
+			key_pan_direction.y -= 1
+			panning_key_amount += 1
+		##backward
+		if event.is_action_pressed("camera_backward"):
+			key_pan_direction.y += 1
+			panning_key_amount += 1
+		
+		if event.is_action_released("camera_left"):
+			key_pan_direction.x += 1
+			panning_key_amount -= 1
+		if event.is_action_released("camera_right"):
+			key_pan_direction.x -= 1
+			panning_key_amount -= 1
+		if event.is_action_released("camera_forward"):
+			key_pan_direction.y += 1
+			panning_key_amount -= 1
+		if event.is_action_released("camera_backward"):
+			key_pan_direction.y -= 1
+			panning_key_amount -= 1
 #endregion
 	
 #region Selection
 	#Single
-	if !building_mode:
-		if event.is_action_pressed("left_click"):
-			if attack_move:
-				issueCommand()
-				attack_move = false
-			else:
-				getSelection(Input.is_action_pressed("shift"))
+		if !building_mode:
+			if event.is_action_pressed("left_click"):
+				if attack_move:
+					issueCommand()
+					attack_move = false
+				else:
+					getSelection(Input.is_action_pressed("shift"))
+			
+			#Drag
+			if event.is_action_pressed("left_click"):
+				mouse_dragging = true
+				startSelectionBox()
+			
+			if event.is_action_released("left_click") and mouse_dragging:
+				mouse_dragging = false
+				endSelectionBox()
+			
+			#Rightclick commands
+			if event.is_action_released("right_click"):
+					attack_move = false
+					issueCommand()
+			
+			#set attack move
+			if event.is_action_pressed("attack_move") and !attack_move:
+				attack_move = true
 		
-		#Drag
-		if event.is_action_pressed("left_click"):
-			mouse_dragging = true
-			startSelectionBox()
-		
-		if event.is_action_released("left_click") and mouse_dragging:
-			mouse_dragging = false
-			endSelectionBox()
-		
-		#Rightclick commands
-		if event.is_action_released("right_click"):
-				attack_move = false
-				issueCommand()
-		
-		#set attack move
-		if event.is_action_pressed("attack_move") and !attack_move:
-			attack_move = true
-	
-	#Deselect button
-	if event.is_action_pressed("deselect"):
-		for unit: Controllable in PlayerVars.getSelectedUnits():
-			unit.is_selected = false
-		PlayerVars.clearSelectedUnits()
+		#Deselect button
+		if event.is_action_pressed("deselect"):
+			for unit: Controllable in PlayerVars.getSelectedUnits():
+				unit.is_selected = false
+			PlayerVars.clearSelectedUnits()
 #endregion
 	
 #region Draw box
-	if event.is_action_pressed("left_click") and !dragging_box:
-		dragging_box = true
-		var result = getWorldClickPosition()
-		if "position" in result:
-			box_pos_1 = result["position"]
-	
-	if dragging_box:
-		var result = getWorldClickPosition()
-		if "position" in result:
-			box_pos_2 = result["position"]
+		if event.is_action_pressed("left_click") and !dragging_box:
+			dragging_box = true
+			var result = getWorldClickPosition()
+			if "position" in result:
+				box_pos_1 = result["position"]
 		
-		if box.get_parent() == null:
-			get_tree().root.add_child(box)
-		
-		box.visible = true
-		calculateSelectionBoxPos()
-		
-		
-	if event.is_action_released("left_click") and dragging_box:
-		dragging_box = false
-		box.visible = false
+		if dragging_box:
+			var result = getWorldClickPosition()
+			if "position" in result:
+				box_pos_2 = result["position"]
+			
+			if box.get_parent() == null:
+				get_tree().root.add_child(box)
+			
+			box.visible = true
+			calculateSelectionBoxPos()
+			
+			
+		if event.is_action_released("left_click") and dragging_box:
+			dragging_box = false
+			box.visible = false
 #endregion
 	
 	#Delete Controllable, maybe debug?
-	if event.is_action_pressed("delete"):
-		for unit: Controllable in PlayerVars.getSelectedUnits():
-			unit.die()
+		if event.is_action_pressed("delete"):
+			for unit: Controllable in PlayerVars.getSelectedUnits():
+				unit.die()
 
 func calculateSelectionBoxPos() -> void:
 	var pos_x: float = (box_pos_1.x + box_pos_2.x) / 2
