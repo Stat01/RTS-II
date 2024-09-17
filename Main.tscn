@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dgeiuigxw0r0a"]
+[gd_scene load_steps=16 format=3 uid="uid://dgeiuigxw0r0a"]
 
 [ext_resource type="PackedScene" uid="uid://cdyimnapkawjs" path="res://CameraController.tscn" id="1_347s1"]
 [ext_resource type="Script" path="res://Main.gd" id="1_x2gny"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bsrpn5c6sv2ef" path="res://Maps/Dev_0/Dev_0.tscn" id="7_8iif0"]
 [ext_resource type="PackedScene" uid="uid://rxe3e51pm3mu" path="res://Controllabes/Structures/Omnite/Omnite.tscn" id="7_a07hw"]
 [ext_resource type="PackedScene" uid="uid://cy7gmooct6gol" path="res://Controllabes/Structures/MCU/MCU.tscn" id="8_gm1f2"]
+[ext_resource type="PackedScene" uid="uid://inog8gdy5ldn" path="res://Controllabes/Units/Nucleon/Nucleon.tscn" id="10_ombth"]
+[ext_resource type="PackedScene" uid="uid://b1ngn4awissq0" path="res://Controllabes/Units/AT-12 Gladiator/AT-12 Gladiator.tscn" id="11_k2h5d"]
 [ext_resource type="PackedScene" uid="uid://dynmqvcimknc3" path="res://AI/AIMaster.tscn" id="12_86qhq"]
 [ext_resource type="PackedScene" uid="uid://bive3wv7ome64" path="res://UI/2D/HUDv3.tscn" id="13_cncwy"]
 [ext_resource type="PackedScene" uid="uid://ck2ij3h4tglip" path="res://BuildingHandler.tscn" id="14_kltx4"]
@@ -54,6 +56,16 @@ transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107
 [node name="VisionNode" parent="Units" instance=ExtResource("15_3qlug")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -154.703, 0, 215.645)
 radius = 30.0
+
+[node name="Nucleon" parent="Units" instance=ExtResource("10_ombth")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61, 0, 30)
+
+[node name="VisionNode2" parent="Units" instance=ExtResource("15_3qlug")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54, 0, 30)
+radius = 20.0
+
+[node name="AT-12 Tank" parent="Units" instance=ExtResource("11_k2h5d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39, 0, 31)
 
 [node name="Doodads" type="Node" parent="."]
 

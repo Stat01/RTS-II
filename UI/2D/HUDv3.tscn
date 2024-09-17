@@ -85,7 +85,7 @@ grow_vertical = 2
 texture_filter = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
-text = "Steel Horizon v0.1 [UI Update]"
+text = "Steel Horizon v0.2 [Expanded Units Update]"
 horizontal_alignment = 2
 
 [node name="FPS Counter" type="Label" parent="VBoxContainer"]

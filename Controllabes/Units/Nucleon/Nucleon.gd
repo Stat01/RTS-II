@@ -1,9 +1,9 @@
 extends "res://Controllabes/Units/Unit.gd"
 
-@onready var bullet_spawn_pos: Node3D = $Base/Turret/Cylinder/Barrelpos
+@onready var bullet_spawn_pos: Node3D = $Base/TurretBase/Turret/Barrel/barrelpos
 
-@onready var turret: MeshInstance3D = $Base/Turret
-@onready var barrel: MeshInstance3D = $Base/Turret/Cylinder
+@onready var turret: MeshInstance3D = $Base/TurretBase/Turret
+@onready var barrel: MeshInstance3D = $Base/TurretBase/Turret/Barrel
 
 @onready var default_turret_rot_pos: Node3D = $DefaultTurretPos
 

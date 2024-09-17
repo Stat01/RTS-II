@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://b4hnsaqm2co3j"]
 
-[ext_resource type="Script" path="res://Controllabes/Units/Zel'va/Zel'va.gd" id="1_m4sl5"]
 [ext_resource type="Material" uid="uid://xsyfhrnmb5eq" path="res://Controllabes/Units/Zel'va/Primary.tres" id="1_s3edl"]
+[ext_resource type="Script" path="res://Controllabes/Units/Nucleon/Nucleon.gd" id="1_weybb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkoyf"]
 
@@ -146,7 +146,7 @@ size = Vector2(0.1, 0.1)
 [node name="Zel\'va" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 5
-script = ExtResource("1_m4sl5")
+script = ExtResource("1_weybb")
 move_speed = 3.0
 rotation_speed = 0.1
 health = 100

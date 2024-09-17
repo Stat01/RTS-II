@@ -43,7 +43,7 @@ enum sizes {SMALL, MEDIUM, LARGE, HUGE, VEHICLE_DEPOT, FACTORY}
 @export var price: int
 @export var build_time: int
 
-enum production_buildings {NONE, VEHICLE_DEPOT, FACTORY}
+enum production_buildings {NONE, VEHICLE_DEPOT, FACTORY, BIOMECHANICAL_PRINTER}
 @export var production_location: production_buildings
 @export var unlock_requirements: Array[String]
 

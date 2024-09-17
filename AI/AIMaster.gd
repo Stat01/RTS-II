@@ -10,7 +10,7 @@ class_name AIMaster
 @export var max_attack_interval := 300
 
 #units
-const ZELVA = preload("res://Controllabes/Units/Zel'va/Zel'va.tscn")
+const NUCLEON = preload("res://Controllabes/Units/Nucleon/Nucleon.tscn")
 const SUICIDE_BALL = preload("res://Controllabes/Units/Suicide Ball/SuicideBall.tscn")
 
 const AI_SLAVE = preload("res://AI/AISlave.tscn")
@@ -44,7 +44,7 @@ func spawnEnemy() -> void:
 	var rand = randi_range(0,1)
 	var ins
 	match rand:
-		0: ins = ZELVA.instantiate()
+		0: ins = NUCLEON.instantiate()
 		1: ins = SUICIDE_BALL.instantiate()
 	 
 	GeneralVars.getUnitsList().add_child(ins)
