@@ -64,20 +64,21 @@ func _physics_process(delta: float) -> void:
 			pan_direction *= Settings.camera_pan_speed
 		
 		if panning_key_amount > 0:
-			panning_key_amount *= Settings.camera_pan_speed
+			panning_key_amount *= Settings.camera_edge_pan_speed
 		
-		##left
-		if mouse_pos.x < get_viewport().get_visible_rect().size.x - (get_viewport().get_visible_rect().size.x - 30):
-			global_position.x -= 1
-		##right
-		if mouse_pos.x > get_viewport().get_visible_rect().size.x - 30:
-			global_position.x += 1
-		##forward
-		if mouse_pos.y < get_viewport().get_visible_rect().size.y - (get_viewport().get_visible_rect().size.y - 30):
-			global_position.z -= 1
-		##backward
-		if mouse_pos.y > get_viewport().get_visible_rect().size.y - 30:
-			global_position.z += 1
+		if Settings.edge_pan:
+			##left
+			if mouse_pos.x < get_viewport().get_visible_rect().size.x - (get_viewport().get_visible_rect().size.x - 30):
+				global_position.x -= 1
+			##right
+			if mouse_pos.x > get_viewport().get_visible_rect().size.x - 30:
+				global_position.x += 1
+			##forward
+			if mouse_pos.y < get_viewport().get_visible_rect().size.y - (get_viewport().get_visible_rect().size.y - 30):
+				global_position.z -= 1
+			##backward
+			if mouse_pos.y > get_viewport().get_visible_rect().size.y - 30:
+				global_position.z += 1
 		
 		if panning or panning_key_amount > 0:
 			global_position += Vector3(pan_direction.x + key_pan_direction.x, 0, pan_direction.y + key_pan_direction.y)

@@ -11,6 +11,7 @@ class_name AIMaster
 
 #units
 const ZELVA = preload("res://Controllabes/Units/Zel'va/Zel'va.tscn")
+const SUICIDE_BALL = preload("res://Controllabes/Units/Suicide Ball/SuicideBall.tscn")
 
 const AI_SLAVE = preload("res://AI/AISlave.tscn")
 
@@ -40,7 +41,12 @@ func launchAttack() -> void:
 	launch_attack_timer.start(randi_range(min_attack_interval, max_attack_interval))
 
 func spawnEnemy() -> void:
-	var ins = ZELVA.instantiate()
+	var rand = randi_range(0,1)
+	var ins
+	match rand:
+		0: ins = ZELVA.instantiate()
+		1: ins = SUICIDE_BALL.instantiate()
+	 
 	GeneralVars.getUnitsList().add_child(ins)
 	ins.global_position = enemy_spawn_point.global_position + Vector3(randf_range(-5, 5), 0, randf_range(-5, 5))
 	getUnits().append(ins)

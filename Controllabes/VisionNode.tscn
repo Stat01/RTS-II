@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://djs0nl8pk3bmo"]
+
+[ext_resource type="Script" path="res://VisionNode.gd" id="1_0qhfm"]
+
+[node name="VisionNode" type="CharacterBody3D"]
+script = ExtResource("1_0qhfm")
+
+[node name="GPUParticlesCollisionSphere3D" type="GPUParticlesCollisionSphere3D" parent="."]
