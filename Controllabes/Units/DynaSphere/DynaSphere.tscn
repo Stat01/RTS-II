@@ -1,0 +1,171 @@
+[gd_scene load_steps=12 format=3 uid="uid://ckfr7mmcorm22"]
+
+[ext_resource type="Script" path="res://Controllabes/Units/DynaSphere/DynaSphere.gd" id="1_76uj3"]
+[ext_resource type="ArrayMesh" uid="uid://i6blqgfgkn8x" path="res://Controllabes/Units/DynaSphere/DynaSphereMesh.tres" id="2_yj6y0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7j7n4"]
+resource_name = "Light"
+cull_mode = 2
+albedo_color = Color(0.0183284, 0, 0.906332, 1)
+roughness = 0.5
+emission_enabled = true
+emission = Color(0.623395, 0, 1, 1)
+
+[sub_resource type="Animation" id="Animation_h3dan"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icosphere:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_u7eaw"]
+resource_name = "Roll"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icosphere:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-6.28319, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s10mt"]
+_data = {
+"RESET": SubResource("Animation_h3dan"),
+"Roll": SubResource("Animation_u7eaw")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ds3da"]
+radius = 0.25
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pqpqe"]
+radius = 1.5
+
+[sub_resource type="Animation" id="Animation_8q05y"]
+resource_name = "Detonate"
+length = 0.25
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icosphere:surface_material_override/1:emission")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.623395, 0, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Icosphere:surface_material_override/1:emission_energy_multiplier")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 50.0]
+}
+
+[sub_resource type="Animation" id="Animation_6ckkl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icosphere:surface_material_override/1:emission")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.623395, 0, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Icosphere:surface_material_override/1:emission_energy_multiplier")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uack2"]
+_data = {
+"Detonate": SubResource("Animation_8q05y"),
+"RESET": SubResource("Animation_6ckkl")
+}
+
+[node name="DynaSphere" type="CharacterBody3D"]
+collision_layer = 8
+collision_mask = 13
+script = ExtResource("1_76uj3")
+move_speed = 8.0
+rotation_speed = 0.1
+health = 45
+damage = 70
+detection_range = 5.0
+name_ = "Suicide Ball"
+team = 2
+radius_meters = 0.25
+sight_range = 6.0
+energy_usage = 3
+price = 50
+build_time = 12
+
+[node name="Icosphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.25, 0)
+mesh = ExtResource("2_yj6y0")
+skeleton = NodePath("")
+surface_material_override/1 = SubResource("StandardMaterial3D_7j7n4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_s10mt")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("SphereShape3D_ds3da")
+
+[node name="DetonateArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 12
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetonateArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_pqpqe")
+
+[node name="Detonate" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uack2")
+}
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+debug_path_custom_point_size = 10.0
+
+[connection signal="body_entered" from="DetonateArea" to="." method="_on_detonate_area_body_entered"]

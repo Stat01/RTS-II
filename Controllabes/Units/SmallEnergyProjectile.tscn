@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://25k65uhr05l8"]
+[gd_scene load_steps=14 format=3 uid="uid://cm7snpa54yhwk"]
 
-[ext_resource type="Script" path="res://Controllabes/Units/Projectile.gd" id="1_oe5rc"]
+[ext_resource type="Script" path="res://Controllabes/Units/EnergyProjectile.gd" id="1_oc8ua"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gjvrc"]
 resource_name = "Base"
@@ -45,27 +45,61 @@ shadow_mesh = SubResource("ArrayMesh_6cpx1")
 [sub_resource type="BoxShape3D" id="BoxShape3D_wtkq2"]
 size = Vector3(1.27, 0.27, 0.12)
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ogolb"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_63nlu"]
+spread = 180.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
 gravity = Vector3(0, 0, 0)
+color = Color(0.529412, 1, 1, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nobnh"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ju5sl"]
 transparency = 1
-shading_mode = 0
+vertex_color_use_as_albedo = true
 albedo_color = Color(1, 1, 1, 0.0470588)
+emission_enabled = true
+emission = Color(0.545098, 1, 1, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_le33l"]
-material = SubResource("StandardMaterial3D_nobnh")
+[sub_resource type="SphereMesh" id="SphereMesh_xvbkb"]
+material = SubResource("StandardMaterial3D_ju5sl")
 radius = 0.01
 height = 2.0
 radial_segments = 8
 rings = 8
 is_hemisphere = true
 
-[node name="Projectile" type="CharacterBody3D"]
-script = ExtResource("1_oe5rc")
+[sub_resource type="Curve" id="Curve_knjdg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.66138, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hxjy5"]
+curve = SubResource("Curve_knjdg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_csf8m"]
+direction = Vector3(0, 0, 1)
+spread = 180.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_hxjy5")
+color = Color(0.388235, 0.615686, 1, 0.560784)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4oeee"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.521569)
+emission_enabled = true
+emission = Color(0.592157, 1, 1, 1)
+billboard_keep_scale = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wmf44"]
+material = SubResource("StandardMaterial3D_4oeee")
+size = Vector2(0.01, 0.2)
+
+[node name="Energy Projectile" type="CharacterBody3D"]
+script = ExtResource("1_oc8ua")
 
 [node name="Model" type="MeshInstance3D" parent="."]
 transform = Transform3D(4.77671e-16, -1.09278e-08, 0.25, -0.25, -1.09278e-08, 0, 1.09278e-08, -0.25, -1.09278e-08, 0, 0, 0)
+visible = false
 mesh = SubResource("ArrayMesh_mjxpk")
 skeleton = NodePath("")
 
@@ -82,9 +116,15 @@ shape = SubResource("BoxShape3D_wtkq2")
 transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0.0152029)
 emitting = false
 amount = 64
-lifetime = 0.2
+lifetime = 0.01
 preprocess = 1.39
-process_material = SubResource("ParticleProcessMaterial_ogolb")
-draw_pass_1 = SubResource("SphereMesh_le33l")
+process_material = SubResource("ParticleProcessMaterial_63nlu")
+draw_pass_1 = SubResource("SphereMesh_xvbkb")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 64
+lifetime = 0.01
+process_material = SubResource("ParticleProcessMaterial_csf8m")
+draw_pass_1 = SubResource("PlaneMesh_wmf44")
 
 [connection signal="body_entered" from="Collision Area" to="." method="_on_collision_area_body_entered"]

@@ -11,7 +11,7 @@ class_name AIMaster
 
 #units
 const NUCLEON = preload("res://Controllabes/Units/Nucleon/Nucleon.tscn")
-const SUICIDE_BALL = preload("res://Controllabes/Units/Suicide Ball/SuicideBall.tscn")
+const DYNA_SPHERE = preload("res://Controllabes/Units/DynaSphere/DynaSphere.tscn")
 
 const AI_SLAVE = preload("res://AI/AISlave.tscn")
 
@@ -45,7 +45,7 @@ func spawnEnemy() -> void:
 	var ins
 	match rand:
 		0: ins = NUCLEON.instantiate()
-		1: ins = SUICIDE_BALL.instantiate()
+		1: ins = DYNA_SPHERE.instantiate()
 	 
 	GeneralVars.getUnitsList().add_child(ins)
 	ins.global_position = enemy_spawn_point.global_position + Vector3(randf_range(-5, 5), 0, randf_range(-5, 5))

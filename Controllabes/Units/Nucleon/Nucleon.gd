@@ -7,7 +7,9 @@ extends "res://Controllabes/Units/Unit.gd"
 
 @onready var default_turret_rot_pos: Node3D = $DefaultTurretPos
 
-const SMALL_PROJECTILE = preload("res://Controllabes/Units/SmallProjectile.tscn")
+@onready var shoot: AnimationPlayer = $Shoot
+
+const SMALL_ENERGY_PROJECTILE = preload("res://Controllabes/Units/SmallEnergyProjectile.tscn")
 
 var on_cooldown: bool
 
@@ -34,7 +36,8 @@ func _physics_process(delta: float) -> void:
 func attack(_unit: CharacterBody3D) -> void:
 	if !on_cooldown:
 		on_cooldown = true
-		var ins = SMALL_PROJECTILE.instantiate()
+		shoot.play("Shoot")
+		var ins = SMALL_ENERGY_PROJECTILE.instantiate()
 		get_tree().root.add_child(ins)
 		ins.global_position = bullet_spawn_pos.global_position
 		
