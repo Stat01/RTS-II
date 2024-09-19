@@ -19,6 +19,8 @@ extends Control
 @onready var check_button_edge_pan: CheckButton = $OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/CheckButtonEdgePan
 @onready var slider_edge_pan_speed: HSlider = $OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/SliderEdgePanSpeed
 @onready var slider_pan_speed: HSlider = $OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/SliderPanSpeed
+@onready var option_button_shadows: OptionButton = $OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2/OptionButtonShadows
+@onready var slider_shadow_distance: HSlider = $OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2/SliderShadowDistance
 
 
 const MAIN_MENU: NodePath = "res://MainMenu.tscn"
@@ -134,7 +136,15 @@ func initializeOptions() -> void:
 	check_button_edge_pan.button_pressed = Settings.edge_pan
 	slider_edge_pan_speed.value = Settings.camera_edge_pan_speed
 	slider_pan_speed.value = Settings.camera_pan_speed
+	option_button_shadows.selected = Settings.shadow_quality
+	slider_shadow_distance.value = Settings.shadow_distance
 
 func setEdgePan(i: bool) -> void:	Settings.edge_pan = i
 func setEdgePanSpeed(i: float) -> void:	Settings.camera_edge_pan_speed = i
 func setPanSpeed(i: float) -> void:	Settings.camera_pan_speed = i
+func setShadowQuality(i: int) -> void:	
+	Settings.shadow_quality = i
+	Settings.shadow_quality_changed.emit(i)
+func setShadowDistance(i: float) -> void:
+	Settings.shadow_distance = i
+	Settings.shadow_distance_changed.emit(i)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://dgeiuigxw0r0a"]
+[gd_scene load_steps=21 format=3 uid="uid://dgeiuigxw0r0a"]
 
 [ext_resource type="PackedScene" uid="uid://cdyimnapkawjs" path="res://CameraController.tscn" id="1_347s1"]
 [ext_resource type="Script" path="res://Main.gd" id="1_x2gny"]
 [ext_resource type="Script" path="res://nav_mesh.gd" id="2_1f3u2"]
 [ext_resource type="Environment" uid="uid://ovq4okk8jxm" path="res://enviroment.tres" id="2_7cbbq"]
 [ext_resource type="CameraAttributesPractical" uid="uid://bm5jhn0wvv8gc" path="res://CameraSettings.tres" id="3_bvquv"]
+[ext_resource type="Script" path="res://WorldEnvironmentController.gd" id="6_sfx84"]
 [ext_resource type="PackedScene" uid="uid://bsrpn5c6sv2ef" path="res://Maps/Dev_0/Dev_0.tscn" id="7_8iif0"]
 [ext_resource type="PackedScene" uid="uid://rxe3e51pm3mu" path="res://Controllabes/Structures/Omnite/Omnite.tscn" id="7_a07hw"]
 [ext_resource type="PackedScene" uid="uid://cy7gmooct6gol" path="res://Controllabes/Structures/MCU/MCU.tscn" id="8_gm1f2"]
@@ -38,6 +39,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.929, 6, 26.476)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("2_7cbbq")
 camera_attributes = ExtResource("3_bvquv")
+script = ExtResource("6_sfx84")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.708497, 0.339142, -0.618882, 0.354, 0.587855, 0.7274, 0.610505, -0.734445, 0.296437, 0, 28.3496, 0)

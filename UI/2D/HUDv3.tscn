@@ -587,7 +587,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="OptionsMenu" type="HBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -637,11 +636,15 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Section" type="Label" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer"]
+[node name="ControlSection" type="Label" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("27_exwat")
-text = "Mouse Settings"
+text = "Control Settings"
 horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("27_exwat")
 
 [node name="CheckButtonEdgePan" type="CheckButton" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -649,10 +652,6 @@ theme = ExtResource("27_exwat")
 button_pressed = true
 text = "Camera edge pan"
 alignment = 2
-
-[node name="HSeparator" type="HSeparator" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("27_exwat")
 
 [node name="CameraEdgePanSpeedLabel" type="Label" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -668,10 +667,6 @@ value = 0.5
 tick_count = 11
 ticks_on_borders = true
 
-[node name="HSeparator2" type="HSeparator" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("27_exwat")
-
 [node name="CameraPanSpeedLabel" type="Label" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("27_exwat")
@@ -686,6 +681,10 @@ value = 0.5
 tick_count = 11
 ticks_on_borders = true
 
+[node name="HSeparator2" type="HSeparator" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("27_exwat")
+
 [node name="Container" type="Container" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -695,11 +694,52 @@ size_flags_stretch_ratio = 0.6
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CheckButton2" type="CheckButton" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2"]
+[node name="GraphicsSection" type="Label" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme = ExtResource("27_exwat")
-text = "Mystery button"
-alignment = 2
+text = "Graphics"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("27_exwat")
+
+[node name="ShadowsSection" type="Label" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Shadows"
+
+[node name="ShadowQualityLabel" type="Label" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Shadow Quality"
+
+[node name="OptionButtonShadows" type="OptionButton" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+item_count = 4
+selected = 2
+popup/item_0/text = "Off"
+popup/item_0/id = 0
+popup/item_1/text = "Low"
+popup/item_1/id = 1
+popup/item_2/text = "Medium"
+popup/item_2/id = 2
+popup/item_3/text = "High"
+popup/item_3/id = 3
+
+[node name="ShadowDistanceLabel" type="Label" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Shadow Distance"
+
+[node name="SliderShadowDistance" type="HSlider" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("27_exwat")
+max_value = 200.0
+value = 100.0
+
+[node name="HSeparator2" type="HSeparator" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("27_exwat")
 
 [node name="Container3" type="Container" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer"]
 layout_mode = 2
@@ -722,3 +762,5 @@ size_flags_horizontal = 3
 [connection signal="toggled" from="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/CheckButtonEdgePan" to="." method="setEdgePan"]
 [connection signal="value_changed" from="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/SliderEdgePanSpeed" to="." method="setEdgePanSpeed"]
 [connection signal="value_changed" from="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/SliderPanSpeed" to="." method="setPanSpeed"]
+[connection signal="item_selected" from="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2/OptionButtonShadows" to="." method="setShadowQuality"]
+[connection signal="value_changed" from="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2/SliderShadowDistance" to="." method="setShadowDistance"]
