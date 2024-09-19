@@ -65,5 +65,5 @@ func clearDetectedTargets() -> void: detected_targets.clear()
 
 func tree_exiting() -> void:
 	print(self)
-	if PlayerVars.getBuildings().has(getName()):
-		PlayerVars.getBuildings().erase(getName())
+	if GeneralVars.getTeamVarList(getTeam()).getBuildings().has(getName()):
+		GeneralVars.getTeamVarList(getTeam()).getBuildings().erase(getName())

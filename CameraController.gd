@@ -23,6 +23,8 @@ var panning: bool
 var panning_key_amount: int
 var key_pan_direction: Vector2
 
+@export var team: int
+
 @export var min_zoom: float
 @export var max_zoom: float
 
@@ -109,7 +111,7 @@ func _physics_process(delta: float) -> void:
 						select_cursor.visible = true
 					2:	#Enemy
 						if collider.visible:
-							if !PlayerVars.getSelectedUnits().is_empty():
+							if !GeneralVars.getTeamVarList(getTeam()).getSelectedUnits().is_empty():
 								GeneralVars.current_cursor_type = 2
 								attack_cursor.visible = true
 							else:
@@ -128,17 +130,6 @@ func _physics_process(delta: float) -> void:
 			glitch_effect.material.set("shader_parameter/shake_rate", shake_strength * 1.0)
 			glitch_effect.material.set("shader_parameter/shake_color", shake_strength * 0.01)
 #endregion
-		
-		#AI debug
-		if Input.is_action_just_pressed("debugbutton"):
-			get_tree().root.get_node("Main").get_node("AI Slave").queue_free()
-			#var ins = AI_SLAVE.instantiate()
-			#var units: Array[CharacterBody3D]
-			#for unit: Controllable in GeneralVars.getUnitsList().get_children():
-			#	if unit.getName() == "Rasmus":
-			#		units.append(unit)
-			#ins.initialize(0, units, false, ai_master, GeneralVars.getStructureList().get_children()[0], )
-			#get_tree().root.add_child(ins)
 
 func minimapMoveCamera(pos: Vector2) -> void:
 	var real_mouse_pos := pos * GeneralVars.getMapSize() * 2
@@ -224,9 +215,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		#Deselect button
 		if event.is_action_pressed("deselect"):
-			for unit: Controllable in PlayerVars.getSelectedUnits():
+			for unit: Controllable in GeneralVars.getTeamVarList(getTeam()).getSelectedUnits():
 				unit.is_selected = false
-			PlayerVars.clearSelectedUnits()
+			GeneralVars.getTeamVarList(getTeam()).clearSelectedUnits()
 #endregion
 	
 #region Draw box
@@ -253,11 +244,39 @@ func _unhandled_input(event: InputEvent) -> void:
 			box.visible = false
 #endregion
 	
-	#Delete Controllable, maybe debug?
+#region All army hotkey
+		elif event.is_action_pressed("select_all_army"):
+			for unit: Controllable in GeneralVars.getTeamVarList(getTeam()).getAllUnits():
+				if !unit.getIsBuilding():
+					unit.setIsSelected(true)
+					GeneralVars.getTeamVarList(getTeam()).addToSelectedUnits(unit)
+#endregion
+	
+#region Debug
+		#Delete Controllable, debug
 		if event.is_action_pressed("delete"):
-			for unit: Controllable in PlayerVars.getSelectedUnits():
+			for unit: Controllable in GeneralVars.getTeamVarList(getTeam()).getSelectedUnits():
 				unit.die()
-
+		
+		elif event.is_action("debugbutton"):
+			var result = getWorldClickPosition()
+			if "position" in result:
+				var spawn_pos: Vector3 = result["position"]
+				var ins = load("res://Controllabes/Units/Nucleon/Nucleon.tscn").instantiate()
+				GeneralVars.getUnitsList().add_child(ins)
+				ins.global_position = spawn_pos
+		
+		elif event.is_action_pressed("select_all_enemy_army"):
+			var amount: int
+			for unit in GeneralVars.getUnitsList().get_children():
+				if unit is Controllable:
+					amount += 1
+					if !unit.getIsBuilding() and unit.getTeam() == 2:
+						unit.setIsSelected(true)
+						GeneralVars.getTeamVarList(getTeam()).addToSelectedUnits(unit)
+			print(amount)
+#endregion
+	
 func calculateSelectionBoxPos() -> void:
 	var pos_x: float = (box_pos_1.x + box_pos_2.x) / 2
 	var pos_z: float = (box_pos_1.z + box_pos_2.z) / 2
@@ -290,17 +309,17 @@ func getSelection(shift_pressed: bool) -> void:
 		var collider = result["collider"]
 		
 		if !shift_pressed:
-			for unit in PlayerVars.getSelectedUnits():
+			for unit in GeneralVars.getTeamVarList(getTeam()).getSelectedUnits():
 				unit.setIsSelected(false)
-			PlayerVars.clearSelectedUnits()
+			GeneralVars.getTeamVarList(getTeam()).clearSelectedUnits()
 		
 		if collider != null and collider is CharacterBody3D and collider.visible:
 			var unit: CharacterBody3D = collider
 			if shift_pressed and unit.getIsSelected() == true:
-				PlayerVars.removeFromSelectedUnits(unit)
+				GeneralVars.getTeamVarList(getTeam()).removeFromSelectedUnits(unit)
 				unit.setIsSelected(false)
 			else:
-				PlayerVars.addToSelectedUnits(unit)
+				GeneralVars.getTeamVarList(getTeam()).addToSelectedUnits(unit)
 				unit.setIsSelected(true)
 				# and (collider.is_in_group("Team1") or collider.is_in_group("Team0"))
 
@@ -314,34 +333,34 @@ func endSelectionBox() -> void:
 	if "position" in result:
 		pos_2 = result["position"]
 		
-		for unit in PlayerVars.getAllUnits():
+		for unit in GeneralVars.getTeamVarList(getTeam()).getAllUnits():
 			if !unit.is_building:
 				#start top left
 				if pos_1.x < pos_2.x and pos_1.z < pos_2.z:
 					if unit.global_position.x > pos_1.x and unit.global_position.x < pos_2.x:
 						if unit.global_position.z > pos_1.z and unit.global_position.z < pos_2.z:
-							PlayerVars.addToSelectedUnits(unit)
+							GeneralVars.getTeamVarList(getTeam()).addToSelectedUnits(unit)
 							unit.setIsSelected(true)
 				
 				#start bottom left
 				if pos_1.x < pos_2.x and pos_1.z > pos_2.z:
 					if unit.global_position.x > pos_1.x and unit.global_position.x < pos_2.x:
 						if unit.global_position.z < pos_1.z and unit.global_position.z > pos_2.z:
-							PlayerVars.addToSelectedUnits(unit)
+							GeneralVars.getTeamVarList(getTeam()).addToSelectedUnits(unit)
 							unit.setIsSelected(true)
 				
 				#start bottom right
 				if pos_1.x > pos_2.x and pos_1.z > pos_2.z:
 					if unit.global_position.x < pos_1.x and unit.global_position.x > pos_2.x:
 						if unit.global_position.z < pos_1.z and unit.global_position.z > pos_2.z:
-							PlayerVars.addToSelectedUnits(unit)
+							GeneralVars.getTeamVarList(getTeam()).addToSelectedUnits(unit)
 							unit.setIsSelected(true)
 				
 				#start top right
 				if pos_1.x > pos_2.x and pos_1.z < pos_2.z:
 					if unit.global_position.x < pos_1.x and unit.global_position.x > pos_2.x:
 						if unit.global_position.z > pos_1.z and unit.global_position.z < pos_2.z:
-							PlayerVars.addToSelectedUnits(unit)
+							GeneralVars.getTeamVarList(getTeam()).addToSelectedUnits(unit)
 							unit.setIsSelected(true)
 
 func issueCommand() -> void:
@@ -350,7 +369,7 @@ func issueCommand() -> void:
 		var collider = result["collider"]
 		var collision_pos = result["position"]
 		
-		for unit in PlayerVars.getSelectedUnits():
+		for unit in GeneralVars.getTeamVarList(getTeam()).getSelectedUnits():
 #region Command Unit
 			if !unit.getIsBuilding():
 				#attack move check
@@ -415,3 +434,5 @@ func commandMoveToUnit(unit: Controllable, collider: Controllable, collision_pos
 	unit.setSavedTargetPosition(collision_pos)
 	unit.getMovementPointer().movePointer(collision_pos)
 	unit.setState(1)
+
+func getTeam() -> int: return team

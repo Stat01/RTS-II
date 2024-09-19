@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dgeiuigxw0r0a"]
+[gd_scene load_steps=14 format=3 uid="uid://dgeiuigxw0r0a"]
 
 [ext_resource type="PackedScene" uid="uid://cdyimnapkawjs" path="res://CameraController.tscn" id="1_347s1"]
 [ext_resource type="Script" path="res://Main.gd" id="1_x2gny"]
@@ -8,8 +8,6 @@
 [ext_resource type="Script" path="res://WorldEnvironmentController.gd" id="6_sfx84"]
 [ext_resource type="PackedScene" uid="uid://bsrpn5c6sv2ef" path="res://Maps/Dev_0/Dev_0.tscn" id="7_8iif0"]
 [ext_resource type="PackedScene" uid="uid://rxe3e51pm3mu" path="res://Controllabes/Structures/Omnite/Omnite.tscn" id="7_a07hw"]
-[ext_resource type="PackedScene" uid="uid://cy7gmooct6gol" path="res://Controllabes/Structures/MCU/MCU.tscn" id="8_gm1f2"]
-[ext_resource type="PackedScene" uid="uid://bxqhms4lcnmbk" path="res://Controllabes/Structures/Central Cortex/CentralCortex.tscn" id="10_tn1a1"]
 [ext_resource type="PackedScene" uid="uid://dynmqvcimknc3" path="res://AI/AIMaster.tscn" id="12_86qhq"]
 [ext_resource type="PackedScene" uid="uid://bive3wv7ome64" path="res://UI/2D/HUDv3.tscn" id="13_cncwy"]
 [ext_resource type="PackedScene" uid="uid://ck2ij3h4tglip" path="res://BuildingHandler.tscn" id="14_kltx4"]
@@ -27,11 +25,9 @@ edge_max_error = 1.0
 script = ExtResource("1_x2gny")
 
 [node name="Building Handler" parent="." instance=ExtResource("14_kltx4")]
-team = 1
 
 [node name="CameraController" parent="." instance=ExtResource("1_347s1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -163.929, 6, 224.476)
-team = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.929, 6, 26.476)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("2_7cbbq")
@@ -52,17 +48,11 @@ script = ExtResource("2_1f3u2")
 
 [node name="Structures" type="Node" parent="."]
 
-[node name="MCU" parent="Structures" instance=ExtResource("8_gm1f2")]
-transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -30, 0, 18)
-
-[node name="Central Cortex" parent="Structures" instance=ExtResource("10_tn1a1")]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -164, 0, 221)
-
 [node name="Units" type="Node" parent="."]
 
 [node name="VisionNode2" parent="Units" instance=ExtResource("15_3qlug")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -104, 0, 125)
-radius = 99999.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54, 0, 30)
+radius = 50.0
 
 [node name="Doodads" type="Node" parent="."]
 
@@ -159,7 +149,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, 60)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("13_cncwy")]
-team = 1
 
 [node name="PathingTimer" type="Timer" parent="."]
 wait_time = 0.1

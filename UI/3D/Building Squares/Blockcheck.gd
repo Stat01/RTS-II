@@ -1,6 +1,8 @@
 extends Area3D
 
-@export var check_for_omnite_patches: bool
+var team: int
+
+var check_for_omnite_patches: bool
 
 var terrain_check: Area3D
 
@@ -12,16 +14,16 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if !check_for_omnite_patches:
 		if get_overlapping_bodies().is_empty():
-			PlayerVars.setBuildingBlocked(false)
+			GeneralVars.getTeamVarList(getTeam()).setBuildingBlocked(false)
 		else:
-			PlayerVars.setBuildingBlocked(true)
+			GeneralVars.getTeamVarList(getTeam()).setBuildingBlocked(true)
 		
 		if !terrain_check.has_overlapping_bodies():
-			PlayerVars.setBuildingBlocked(true)
+			GeneralVars.getTeamVarList(getTeam()).setBuildingBlocked(true)
 	
 	else:
 		should_block = false
-		PlayerVars.setBuildingBlocked(true)
+		GeneralVars.getTeamVarList(getTeam()).setBuildingBlocked(true)
 		if !get_overlapping_bodies().is_empty():
 			for i in get_overlapping_bodies():
 				if !i.is_in_group("Omnite"):
@@ -30,4 +32,6 @@ func _physics_process(_delta: float) -> void:
 			should_block = true
 		
 		if !should_block:
-			PlayerVars.setBuildingBlocked(false)
+			GeneralVars.getTeamVarList(getTeam()).setBuildingBlocked(false)
+
+func getTeam() -> int: return team

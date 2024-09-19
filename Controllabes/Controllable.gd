@@ -79,10 +79,10 @@ func _ready() -> void:
 	
 	match team:
 		0:	add_to_group("Team0")
-		1:	
-			add_to_group("Team1")
-			PlayerVars.addToAllUnits(self)
+		1:	add_to_group("Team1")
 		2:	add_to_group("Team2")
+	
+	GeneralVars.getTeamVarList(getTeam()).addToAllUnits(self)
 	
 	match size:
 		0:	selection_circle = SELECTION_SMALL.instantiate()
@@ -140,7 +140,7 @@ func _ready() -> void:
 			minimap_blip.modulate = Color.CRIMSON
 	
 	#Energy usage
-	PlayerVars.changeCurrentEnergyUsage(energy_usage)
+	GeneralVars.getTeamVarList(getTeam()).changeCurrentEnergyUsage(energy_usage)
 
 func _process(_delta: float) -> void:
 	if !GeneralVars.getPaused():
@@ -219,9 +219,9 @@ func reduceHealth(damage_: int, damage_type_: int, _shooter_: CharacterBody3D) -
 	return false
 
 func die() -> void:
-	PlayerVars.removeFromAllUnits(self)
-	PlayerVars.removeFromSelectedUnits(self)
-	PlayerVars.changeCurrentEnergyUsage(-energy_usage)
+	GeneralVars.getTeamVarList(getTeam()).removeFromAllUnits(self)
+	GeneralVars.getTeamVarList(getTeam()).removeFromSelectedUnits(self)
+	GeneralVars.getTeamVarList(getTeam()).changeCurrentEnergyUsage(-energy_usage)
 	queue_free()
 
 func getVisibleBy() -> Array: return visible_by

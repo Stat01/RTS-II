@@ -203,9 +203,9 @@ func safeMoveUnit(safe_velocity: Vector3) -> void:
 		smoothTurn(Vector3(global_vel.x, global_position.y, global_vel.z), self, rotation_speed)
 		#velocity = Vector3(safe_velocity.normalized().x, 0, safe_velocity.normalized().z) * move_speed
 		
-		#slow down if no power
+		#slow down if no power and player team
 		var actual_move_speed := move_speed
-		if PlayerVars.getCurrentEnergyUsage() > PlayerVars.getMaxEnergyUsage():
+		if GeneralVars.getTeamVarList(getTeam()).getCurrentEnergyUsage() > GeneralVars.getTeamVarList(getTeam()).getMaxEnergyUsage() and getTeam() == 1:
 			actual_move_speed *= 0.5
 		
 		velocity = global_position - to_global(Vector3.FORWARD * -actual_move_speed)

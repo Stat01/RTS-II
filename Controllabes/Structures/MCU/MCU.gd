@@ -10,8 +10,8 @@ func _ready() -> void:
 	animation_player.play("Base")
 	animation_player_2.play("Detail")
 	animation_player_3.play("Plate")
-	PlayerVars.changeMaxEnergyUsage(150)
+	GeneralVars.getTeamVarList(getTeam()).changeMaxEnergyUsage(150)
 
 func die() -> void:
-	PlayerVars.changeMaxEnergyUsage(-150)
+	GeneralVars.getTeamVarList(getTeam()).changeMaxEnergyUsage(-150)
 	super.die()

@@ -12,8 +12,8 @@ func _ready() -> void:
 	animation_player_3.play("Plate/Plate")
 	animation_player_4.play("Base/Base")
 	
-	PlayerVars.changeMaxOmnite(500)
+	GeneralVars.getTeamVarList(getTeam()).changeMaxOmnite(500)
 
 func die() -> void:
 	super.die()
-	PlayerVars.changeMaxOmnite(-500)
+	GeneralVars.getTeamVarList(getTeam()).changeMaxOmnite(-500)

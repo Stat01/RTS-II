@@ -1051,7 +1051,7 @@ _data = {
 
 [node name="LT-13 Striker" type="CharacterBody3D"]
 collision_layer = 8
-collision_mask = 13
+collision_mask = 5
 script = ExtResource("1_o2ngc")
 move_speed = 4.0
 rotation_speed = 0.1

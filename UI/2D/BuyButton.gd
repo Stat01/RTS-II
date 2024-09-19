@@ -55,7 +55,7 @@ func _process(_delta: float) -> void:
 		progress_bar.value = 0
 	
 	for i in unit_requirements:
-		if !PlayerVars.getBuildings().has(i):
+		if !GeneralVars.getTeamVarList(getTeam()).getBuildings().has(i):
 			if print_locked:
 				print("should lock")
 			is_locked = true
@@ -77,31 +77,31 @@ func _on_gui_input(event: InputEvent) -> void:
 		if is_structure_button:
 			if event is InputEventMouseButton and event.is_action_pressed("left_click"):
 				#start building
-				if !currently_building and PlayerVars.getOmnite() >= ins.getPrice() and amount_in_queue == 0:
-					PlayerVars.changeOmnite(-ins.getPrice())
+				if !currently_building and GeneralVars.getTeamVarList(getTeam()).getOmnite() >= ins.getPrice() and amount_in_queue == 0:
+					GeneralVars.getTeamVarList(getTeam()).changeOmnite(-ins.getPrice())
 					currently_building = true
 					amount_in_queue += 1
 					timer.start(build_time)
 				
 				#place building
 				if building_complete:
-					PlayerVars.setBuildingMode(true)
-					PlayerVars.setActiveBuilding(unit)
+					GeneralVars.getTeamVarList(getTeam()).setBuildingMode(true)
+					GeneralVars.getTeamVarList(getTeam()).setActiveBuilding(unit)
 			elif event is InputEventMouseButton and event.is_action_pressed("right_click"):
 				refundBuilding(unit_name)
 				timer.stop()
 		else:
 			if event is InputEventMouseButton and event.is_action_pressed("left_click"):
-				if PlayerVars.getOmnite() >= ins.getPrice():
+				if GeneralVars.getTeamVarList(getTeam()).getOmnite() >= ins.getPrice():
 					currently_building = true
-					PlayerVars.changeOmnite(-ins.getPrice())
+					GeneralVars.getTeamVarList(getTeam()).changeOmnite(-ins.getPrice())
 					amount_in_queue += 1
 					if amount_in_queue == 1:
 						timer.start(build_time)
 			
 			elif event is InputEventMouseButton and event.is_action_pressed("right_click"):
 				if currently_building:
-					PlayerVars.changeOmnite(ins.getPrice())
+					GeneralVars.getTeamVarList(getTeam()).changeOmnite(ins.getPrice())
 					amount_in_queue -= 1
 					if amount_in_queue <= 0:
 						currently_building = false
@@ -114,19 +114,19 @@ func _on_timer_timeout() -> void:
 		match production_building:
 			
 			1:	#Vehicle Depot
-				if PlayerVars.hasVehicleDepotBuilding():
+				if GeneralVars.getTeamVarList(getTeam()).hasVehicleDepotBuilding():
 					GeneralVars.getUnitsList().add_child(ins1)
-					var pos : Vector3 = PlayerVars.getVehicleDepotBuilding().getSpawnNode().global_position
+					var pos : Vector3 = GeneralVars.getTeamVarList(getTeam()).getVehicleDepotBuilding().getSpawnNode().global_position
 					ins1.global_position = Vector3(pos.x + randf_range(-1, 1), pos.y, pos.z + randf_range(-1, 1))
 					await get_tree().create_timer(0.05).timeout
-					commandMoveUnit(ins1, PlayerVars.getVehicleDepotBuilding().getWayPoint())
+					commandMoveUnit(ins1, GeneralVars.getTeamVarList(getTeam()).getVehicleDepotBuilding().getWayPoint())
 			2:	#Factory
-				if PlayerVars.hasFactoryBuilding():
+				if GeneralVars.getTeamVarList(getTeam()).hasFactoryBuilding():
 					GeneralVars.getUnitsList().add_child(ins1)
-					var pos : Vector3 = PlayerVars.getFactoryBuilding().getSpawnNode().global_position
+					var pos : Vector3 = GeneralVars.getTeamVarList(getTeam()).getFactoryBuilding().getSpawnNode().global_position
 					ins1.global_position = Vector3(pos.x + randf_range(-1.5, 1.5), pos.y, pos.z + randf_range(-1.5, 1.5))
 					await get_tree().create_timer(0.05).timeout
-					commandMoveUnit(ins1, PlayerVars.getFactoryBuilding().getWayPoint())
+					commandMoveUnit(ins1, GeneralVars.getTeamVarList(getTeam()).getFactoryBuilding().getWayPoint())
 		
 		amount_in_queue -= 1
 		if amount_in_queue > 0:
@@ -144,7 +144,7 @@ func commandMoveUnit(unit_: Controllable, collision_pos: Vector3) -> void:
 func refundBuilding(unit_name_: String) -> void:
 	if is_structure_button and unit_name_ == unit_name:
 		if building_complete or currently_building:
-			PlayerVars.changeOmnite(ins.getPrice())
+			GeneralVars.getTeamVarList(getTeam()).changeOmnite(ins.getPrice())
 			buildingPlaced(unit_name_)
 
 func buildingPlaced(unit_name_: String) -> void:
@@ -153,3 +153,5 @@ func buildingPlaced(unit_name_: String) -> void:
 			building_complete = false
 			currently_building = false
 			amount_in_queue = 0
+
+func getTeam() -> int: return get_node("../../../../../../../../../").getTeam()

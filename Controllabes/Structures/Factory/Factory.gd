@@ -5,9 +5,9 @@ extends "res://Controllabes/Structures/StructureNoWeapon.gd"
 
 func _ready() -> void:
 	super._ready()
-	PlayerVars.setFactoryBuilding(self)
+	GeneralVars.getTeamVarList(getTeam()).setFactoryBuilding(self)
 	animation_player.play("Rise")
 
 func die() -> void:
 	super.die()
-	PlayerVars.setFactoryBuilding(null)
+	GeneralVars.getTeamVarList(getTeam()).setFactoryBuilding(null)

@@ -21,9 +21,9 @@ func _ready() -> void:
 
 func refreshMinimap() -> void:
 	sub_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
-	if PlayerVars.hasRadar():
+	if GeneralVars.getTeamVarList(getTeam()).hasRadar():
 		#Minimap need 100 Energy to function
-		if PlayerVars.getEnergyRemaining() <= 100:
+		if GeneralVars.getTeamVarList(getTeam()).getEnergyRemaining() <= 100:
 			minimap_noise.visible = true
 			minimap_noise.get("texture").get("noise").set("seed", randi_range(0,1024))
 			camera.environment.adjustment_enabled = false
@@ -37,7 +37,9 @@ func refreshMinimap() -> void:
 		camera.environment.adjustment_enabled = false
 
 func _gui_input(event: InputEvent) -> void:
-	if PlayerVars.hasRadar() and PlayerVars.getEnergyRemaining() > 100 and event is InputEventMouseButton and event.button_index == 1:
+	if GeneralVars.getTeamVarList(getTeam()).hasRadar() and GeneralVars.getTeamVarList(getTeam()).getEnergyRemaining() > 100 and event is InputEventMouseButton and event.button_index == 1:
 		var mouse_pos := Vector2(event.position.x / size.x, event.position.y / size.y)
 		SignalManager.minimap_camera_position_changed.emit(mouse_pos)
 		print(mouse_pos)
+#												:)
+func getTeam() -> int: return get_node("../../../../../../../").getTeam()

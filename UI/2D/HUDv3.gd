@@ -27,6 +27,8 @@ const MAIN_MENU: NodePath = "res://MainMenu.tscn"
 
 var omnite: float
 
+@export var team: int
+
 func _ready() -> void:
 	initializeOptions()
 
@@ -35,8 +37,8 @@ func _process(_delta: float) -> void:
 	fps_counter.text = str(Engine.get_frames_per_second()) + "fps"
 	
 	#selection ui
-	if !PlayerVars.getSelectedUnits().is_empty():
-		var to_show = PlayerVars.getSelectedUnits()[0]
+	if !GeneralVars.getTeamVarList(getTeam()).getSelectedUnits().is_empty():
+		var to_show = GeneralVars.getTeamVarList(getTeam()).getSelectedUnits()[0]
 		selection_ui.show()
 		updateSelectionUI(to_show)
 		
@@ -44,20 +46,20 @@ func _process(_delta: float) -> void:
 		selection_ui.hide()
 	
 	#Omnite indicator
-	var omnite_scale: float = (PlayerVars.getOmnite() as float / PlayerVars.getMaxOmnite() as float)
+	var omnite_scale: float = (GeneralVars.getTeamVarList(getTeam()).getOmnite() as float / GeneralVars.getTeamVarList(getTeam()).getMaxOmnite() as float)
 	
 	omnite = lerp(omnite, omnite_scale, 0.01)
 	omnite_indicator.material.set("shader_parameter/fV", omnite)
-	omnite_counter.text = str(PlayerVars.getOmnite()) + " / " + str(PlayerVars.getMaxOmnite())
+	omnite_counter.text = str(GeneralVars.getTeamVarList(getTeam()).getOmnite()) + " / " + str(GeneralVars.getTeamVarList(getTeam()).getMaxOmnite())
 	
 	#Power bar
-	power_bar.value = PlayerVars.getCurrentEnergyUsage()
-	power_bar.max_value = PlayerVars.getMaxEnergyUsage()
+	power_bar.value = GeneralVars.getTeamVarList(getTeam()).getCurrentEnergyUsage()
+	power_bar.max_value = GeneralVars.getTeamVarList(getTeam()).getMaxEnergyUsage()
 	
-	if PlayerVars.getEnergyRemaining() < 0:
+	if GeneralVars.getTeamVarList(getTeam()).getEnergyRemaining() < 0:
 		power_bar.get("theme_override_styles/background").set("bg_color", Color.DARK_RED)
 		power_bar.get("theme_override_styles/fill").set("bg_color", Color.RED)
-	elif PlayerVars.getEnergyRemaining() <= 100:
+	elif GeneralVars.getTeamVarList(getTeam()).getEnergyRemaining() <= 100:
 		power_bar.get("theme_override_styles/background").set("bg_color", Color.ORANGE)
 		power_bar.get("theme_override_styles/fill").set("bg_color", Color.YELLOW)
 	else:
@@ -148,3 +150,5 @@ func setShadowQuality(i: int) -> void:
 func setShadowDistance(i: float) -> void:
 	Settings.shadow_distance = i
 	Settings.shadow_distance_changed.emit(i)
+
+func getTeam() -> int: return team

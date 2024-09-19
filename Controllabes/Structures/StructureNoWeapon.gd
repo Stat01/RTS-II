@@ -11,8 +11,8 @@ func _ready() -> void:
 		spawn_node = get_node("SpawnNode")
 		waypoint = spawn_node.global_position
 	
-	if !PlayerVars.getBuildings().has(getName()):
-		PlayerVars.getBuildings().append(getName())
+	if !GeneralVars.getTeamVarList(getTeam()).getBuildings().has(getName()):
+		GeneralVars.getTeamVarList(getTeam()).getBuildings().append(getName())
 	
 	connect("tree_exiting", tree_exiting)
 
@@ -26,5 +26,5 @@ func isProductionBuilding() -> bool: return production_building
 
 func tree_exiting() -> void:
 	print(self)
-	if PlayerVars.getBuildings().has(getName()):
-		PlayerVars.getBuildings().erase(getName())
+	if GeneralVars.getTeamVarList(getTeam()).getBuildings().has(getName()):
+		GeneralVars.getTeamVarList(getTeam()).getBuildings().erase(getName())

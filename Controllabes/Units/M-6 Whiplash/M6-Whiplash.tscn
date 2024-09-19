@@ -652,7 +652,7 @@ _data = {
 
 [node name="M-6 Whiplash" type="CharacterBody3D"]
 collision_layer = 8
-collision_mask = 13
+collision_mask = 5
 script = ExtResource("1_yb034")
 move_speed = 2.0
 rotation_speed = 0.02

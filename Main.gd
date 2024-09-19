@@ -4,6 +4,7 @@ extends Node
 @onready var structures_list: Node = $Structures
 @onready var units_list: Node = $Units
 
+
 func _ready() -> void:
 	GeneralVars.nav_mesh = nav_mesh
 	SignalManager.rebake_nav_mesh.connect(reBake)

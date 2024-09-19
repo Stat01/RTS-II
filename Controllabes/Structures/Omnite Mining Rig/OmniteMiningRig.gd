@@ -21,7 +21,7 @@ func _ready() -> void:
 func _on_timer_timeout() -> void:
 	omnite_yield = omnite_area.get_overlapping_bodies().size()
 	
-	PlayerVars.changeOmnite(omnite_yield)
+	GeneralVars.getTeamVarList(getTeam()).changeOmnite(omnite_yield)
 	
 	for i in omnite_area.get_overlapping_bodies():
 		i.amount -= 1

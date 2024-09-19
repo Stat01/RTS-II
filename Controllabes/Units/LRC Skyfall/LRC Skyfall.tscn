@@ -686,7 +686,7 @@ _data = {
 
 [node name="LRC Skyfall" type="CharacterBody3D"]
 collision_layer = 8
-collision_mask = 13
+collision_mask = 5
 script = ExtResource("1_c6i2b")
 move_speed = 1.5
 rotation_speed = 0.01

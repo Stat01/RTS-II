@@ -20,18 +20,20 @@ var once1: bool
 var nono_clickerino: bool
 var mouse_world_pos
 
+@export var team: int
+
 @onready var camera_controller: Node3D = $"../CameraController"
 
 func _process(_delta: float) -> void:
-	if PlayerVars.getBuildingMode():
+	if GeneralVars.getTeamVarList(getTeam()).getBuildingMode():
 		
 		if nono_clickerino:
-			ins = PlayerVars.getActiveBuilding().instantiate()
+			ins = GeneralVars.getTeamVarList(getTeam()).getActiveBuilding().instantiate()
 			
 			if !once:
 				once = true
 				active_building_square = building_squares[ins.getSize()].instantiate()
-				print(active_building_square)
+				active_building_square.get_child(0).get_child(0).team = getTeam()
 				
 				if ins.getName() == "Mining Rig":
 					active_building_square.get_child(0).get_child(0).check_for_omnite_patches = true
@@ -50,14 +52,14 @@ func _process(_delta: float) -> void:
 				active_building_square.global_position.z = snapped(active_building_square.global_position.z, 1)
 				#active_building_square.global_rotation_degrees.y = 45
 				
-				if PlayerVars.getBuildingBlocked():
+				if GeneralVars.getTeamVarList(getTeam()).getBuildingBlocked():
 					active_building_square.get_child(0).set("surface_material_override/0", MATERIAL_BLOCK)
 				else:
 					active_building_square.get_child(0).set("surface_material_override/0", MATERIAL_PASS)
 				
 				#Placing Building
-				if Input.is_action_just_pressed("left_click") and !PlayerVars.getBuildingBlocked():
-					var ins1: Controllable = PlayerVars.getActiveBuilding().instantiate()
+				if Input.is_action_just_pressed("left_click") and !GeneralVars.getTeamVarList(getTeam()).getBuildingBlocked():
+					var ins1: Controllable = GeneralVars.getTeamVarList(getTeam()).getActiveBuilding().instantiate()
 					get_tree().root.get_node("Main").get_node("Structures").add_child(ins1)
 					ins1.global_position = mouse_world_pos
 					ins1.global_position.x = snapped(ins1.global_position.x, 1)
@@ -72,9 +74,9 @@ func _process(_delta: float) -> void:
 			nono_clickerino = true
 
 func DisableBuildingMode(refund_building: bool) -> void:
-	var ins1 = PlayerVars.getActiveBuilding().instantiate()
-	PlayerVars.setBuildingMode(false)
-	PlayerVars.setActiveBuilding(null)
+	var ins1 = GeneralVars.getTeamVarList(getTeam()).getActiveBuilding().instantiate()
+	GeneralVars.getTeamVarList(getTeam()).setBuildingMode(false)
+	GeneralVars.getTeamVarList(getTeam()).setActiveBuilding(null)
 	if refund_building:
 		SignalManager.refund_building.emit(ins1.getName())
 	else:
@@ -87,3 +89,5 @@ func DisableBuildingMode(refund_building: bool) -> void:
 	once1 = false
 	await get_tree().create_timer(0.05).timeout
 	nono_clickerino = false
+
+func getTeam() -> int: return team

@@ -1,4 +1,5 @@
 extends Node
+class_name TeamVars
 
 func _process(_delta: float) -> void:
 	minerals = clamp(minerals, 0, max_minerals)
