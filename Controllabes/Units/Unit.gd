@@ -24,6 +24,8 @@ var attack_moving: bool
 
 var detection_area: Area3D
 var nav_agent: NavigationAgent3D
+var update_interval: int = 5
+var update_interval_curr: int = 0
 
 const GRAVITY: int = 10
 
@@ -58,6 +60,13 @@ func _physics_process(delta: float) -> void:
 		
 		if current_target != null:
 			target_position = current_target.global_position
+		
+		update_interval_curr += 1
+		if Settings.low_end_cpu:
+			update_interval = 10
+		else:
+			update_interval = 5
+		
 		stateMachine()
 		
 		if print_state:
@@ -190,12 +199,18 @@ func detectionAreaExited(body: Node3D) -> void:
 func moveUnit() -> void:
 	can_move = true
 	var current_location = global_transform.origin
-	var next_location = nav_agent.get_next_path_position()
-	var new_velocity = (next_location - current_location)
+	var next_location: Vector3 = Vector3.ZERO
+	if update_interval_curr >= update_interval:
+		update_interval_curr = 0
+		next_location = nav_agent.get_next_path_position()
+	
+	var new_velocity: Vector3 = Vector3.ZERO
+	if next_location != Vector3.ZERO:
+		new_velocity = (next_location - current_location)
 	
 	#nav_agent.set_avoidance_enabled(true)
-	
-	nav_agent.set_velocity(new_velocity)
+	if new_velocity != Vector3.ZERO:
+		nav_agent.set_velocity(new_velocity)
 
 func safeMoveUnit(safe_velocity: Vector3) -> void:
 	if can_move and !GeneralVars.getPaused():

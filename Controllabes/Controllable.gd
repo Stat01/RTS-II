@@ -154,7 +154,6 @@ func _process(_delta: float) -> void:
 		if getTeam() == 2:
 			if getVisibleBy().is_empty() and turn_visible == true:
 				turn_visible = false
-				await get_tree().create_timer(1.5).timeout
 				visible = false
 			elif !getVisibleBy().is_empty():
 				turn_visible = true

@@ -686,6 +686,12 @@ ticks_on_borders = true
 layout_mode = 2
 theme = ExtResource("27_exwat")
 
+[node name="CheckButtonLowEndCPU" type="CheckButton" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Enable if you experience low fps with large amounts of units."
+theme = ExtResource("27_exwat")
+text = "Low end CPU"
+
 [node name="Container" type="Container" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -763,5 +769,6 @@ size_flags_horizontal = 3
 [connection signal="toggled" from="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/CheckButtonEdgePan" to="." method="setEdgePan"]
 [connection signal="value_changed" from="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/SliderEdgePanSpeed" to="." method="setEdgePanSpeed"]
 [connection signal="value_changed" from="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/SliderPanSpeed" to="." method="setPanSpeed"]
+[connection signal="toggled" from="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/CheckButtonLowEndCPU" to="." method="setLowEndCPU"]
 [connection signal="item_selected" from="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2/OptionButtonShadows" to="." method="setShadowQuality"]
 [connection signal="value_changed" from="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2/SliderShadowDistance" to="." method="setShadowDistance"]

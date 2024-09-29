@@ -310,7 +310,8 @@ func getSelection(shift_pressed: bool) -> void:
 		
 		if !shift_pressed:
 			for unit in GeneralVars.getTeamVarList(getTeam()).getSelectedUnits():
-				unit.setIsSelected(false)
+				if is_instance_valid(unit):
+					unit.setIsSelected(false)
 			GeneralVars.getTeamVarList(getTeam()).clearSelectedUnits()
 		
 		if collider != null and collider is CharacterBody3D and collider.visible:

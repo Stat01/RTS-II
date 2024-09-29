@@ -21,6 +21,7 @@ extends Control
 @onready var slider_pan_speed: HSlider = $OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/SliderPanSpeed
 @onready var option_button_shadows: OptionButton = $OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2/OptionButtonShadows
 @onready var slider_shadow_distance: HSlider = $OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2/SliderShadowDistance
+@onready var check_button_low_end_cpu: CheckButton = $OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/CheckButtonLowEndCPU
 
 
 const MAIN_MENU: NodePath = "res://MainMenu.tscn"
@@ -39,8 +40,9 @@ func _process(_delta: float) -> void:
 	#selection ui
 	if !GeneralVars.getTeamVarList(getTeam()).getSelectedUnits().is_empty():
 		var to_show = GeneralVars.getTeamVarList(getTeam()).getSelectedUnits()[0]
-		selection_ui.show()
-		updateSelectionUI(to_show)
+		if is_instance_valid(to_show):
+			selection_ui.show()
+			updateSelectionUI(to_show)
 		
 	else:
 		selection_ui.hide()
@@ -140,6 +142,8 @@ func initializeOptions() -> void:
 	slider_pan_speed.value = Settings.camera_pan_speed
 	option_button_shadows.selected = Settings.shadow_quality
 	slider_shadow_distance.value = Settings.shadow_distance
+	check_button_low_end_cpu.button_pressed = Settings.low_end_cpu
+	
 
 func setEdgePan(i: bool) -> void:	Settings.edge_pan = i
 func setEdgePanSpeed(i: float) -> void:	Settings.camera_edge_pan_speed = i
@@ -150,5 +154,7 @@ func setShadowQuality(i: int) -> void:
 func setShadowDistance(i: float) -> void:
 	Settings.shadow_distance = i
 	Settings.shadow_distance_changed.emit(i)
+func setLowEndCPU(i: bool) -> void:
+	Settings.low_end_cpu = i
 
 func getTeam() -> int: return team
