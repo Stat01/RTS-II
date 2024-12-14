@@ -11,6 +11,8 @@ var shadow_quality: shadow_qualities = shadow_qualities.MEDIUM
 signal shadow_quality_changed
 var shadow_distance: float = 100.0
 signal shadow_distance_changed
+var fog_of_war_enable: bool = true
+signal fog_of_war_changed
 
 #misc
 var low_end_cpu: bool = false

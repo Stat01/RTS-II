@@ -12,7 +12,6 @@ func _physics_process(delta: float) -> void:
 		animation_player.pause()
 
 func detonate() -> void:
-	print("kabooom")
 	detonate_player.play("Detonate")
 	await detonate_player.animation_finished
 	EffectCreator.explosionMedium(global_position)

@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://d2d7mdv84wp13"]
+
+[resource]
+resource_name = "BasePlate"
+cull_mode = 2
+albedo_color = Color(0.299993, 0.299993, 0.299993, 1)
+roughness = 0.5

@@ -131,6 +131,7 @@ select_all_enemy_army={
 
 [rendering]
 
+occlusion_culling/use_occlusion_culling=true
 textures/scene_name_casing=1
 textures/size/always_on_top=true
 

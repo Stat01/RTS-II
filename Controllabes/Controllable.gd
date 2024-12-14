@@ -29,7 +29,7 @@ enum damage_types {LIGHT, HEAVY, STRUCTURE, NONE}
 @export var name_: String
 @export var is_building: bool
 
-enum teams {NEUTRAL, FRIENDLY, ENEMY}
+enum teams {NEUTRAL, HUMAN, ALIEN}
 @export var team: teams
 
 enum sizes {SMALL, MEDIUM, LARGE, HUGE, VEHICLE_DEPOT, FACTORY}

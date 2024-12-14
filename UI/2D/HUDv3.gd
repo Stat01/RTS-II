@@ -22,6 +22,7 @@ extends Control
 @onready var option_button_shadows: OptionButton = $OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2/OptionButtonShadows
 @onready var slider_shadow_distance: HSlider = $OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2/SliderShadowDistance
 @onready var check_button_low_end_cpu: CheckButton = $OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/CheckButtonLowEndCPU
+@onready var check_button_enable_fow: CheckButton = $OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2/CheckButtonEnableFOW
 
 
 const MAIN_MENU: NodePath = "res://MainMenu.tscn"
@@ -143,6 +144,7 @@ func initializeOptions() -> void:
 	option_button_shadows.selected = Settings.shadow_quality
 	slider_shadow_distance.value = Settings.shadow_distance
 	check_button_low_end_cpu.button_pressed = Settings.low_end_cpu
+	check_button_enable_fow.button_pressed = Settings.fog_of_war_enable
 	
 
 func setEdgePan(i: bool) -> void:	Settings.edge_pan = i
@@ -156,5 +158,8 @@ func setShadowDistance(i: float) -> void:
 	Settings.shadow_distance_changed.emit(i)
 func setLowEndCPU(i: bool) -> void:
 	Settings.low_end_cpu = i
+func setEnableFOW(i: bool) -> void:
+	Settings.fog_of_war_enable = i
+	Settings.fog_of_war_changed.emit(i)
 
 func getTeam() -> int: return team

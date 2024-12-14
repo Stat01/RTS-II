@@ -688,7 +688,7 @@ theme = ExtResource("27_exwat")
 
 [node name="CheckButtonLowEndCPU" type="CheckButton" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-tooltip_text = "Enable if you experience low fps with large amounts of units."
+tooltip_text = "Lowers frequency of unit pathing updates. Enable if you experience low fps with large amounts of units."
 theme = ExtResource("27_exwat")
 text = "Low end CPU"
 
@@ -744,6 +744,12 @@ theme = ExtResource("27_exwat")
 max_value = 200.0
 value = 100.0
 
+[node name="CheckButtonEnableFOW" type="CheckButton" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+tooltip_text = "Toggles fog of war. Big fps increase. Not recommended unless absolutely necessary"
+theme = ExtResource("27_exwat")
+text = "Fog of war"
+
 [node name="HSeparator2" type="HSeparator" parent="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme = ExtResource("27_exwat")
@@ -772,3 +778,4 @@ size_flags_horizontal = 3
 [connection signal="toggled" from="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer/CheckButtonLowEndCPU" to="." method="setLowEndCPU"]
 [connection signal="item_selected" from="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2/OptionButtonShadows" to="." method="setShadowQuality"]
 [connection signal="value_changed" from="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2/SliderShadowDistance" to="." method="setShadowDistance"]
+[connection signal="toggled" from="OptionsMenu/VBoxContainer/NinePatchRect/HBoxContainer/VBoxContainer2/CheckButtonEnableFOW" to="." method="setEnableFOW"]

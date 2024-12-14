@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b6rdu0blxk56d"]
+
+[resource]
+resource_name = "Center"
+transparency = 4
+albedo_color = Color(0.905882, 0.905882, 0.905882, 0.701961)
+roughness = 0.2
