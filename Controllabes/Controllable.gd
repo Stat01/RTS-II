@@ -32,7 +32,7 @@ enum damage_types {LIGHT, HEAVY, STRUCTURE, NONE}
 enum teams {NEUTRAL, HUMAN, ALIEN}
 @export var team: teams
 
-enum sizes {SMALL, MEDIUM, LARGE, HUGE, VEHICLE_DEPOT, FACTORY}
+enum sizes {SMALL, MEDIUM, LARGE, HUGE, VEHICLE_DEPOT, FACTORY, BIOMECHPRINTER}
 @export var size: sizes
 @export var radius_meters: float
 @export var sight_range: float
@@ -92,6 +92,7 @@ func _ready() -> void:
 		#vehicle depot and factory special shit
 		4:	selection_circle = SELECTION_MEDIUM.instantiate()
 		5:	selection_circle = SELECTION_LARGE.instantiate()
+		6:	selection_circle = SELECTION_LARGE.instantiate()
 	add_child(selection_circle)
 	
 	#add sight area if not neutral controllable

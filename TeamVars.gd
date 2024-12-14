@@ -68,12 +68,16 @@ func setBuildingBlocked(i: bool) -> void: building_blocked = i
 #Unit production
 var vehicledepot_building: CharacterBody3D
 var factory_building: CharacterBody3D
+var biomechanical_printer: CharacterBody3D
 func getVehicleDepotBuilding() -> CharacterBody3D: return vehicledepot_building
 func setVehicleDepotBuilding(i: CharacterBody3D) -> void: vehicledepot_building = i
 func hasVehicleDepotBuilding() -> bool: return false if vehicledepot_building == null else true
 func getFactoryBuilding() -> CharacterBody3D: return factory_building
 func setFactoryBuilding(i: CharacterBody3D) -> void: factory_building = i
 func hasFactoryBuilding() -> bool: return false if factory_building == null else true
+func getBioMechanicalPrinterBuilding() -> CharacterBody3D: return biomechanical_printer
+func setBioMechanicalPrinterBuilding(i: CharacterBody3D) -> void: biomechanical_printer = i
+func hasBioMechanicalPrinterBuilding() -> bool: return false if biomechanical_printer == null else true
 #-------------------------------#
 
 #Building unlocks

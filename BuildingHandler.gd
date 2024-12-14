@@ -60,7 +60,7 @@ func _process(_delta: float) -> void:
 				#Placing Building
 				if Input.is_action_just_pressed("left_click") and !GeneralVars.getTeamVarList(getTeam()).getBuildingBlocked():
 					var ins1: Controllable = GeneralVars.getTeamVarList(getTeam()).getActiveBuilding().instantiate()
-					get_tree().root.get_node("Main").get_node("Structures").add_child(ins1)
+					GeneralVars.getStructureList().add_child(ins1)
 					ins1.global_position = mouse_world_pos
 					ins1.global_position.x = snapped(ins1.global_position.x, 1)
 					ins1.global_position.z = snapped(ins1.global_position.z, 1)

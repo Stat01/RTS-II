@@ -267,7 +267,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				ins.global_position = spawn_pos
 		
 		elif event.is_action_pressed("select_all_enemy_army"):
-			var amount: int
+			var amount: int = 0
 			for unit in GeneralVars.getUnitsList().get_children():
 				if unit is Controllable:
 					amount += 1

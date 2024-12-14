@@ -1,0 +1,14 @@
+[gd_resource type="QuadMesh" load_steps=2 format=3 uid="uid://dpcjph2eeykud"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5lsoq"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 1, 1, 1)
+emission_enabled = true
+emission = Color(0, 1, 1, 1)
+emission_energy_multiplier = 10.0
+billboard_mode = 1
+billboard_keep_scale = true
+
+[resource]
+material = SubResource("StandardMaterial3D_5lsoq")
+size = Vector2(0.05, 0.05)
