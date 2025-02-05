@@ -41,7 +41,7 @@ script = ExtResource("1_x2gny")
 team = 1
 
 [node name="CameraController" parent="." instance=ExtResource("1_347s1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -163.521, 6, 229.775)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.9795, 6, 37.3297)
 team = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
