@@ -96,26 +96,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -163, 0, 226)
 radius = 20.0
 
 [node name="Omnite Cell" parent="Structures" instance=ExtResource("13_26lv7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -165, 0, 225)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -165.367, 0, 229.383)
 
 [node name="Omnite Cell2" parent="Structures" instance=ExtResource("13_26lv7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -162, 0, 225)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -162.367, 0, 229.383)
 
 [node name="Omnite Cell3" parent="Structures" instance=ExtResource("13_26lv7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -166, 0, 227)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -166.367, 0, 231.383)
 
 [node name="Omnite Cell4" parent="Structures" instance=ExtResource("13_26lv7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -163, 0, 227)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -163.367, 0, 231.383)
 
 [node name="Central Cortex" parent="Structures" instance=ExtResource("10_tn1a1")]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -164, 0, 221)
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -173.904, 0, 219.724)
 
 [node name="Fusion Array" parent="Structures" instance=ExtResource("25_pdw8i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -160, 0, 227)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -157.2, 0, 230.464)
 size = 2
 
 [node name="Biomechanical Printer" parent="Structures" instance=ExtResource("26_y87ra")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -159, 0, 223)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -153.172, 0, 225.945)
 
 [node name="Units" type="Node" parent="."]
 unique_name_in_owner = true
