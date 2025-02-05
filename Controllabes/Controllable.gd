@@ -89,7 +89,7 @@ func _ready() -> void:
 		1:	selection_circle = SELECTION_MEDIUM.instantiate()
 		2:	selection_circle = SELECTION_LARGE.instantiate()
 		3:	selection_circle = SELECTION_HUGE.instantiate()
-		#vehicle depot and factory special shit
+		#vehicle depot and factory special thing
 		4:	selection_circle = SELECTION_MEDIUM.instantiate()
 		5:	selection_circle = SELECTION_LARGE.instantiate()
 		6:	selection_circle = SELECTION_LARGE.instantiate()

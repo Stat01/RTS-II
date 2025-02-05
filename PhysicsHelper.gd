@@ -6,7 +6,7 @@ static func calculateArcVelocity(point_a: Vector3, point_b: Vector3, arc_height:
 	var velocity: Vector3 = Vector3(0,0,0)
 	
 	if arc_height > 0:
-		print_debug("Sir you put in the wrong arc_height. It's positive. Shit dont work.")
+		print_debug("Sir you put in the wrong arc_height. It's positive. It dont work.")
 	
 	var displacement: Vector3 = point_b - point_a
 	

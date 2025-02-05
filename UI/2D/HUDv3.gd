@@ -136,7 +136,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		togglePauseMenu()
 		options_menu.visible = false
 
-##Options buttons n' shit
+##Options buttons
 func initializeOptions() -> void:
 	check_button_edge_pan.button_pressed = Settings.edge_pan
 	slider_edge_pan_speed.value = Settings.camera_edge_pan_speed

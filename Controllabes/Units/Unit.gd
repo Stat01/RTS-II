@@ -1,4 +1,4 @@
-extends "res://Controllabes/Controllable.gd"
+extends Controllable
 
 class_name Unit
 
@@ -100,8 +100,6 @@ func moveState() -> void:
 	if global_position.distance_to(target_position) < 1.1:
 		setState(IDLE)
 
-#	God knows this function needs a refactor but I can't be fucked tbh.
-#	I did it :)
 func attackMoveState() -> void:
 	if getCurrentTarget() != null or attack_moving:
 		#out of range
@@ -131,46 +129,6 @@ func attackMoveState() -> void:
 	else:
 		setState(IDLE)
 
-func old_attackMoveState() -> void:
-
-	#enemy detected or not yet at target location
-	if current_target != null or attack_moving:
-		
-		#unit has target but it's out of range, move toward it
-		if getCurrentTarget() != null and global_position.distance_to(target_position) - getCurrentTarget().getRadius() - getRadius() > attack_range:
-			moveUnit()
-			
-		#unit has no target selected
-		elif current_target == null:
-			
-			#select first target from detected list
-			if !detected_targets.is_empty():
-				for i in detected_targets:
-					if i.getVisibleBy().has(self):
-						setCurrentTarget(i)
-						return
-			
-			#if there are no enemies in detected list continue to original 
-			else:
-				if saved_target_position != target_position:
-					target_position = saved_target_position
-			
-			
-			if global_position.distance_to(target_position) < 1.1:
-				pass
-				#setState(IDLE)
-			else:
-				moveUnit()
-		#unit has target and is in range
-		else:
-			
-			#nav_agent.set_avoidance_enabled(true)
-			attack(current_target)
-		
-	#no enemy detected and arrived at target location
-	else:
-		setState(IDLE)
-
 func attack(_unit: CharacterBody3D) -> void:
 	if print_attack_override:
 		print("Attack should be overwritten")
@@ -178,7 +136,7 @@ func attack(_unit: CharacterBody3D) -> void:
 
 func reduceHealth(damage_: int, damage_type_: int, origin_: CharacterBody3D) -> bool:
 	var result: bool = super.reduceHealth(damage_, damage_type_, origin_)
-	#return fire bitches
+	#return fire 
 	if getState() == IDLE and global_position.distance_to(origin_.global_position) <= sight_range:
 		forceSetCurrentTarget(origin_)
 		setState(ATTACKMOVE)
@@ -225,7 +183,7 @@ func safeMoveUnit(safe_velocity: Vector3) -> void:
 		
 		velocity = global_position - to_global(Vector3.FORWARD * -actual_move_speed)
 		
-		#keep these fools on the floor
+		#keep unit on floor
 		if !is_on_floor():
 			velocity.y -= GRAVITY
 		else:
@@ -235,10 +193,6 @@ func safeMoveUnit(safe_velocity: Vector3) -> void:
 			global_position.y = 1
 		
 		move_and_slide()
-	else:
-		return
-		#not currently in use idk why it's even here tbh
-		nav_agent.set_avoidance_enabled(false)
 
 func makePath() -> void:
 	nav_agent.set_target_position(target_position)

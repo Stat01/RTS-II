@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dgeiuigxw0r0a"]
+[gd_scene load_steps=27 format=3 uid="uid://dgeiuigxw0r0a"]
 
 [ext_resource type="PackedScene" uid="uid://cdyimnapkawjs" path="res://CameraController.tscn" id="1_347s1"]
 [ext_resource type="Script" path="res://Main.gd" id="1_x2gny"]
@@ -22,7 +22,6 @@
 [ext_resource type="PackedScene" uid="uid://dpb2bg1ijrq4v" path="res://Controllabes/Units/LT-13 Striker/LT-13 Striker.tscn" id="15_58ndw"]
 [ext_resource type="PackedScene" uid="uid://dxxwrhd6copwk" path="res://Controllabes/Units/M-6 Whiplash/M6-Whiplash.tscn" id="16_j1suh"]
 [ext_resource type="PackedScene" uid="uid://inog8gdy5ldn" path="res://Controllabes/Units/Nucleon/Nucleon.tscn" id="17_03ohi"]
-[ext_resource type="PackedScene" uid="uid://dncmlvvkf3r6l" path="res://Controllabes/Units/Roach/Roach.tscn" id="20_1jvbh"]
 [ext_resource type="PackedScene" uid="uid://b1ngn4awissq0" path="res://Controllabes/Units/AT-12 Gladiator/AT-12 Gladiator.tscn" id="20_fuody"]
 [ext_resource type="PackedScene" uid="uid://cml5tiloyv4f0" path="res://Controllabes/Structures/Fusion Array/Fusion Array.tscn" id="25_pdw8i"]
 [ext_resource type="PackedScene" uid="uid://dh15kqa8b75l8" path="res://Controllabes/Structures/Biomechanical Printer/Biomechanical Printer.tscn" id="26_y87ra"]
@@ -158,104 +157,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74.298, -1.90735e-06, 22.243
 [node name="Nucleon4" parent="Units" instance=ExtResource("17_03ohi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.6867, 1.90735e-06, 26.4382)
 
-[node name="Roach" parent="Units" instance=ExtResource("20_1jvbh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62, 0, 29)
-
 [node name="AT-12 Tank" parent="Units" instance=ExtResource("20_fuody")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, 29)
-
-[node name="AT-12 Tank2" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.2602, 0, 31.583)
-
-[node name="AT-12 Tank3" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.4217, 0, 26.3121)
-
-[node name="AT-12 Tank4" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.6819, 0, 28.8951)
-
-[node name="AT-12 Tank5" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.4217, 0, 26.3121)
-
-[node name="AT-12 Tank6" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.6819, 0, 28.8951)
-
-[node name="AT-12 Tank7" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.4217, 0, 31.3121)
-
-[node name="AT-12 Tank8" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.6819, 0, 33.8951)
-
-[node name="AT-12 Tank9" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.6084, 0, 37.9826)
-
-[node name="AT-12 Tank10" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.8686, 0, 40.5656)
-
-[node name="AT-12 Tank11" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.0301, 0, 35.2947)
-
-[node name="AT-12 Tank12" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.2903, 0, 37.8777)
-
-[node name="AT-12 Tank13" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.0301, 0, 35.2947)
-
-[node name="AT-12 Tank14" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.2903, 0, 37.8777)
-
-[node name="AT-12 Tank15" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.0301, 0, 40.2947)
-
-[node name="AT-12 Tank16" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.2903, 0, 42.8777)
-
-[node name="AT-12 Tank17" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.4401, 0, 38.1509)
-
-[node name="AT-12 Tank18" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.7003, 0, 40.7339)
-
-[node name="AT-12 Tank19" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.8618, 0, 35.463)
-
-[node name="AT-12 Tank20" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.122, 0, 38.046)
-
-[node name="AT-12 Tank21" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.8618, 0, 35.463)
-
-[node name="AT-12 Tank22" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.122, 0, 38.046)
-
-[node name="AT-12 Tank23" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.8618, 0, 40.463)
-
-[node name="AT-12 Tank24" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.122, 0, 43.046)
-
-[node name="AT-12 Tank25" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.4108, 0, 28.8251)
-
-[node name="AT-12 Tank26" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.671, 0, 31.4082)
-
-[node name="AT-12 Tank27" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.8326, 0, 26.1372)
-
-[node name="AT-12 Tank28" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.0928, 0, 28.7202)
-
-[node name="AT-12 Tank29" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56.8326, 0, 26.1372)
-
-[node name="AT-12 Tank30" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.0928, 0, 28.7202)
-
-[node name="AT-12 Tank31" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56.8326, 0, 31.1372)
-
-[node name="AT-12 Tank32" parent="Units" instance=ExtResource("20_fuody")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.0928, 0, 33.7202)
 
 [node name="Doodads" type="Node" parent="."]
 
